@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+
+import { Header } from '../components/Header.tsx';
+import { Footer } from '../components/Footer.tsx';
+import { NavBar } from '../components/NavBar.tsx';
+import { Stats } from '../components/Stats.tsx';
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title><slot name="title" /></title>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background transition-colors duration-500">
+        <!-- Header -->
+        <Header client:load />
+        
+        <NavBar client:load />
+        <!-- Main Content -->
+        <main>
+        <slot />
+        </main>
+
+        <!-- Footer -->
+        <Footer client:load />
+    </div>
+  </body>
+</html>

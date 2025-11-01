@@ -1,0 +1,25 @@
+---
+import '../../styles/global.css';
+import { assData } from '../../data/assData';
+import { AssignmentDetail } from '../../components/assignment/AssignmentDetail.tsx';
+import BaseLayout from '../../layout/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const paths = Object.keys(assData).map((assCode) => ({
+    params: { assCode },
+  }));
+  return paths ;
+}
+
+const { assCode } = Astro.params;
+
+const selectedAssignment = assData[assCode];
+if (!selectedAssignment) {
+  throw new Error(`Assignment con codice ${assCode} non trovato.`);
+}
+---
+
+<BaseLayout>
+  <Fragment slot="title">{selectedAssignment.title}</Fragment>
+  <AssignmentDetail assignmentType={assCode} />
+</BaseLayout>

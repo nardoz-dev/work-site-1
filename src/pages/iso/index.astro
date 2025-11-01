@@ -1,0 +1,17 @@
+---
+import '../../styles/global.css';
+import { ISOList } from '../../components/iso/ISOList.tsx';
+import BaseLayout from '../../layout/BaseLayout.astro';
+
+const handleBack = () => {
+  // Implementa la logica per tornare indietro, se necessario
+};
+
+const handleSelectISO = (isoType) => {
+  // Implementa la logica per gestire la selezione di un'ISO
+};
+---
+
+<BaseLayout>
+  <ISOList onBack={handleBack} onSelectISO={handleSelectISO} />
+</BaseLayout>
