@@ -1,32 +1,52 @@
 ---
-import '../styles/global.css';
-
+// src/layout/BaseLayout.astro
 import { Header } from '../components/Header.tsx';
 import { Footer } from '../components/Footer.tsx';
-import { NavBar } from '../components/NavBar.tsx';
-import { Stats } from '../components/Stats.tsx';
+
 ---
 
 <html lang="it">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <title><slot name="title" /></title>
-  </head>
+    </head>
   <body>
-    <div class="min-h-screen bg-background transition-colors duration-500">
-        <!-- Header -->
-        <Header client:load />
-        
-        <NavBar client:load />
-        <!-- Main Content -->
-        <main>
-        <slot />
-        </main>
 
-        <!-- Footer -->
-        <Footer client:load />
-    </div>
+    <Header client:load />
+
+    <main class="pt-16">
+      <slot /> 
+    </main>
+    
+    <script>
+      import { activeSection } from '../stores/navigationStore';
+
+      // Seleziona tutte le sezioni figlie di <main> che hanno un ID
+      const sections = document.querySelectorAll('main section[id]');
+
+      if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              // Appena una sezione entra nel viewport, 
+              // aggiorna lo store globale.
+              activeSection.set(entry.target.id);
+              break; // Ci interessa solo la prima che intercetta
+            }
+          }
+        }, {
+          // 'rootMargin' imposta la "linea" di trigger.
+          // -160px dall'alto, -30% dal basso.
+          // Regola questi valori per perfezionare quando si attiva il link.
+          rootMargin: '-160px 0px -30% 0px',
+          threshold: 0 // Si attiva appena 1px è visibile
+        });
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+      }
+    </script>
   </body>
+  <footer>
+    <Footer client:load />
+  </footer>
 </html>

@@ -57,7 +57,7 @@ export function NewsSection() {
           {newsArticles.map((article) => (
             <Card 
               key={article.id} 
-              className="group relative bg-white dark:bg-[#2d2d2f] border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.02] transition-all duration-500 overflow-hidden rounded-2xl"
+              className="group relative bg-white dark:bg-[#2d2d2f] border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.02] transition-all duration-500 overflow-hidden rounded-2xl flex flex-col"
             >
               <div className="relative">
                 <div className="relative h-56 overflow-hidden">
@@ -109,14 +109,14 @@ export function NewsSection() {
                 </CardTitle>
               </CardHeader>
               
-              <CardContent className="pt-0">
-                <CardDescription className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-400">
+              <CardContent className="pt-0 flex-grow flex flex-col">
+                <CardDescription className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-400 flex-grow">
                   {article.excerpt}
                 </CardDescription>
                 
                 <Button 
                   variant="ghost" 
-                  className="group/btn p-0 h-auto text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
+                  className="group/btn p-0 h-auto text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 self-start mt-auto"
                 >
                   Leggi tutto
                   <ChevronRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
@@ -126,18 +126,6 @@ export function NewsSection() {
           ))}
         </div>
 
-        {/* <div className="text-center mt-12">
-          <Button 
-            size="lg" 
-            variant="outline" 
-            onClick={
-              () => window.scrollTo({ top: 0, behavior: 'smooth' })
-            }
-            className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-600 dark:hover:text-white"
-          >
-            Vedi tutti gli articoli
-          </Button>
-        </div> */}
         <div className="text-center mt-12">
           <a
             href="/news/"

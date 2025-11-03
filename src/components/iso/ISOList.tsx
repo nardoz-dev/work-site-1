@@ -59,7 +59,7 @@ const allISOs = [
 
 export function ISOList({ onBack, onSelectISO }: ISOListProps) {
   return (
-    <div className="min-h-screen bg-background pt-16">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
         <div className="container mx-auto px-4 py-12">
@@ -121,7 +121,7 @@ export function ISOList({ onBack, onSelectISO }: ISOListProps) {
               Non trovi la certificazione che cerchi?
             </h3>
             <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
-              Offriamo consulenza su molte altre certificazioni e standard internazionali.
+              Offriamo supporto su molte altre certificazioni e standard internazionali.
               Contattaci per scoprire come possiamo aiutarti.
             </p>
             <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">

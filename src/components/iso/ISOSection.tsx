@@ -33,20 +33,36 @@ const mainServices = Object.keys(isoData).map((isoCode) => ({
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
   link: `/iso/${isoCode}`, // Link dinamico
+  modal: true,
 }));
 
 mainServices.push({
   icon: Award,
   title: "Altre ISO",
-  description: "NAVIGA NEL NOSTRO SITO PER VEDERNE ALTRE!",
+  description: "Lista completa di tutte le ISO.",
   bgColor: "bg-white dark:bg-gray-800",
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
   link: "/iso", // Link statico
+  modal: false,
 });
 
-export function ConsISO() {
+interface ServicesProps {
+  onViewISO?: (isoType: string) => void;
+  onViewISOList?: () => void;
+  onOpenISOModal?: (isoType: string) => void;
+}
 
+export function ConsISO({ onViewISO, onViewISOList, onOpenISOModal }: ServicesProps) {
+  const handleISOClick = (service: object) => {
+
+    if (service.modal && onOpenISOModal) {
+      onOpenISOModal(service.title)
+    }else {
+      onViewISOList()
+    }
+
+  };
   return (
     <section
       id="iso"
@@ -103,12 +119,18 @@ export function ConsISO() {
                   >
                     Scopri di più
                   </Button> */}
-                  <a
+                  <Button 
+                    onClick={() => handleISOClick(service)}
+                    className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
+                  >
+                    Scopri di più
+                  </Button>
+                  {/* <a
                     href={service.link}
                     className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all inline-block"
                   >
                     Scopri di più
-                  </a>
+                  </a> */}
                 </div>
               </div>
             );

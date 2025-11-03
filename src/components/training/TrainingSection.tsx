@@ -1,13 +1,13 @@
-import { ImageWithFallback } from "./utils/fallback"
-import { Button } from "./ui/button";
+import { ImageWithFallback } from "../utils/fallback"
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Badge } from "./ui/badge";
+} from "../ui/card";
+import { Badge } from "../ui/badge";
 import { Calendar, Clock, Users, BookOpen } from "lucide-react";
 
 const courses = [

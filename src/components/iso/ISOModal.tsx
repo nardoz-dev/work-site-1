@@ -1,9 +1,13 @@
-import { Button } from "../ui/button";
-import { ArrowLeft, CheckCircle2, FileText, Users, Target, Award } from "lucide-react";
+import { Dialog, DialogPortal, DialogOverlay, DialogHeader, DialogTitle } from "./ui/dialog";
+import * as DialogPrimitive from "@radix-ui/react-dialog@1.1.6";
+import { X, CheckCircle2, Award, FileCheck, Settings } from "lucide-react";
+import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
 
-interface ISODetailProps {
+interface ISOModalProps {
+  isOpen: boolean;
+  onClose: () => void;
   isoType: string;
-  onBack: () => void;
 }
 
 const isoData: Record<string, {
@@ -161,135 +165,135 @@ const isoData: Record<string, {
   }
 };
 
-export function ISODetail({ isoType, onBack }: ISODetailProps) {
-  const data = isoData[isoType] || isoData["9001"];
+export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
+  const data = isoData[isoType];
 
-  // Usa sempre il colore blu per tutte le ISO
-  const colorClasses = {
-    bg: "bg-blue-50 dark:bg-blue-950/20",
-    text: "text-blue-600 dark:text-blue-400",
-    border: "border-blue-200 dark:border-blue-900",
-    hover: "hover:bg-blue-100 dark:hover:bg-blue-900/30"
-  };
+  if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className={`${colorClasses.bg} border-b ${colorClasses.border} transition-colors duration-500`}>
-        <div className="container mx-auto px-4 py-12">
-            <a
-            href={`/iso`}
-            className={`mb-6 ${colorClasses.text} hover:bg-transparent flex items-center`}
-            >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Torna alle certificazioni
-            </a>
-          <div className="max-w-4xl">
-            <h1 className={`text-4xl lg:text-5xl mb-4 ${colorClasses.text}`}>
-              {data.title}
-            </h1>
-            <p className="text-xl text-foreground/70">
-              {data.subtitle}
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogPrimitive.Content className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 max-w-7xl w-[95vw] max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 duration-200">
+          {/* Header */}
+          <DialogHeader className="p-8 pb-6 bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-4 flex-1">
+                <div className="bg-blue-600 dark:bg-blue-700 w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <DialogTitle className="text-3xl text-blue-600 dark:text-blue-400 mb-2">
+                    {data.title}
+                  </DialogTitle>
+                  <p className="text-lg text-foreground/70">
+                    {data.subtitle}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={onClose}
+                className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 flex items-center justify-center transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </DialogHeader>
+
+        {/* Scrollable Content */}
+        <ScrollArea className="h-[calc(90vh-180px)]">
+          <div className="p-8">
+            {/* Description */}
+            <p className="text-lg text-foreground/80 leading-relaxed mb-8">
+              {data.description}
             </p>
+
+            {/* Benefits Section */}
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                  <CheckCircle2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-2xl text-foreground">
+                  Vantaggi
+                </h3>
+              </div>
+              <div className="grid md:grid-cols-2 gap-3">
+                {data.benefits.map((benefit, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-950/10 rounded-lg border border-blue-200 dark:border-blue-900"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground/80">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Requirements Section */}
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                  <FileCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-2xl text-foreground">
+                  Requisiti Principali
+                </h3>
+              </div>
+              <div className="space-y-3">
+                {data.requirements.map((requirement, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700"
+                  >
+                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm">
+                      {index + 1}
+                    </div>
+                    <span className="text-foreground/80">{requirement}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Process Section */}
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                  <Settings className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-2xl text-foreground">
+                  Processo di Certificazione
+                </h3>
+              </div>
+              <div className="space-y-3">
+                {data.process.map((step, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-950/10 dark:to-transparent rounded-lg border-l-4 border-blue-600"
+                  >
+                    <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center flex-shrink-0">
+                      {index + 1}
+                    </div>
+                    <span className="text-foreground/80 pt-1">{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </ScrollArea>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto space-y-16">
-          {/* Description */}
-          <section>
-            <div className={`p-8 ${colorClasses.bg} border ${colorClasses.border} rounded-2xl`}>
-              <p className="text-lg leading-relaxed text-foreground/80">
-                {data.description}
-              </p>
-            </div>
-          </section>
-
-          {/* Benefits */}
-          <section>
-            <div className="flex items-center gap-3 mb-8">
-              <Target className={`w-8 h-8 ${colorClasses.text}`} />
-              <h2 className="text-3xl text-foreground">Vantaggi della Certificazione</h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {data.benefits.map((benefit, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start gap-3 p-4 ${colorClasses.bg} border ${colorClasses.border} rounded-lg ${colorClasses.hover} transition-colors`}
-                >
-                  <CheckCircle2 className={`w-5 h-5 ${colorClasses.text} flex-shrink-0 mt-0.5`} />
-                  <span className="text-foreground/80">{benefit}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Requirements */}
-          <section>
-            <div className="flex items-center gap-3 mb-8">
-              <FileText className={`w-8 h-8 ${colorClasses.text}`} />
-              <h2 className="text-3xl text-foreground">Requisiti Principali</h2>
-            </div>
-            <div className="space-y-3">
-              {data.requirements.map((req, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start gap-4 p-5 bg-background border border-border rounded-lg ${colorClasses.hover} transition-colors`}
-                >
-                  <div className={`flex items-center justify-center w-8 h-8 rounded-full ${colorClasses.bg} ${colorClasses.text} flex-shrink-0`}>
-                    {index + 1}
-                  </div>
-                  <span className="text-foreground/80 pt-1">{req}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Process */}
-          <section>
-            <div className="flex items-center gap-3 mb-8">
-              <Award className={`w-8 h-8 ${colorClasses.text}`} />
-              <h2 className="text-3xl text-foreground">Processo di Certificazione</h2>
-            </div>
-            <div className="space-y-4">
-              {data.process.map((step, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className={`flex items-center justify-center min-w-12 h-12 rounded-full ${colorClasses.bg} ${colorClasses.text} border-2 ${colorClasses.border}`}>
-                    {index + 1}
-                  </div>
-                  <div className="flex-1 pt-2">
-                    <p className="text-foreground/80">{step}</p>
-                    {index < data.process.length - 1 && (
-                      <div className={`w-0.5 h-8 ${colorClasses.bg} ml-6 mt-2`} />
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* CTA */}
-          <section className={`p-8 ${colorClasses.bg} border ${colorClasses.border} rounded-2xl text-center`}>
-            <h3 className="text-2xl mb-4 text-foreground">
-              Interessato alla certificazione {data.title}?
-            </h3>
-            <p className="text-foreground/70 mb-6 max-w-2xl mx-auto">
-              I nostri consulenti esperti sono pronti ad accompagnarti nel percorso di certificazione.
-              Contattaci per una consulenza gratuita e senza impegno.
+          {/* Footer */}
+          <div className="p-6 bg-blue-50 dark:bg-blue-950/20 border-t border-blue-200 dark:border-blue-900 flex items-center justify-between gap-4">
+            <p className="text-sm text-foreground/70">
+              Vuoi saperne di più sulla certificazione ISO 9001?
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-                Richiedi Consulenza
-              </Button>
-              <Button variant="outline" className={`${colorClasses.border} ${colorClasses.text}`}>
-                Scarica Brochure
-              </Button>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              Richiedi Consulenza
+            </Button>
+          </div>
+        </DialogPrimitive.Content>
+      </DialogPortal>
+    </Dialog>
   );
 }
