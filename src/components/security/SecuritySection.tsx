@@ -2,12 +2,14 @@ import { Button } from "../ui/button";
 import { CheckCircle } from "lucide-react";
 
 const features = [
-  "Valutazione dei rischi aziendali personalizzata",
-  "Documento di Valutazione dei Rischi (DVR) completo",
-  "Piano Operativo di Sicurezza (POS) per cantieri",
-  "Supporto per adempimenti D.Lgs 81/08",
+  "Valutazione dei rischi (DVR)",
+  "Valutazioni specifiche dei rischi",
+  "Piani di emergenza ed evacuazione",
+  "Verifiche ed audit interni",
+  "Formazione dei lavoratori",
   "Sorveglianza sanitaria e visite mediche",
-  "Gestione degli impianti e manutenzioni"
+  "HACCP",
+  "Sopralluoghi e controlli di monitoraggio",
 ];
 
 export function Security() {
@@ -19,12 +21,15 @@ export function Security() {
             <div className="space-y-4">
               <p className="text-blue-600 dark:text-blue-400 tracking-wide">SICUREZZA SUL LAVORO</p>
               <h2 className="text-3xl lg:text-4xl text-foreground">
-                Proteggiamo il tuo ambiente di lavoro con <span className="text-blue-600 dark:text-blue-400">competenza</span>
+                Affidati a chi fa della sicurezza un <span className="text-blue-600 dark:text-blue-400">valore</span>, non un obbligo.
+                
+                <br></br>
+                Sicurezza sul lavoro: la nostra esperienza al servizio della tua azienda.
+
               </h2>
               <p className="text-foreground/70 text-lg leading-relaxed">
-                La sicurezza sul lavoro è un obbligo normativo ma anche un investimento sul capitale umano. 
-                Studio Venturiero offre consulenza completa per rendere la tua azienda sicura e conforme 
-                alle normative vigenti, riducendo i rischi e migliorando il benessere dei lavoratori.
+                La consulenza per la sicurezza sul lavoro è un servizio fondamentale per garantire la tutela dei lavoratori, la conformità alle normative vigenti e la prevenzione degli infortuni e delle malattie professionali.
+                Attraverso un approccio tecnico e personalizzato, STUDIO VENTURIERO supporta le aziende nell’applicazione del D.Lgs. 81/2008 e di tutte le disposizioni in materia di salute e sicurezza, assicurando una gestione efficace, documentata e conforme del sistema sicurezza.    
               </p>
             </div>
 
@@ -48,3 +53,6 @@ export function Security() {
     </section>
   );
 }
+
+
+
