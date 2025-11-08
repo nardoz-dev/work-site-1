@@ -124,7 +124,7 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
   };
 
   return (
-    <div className="min-h-screen  bg-background pt-16">
+    <div className="min-h-screen  bg-background">
       {/* Header */}
       <div className={`${colorClasses.bg} border-b ${colorClasses.border} transition-colors duration-500`}>
         <div className="container mx-auto px-4 py-12">
@@ -176,7 +176,7 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
           {/* Responsibilities and Qualifications - Two columns */}
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Responsibilities */}
-            <section>
+            {/* <section>
               <div className="flex items-center gap-3 mb-6">
                 <ClipboardCheck className={`w-7 h-7 ${colorClasses.text}`} />
                 <h2 className="text-2xl text-foreground">Responsabilità</h2>
@@ -192,10 +192,10 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
                   </div>
                 ))}
               </div>
-            </section>
+            </section> */}
 
             {/* Qualifications */}
-            <section>
+            {/* <section>
               <div className="flex items-center gap-3 mb-6">
                 <FileText className={`w-7 h-7 ${colorClasses.text}`} />
                 <h2 className="text-2xl text-foreground">Qualifiche Richieste</h2>
@@ -213,7 +213,7 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
                   </div>
                 ))}
               </div>
-            </section>
+            </section> */}
           </div>
 
           {/* Services */}
@@ -243,7 +243,6 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
               Hai bisogno di un {data.title}?
             </h3>
             <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
-              I nostri professionisti qualificati sono a tua disposizione per supportarti in ogni fase del progetto.
               Contattaci per una valutazione personalizzata delle tue esigenze.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

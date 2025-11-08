@@ -1,29 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 import { Button } from "../ui/button";
-import {
-  Shield,
-  Settings,
-  HardHat,
-  Utensils,
-  GraduationCap,
-  Zap,
-  Award,
-  BookOpen,
-  Users,
-  UserCheck,
-  FileCheck,
-  Wrench,
-} from "lucide-react";
-
+import { Award } from "lucide-react";
+import { useState } from "react";
 import { isoData } from "../../data/isoData";
+import { ISOModal } from "./ISOModal";
 
-// Main Services Grid (matching the second image)
+// Main ISO - This is for the cards displayed in the main ISO section
 
 const mainServices = Object.keys(isoData).map((isoCode) => ({
   icon: Award,
@@ -33,6 +14,7 @@ const mainServices = Object.keys(isoData).map((isoCode) => ({
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
   link: `/iso/${isoCode}`, // Link dinamico
+  code: isoCode,
   modal: true,
 }));
 
@@ -44,100 +26,96 @@ mainServices.push({
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
   link: "/iso", // Link statico
+  code: " ",
   modal: false,
 });
 
-interface ServicesProps {
-  onViewISO?: (isoType: string) => void;
-  onViewISOList?: () => void;
-  onOpenISOModal?: (isoType: string) => void;
-}
 
-export function ConsISO({ onViewISO, onViewISOList, onOpenISOModal }: ServicesProps) {
-  const handleISOClick = (service: object) => {
+export function ConsISO() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedISO, setSelectedISO] = useState<string | null>(null);
 
-    if (service.modal && onOpenISOModal) {
-      onOpenISOModal(service.title)
-    }else {
-      onViewISOList()
+  const handleISOClick = (service: typeof mainServices[0]) => {
+    if(service.modal && service.code) {
+      // Open Modal for the specific ISO
+      setSelectedISO(service.code);
+      setModalOpen(true);
+    } else if (service.link) {
+      // This is for handling the case "All other ISOs"
+      window.location.href = service.link;
     }
 
   };
   return (
-    <section
-      id="iso"
-      className="py-20 bg-gradient-to-b bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500"
-    >
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-2">
-            LE NOSTRE CERTIFICAZIONI
-          </p>
-          <h2 className="text-3xl lg:text-4xl text-foreground mb-4">
-            Studio Venturiero
-          </h2>
-          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-            Offriamo una vasta gamma di certificazioni per il
-            lavoro. Ecco le nostre principali ISO, pensate per
-            soddisfare le esigenze della tua azienda.
-          </p>
-        </div>
+    <>
+      <section
+        id="iso"
+        className="py-20 bg-gradient-to-b bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500"
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-2">
+              LE NOSTRE PRINCIPALI CERTIFICAZIONI
+            </p>
+            <h2 className="text-3xl lg:text-4xl text-foreground mb-4">
+              Studio Venturiero
+            </h2>
+            <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
+              Offriamo una vasta gamma di certificazioni per il
+              lavoro. Ecco le nostre principali ISO, pensate per
+              soddisfare le esigenze della tua azienda.
+            </p>
+          </div>
 
-        {/* Main Services Grid - 2x2 layout with better spacing */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
-          {mainServices.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
+          {/* Main Services Grid - 2x2 layout with better spacing */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            {mainServices.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
               <div
                 key={index}
-                className={`${service.bgColor} ${service.textColor} rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 border border-gray-200 dark:border-gray-700`}
+                className={`${service.bgColor} ${service.textColor} rounded-xl p-6 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-500 border border-gray-200 dark:border-gray-700`}
               >
-                <div className="text-center mb-6">
-                  <div
-                    className={`${service.iconBg} w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg`}
-                  >
-                    <IconComponent className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="text-xl uppercase tracking-wide mb-4">
-                    {service.title}
-                  </h3>
+                <div className="text-center mb-4">
+                <div
+                  className={`${service.iconBg} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md`}
+                >
+                  <IconComponent className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-sm leading-relaxed mb-6 text-center min-h-[3rem]">
-                  {service.description}
+                <h3 className="text-lg uppercase tracking-wide mb-2">
+                  {service.title}
+                </h3>
+                </div>
+                <p className="text-sm leading-relaxed mb-4 text-center min-h-[2.5rem]">
+                {service.description}
                 </p>
                 <div className="text-center">
-                  {/* <Button
-                    className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
-                    onClick={() => {
-                      if (service.title === "Altre ISO") {
-                        navigate("/iso");
-                      } else {
-                        const isoCode = service.title.split(" ")[1]; // Extract ISO code from title
-                        navigate(`/iso/${isoCode}`);
-                      }
-                    }}
-                  >
-                    Scopri di più
-                  </Button> */}
-                  <Button 
-                    onClick={() => handleISOClick(service)}
-                    className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
-                  >
-                    Scopri di più
-                  </Button>
-                  {/* <a
-                    href={service.link}
-                    className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all inline-block"
-                  >
-                    Scopri di più
-                  </a> */}
+                <Button 
+                  onClick={() => {
+                  handleISOClick(service);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-6 py-2 rounded-md shadow-sm hover:shadow-md transition-all"
+                >
+                  Scopri di più
+                </Button>
                 </div>
               </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Modal for ISO Details */}
+      {selectedISO && modalOpen && (
+        <ISOModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          isoType={selectedISO}
+        />
+      )}
+
+    </>
   );
 }
 
