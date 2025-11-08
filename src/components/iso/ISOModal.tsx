@@ -201,7 +201,7 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
           </DialogHeader>
 
         {/* Scrollable Content */}
-        <ScrollArea className="h-[calc(90vh-180px)]">
+        {/* <ScrollArea className="h-[calc(90vh-180px)]"> */}
           <div className="p-8">
             {/* Description */}
             <p className="text-lg text-foreground/80 leading-relaxed mb-8">
@@ -232,7 +232,7 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
             </div>
 
             {/* Requirements Section */}
-            <div className="mb-8">
+            {/* <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                   <FileCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -254,10 +254,10 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Process Section */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                   <Settings className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -279,16 +279,22 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
-        </ScrollArea>
+        {/* </ScrollArea> */}
 
           {/* Footer */}
           <div className="p-6 bg-blue-50 dark:bg-blue-950/20 border-t border-blue-200 dark:border-blue-900 flex items-center justify-between gap-4">
             <p className="text-sm text-foreground/70">
               Vuoi saperne di più sulla certificazione ISO 9001?
             </p>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+              onClick={() => {
+                onClose();
+                window.location.href = "/#contact";
+              }}
+            >
               Richiedi Consulenza
             </Button>
           </div>

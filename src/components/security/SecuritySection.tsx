@@ -79,6 +79,7 @@ export function Security() {
           <Button 
             size="lg" 
             className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+            onClick={() => window.location.href = "/#contact"}
           >
             Contattami per una consulenza gratuita
           </Button>

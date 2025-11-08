@@ -227,7 +227,7 @@ export function ISODetail({ isoType, onBack }: ISODetailProps) {
           </section>
 
           {/* Requirements */}
-          <section>
+          {/* <section>
             <div className="flex items-center gap-3 mb-8">
               <FileText className={`w-8 h-8 ${colorClasses.text}`} />
               <h2 className="text-3xl text-foreground">Requisiti Principali</h2>
@@ -245,10 +245,10 @@ export function ISODetail({ isoType, onBack }: ISODetailProps) {
                 </div>
               ))}
             </div>
-          </section>
+          </section> */}
 
           {/* Process */}
-          <section>
+          {/* <section>
             <div className="flex items-center gap-3 mb-8">
               <Award className={`w-8 h-8 ${colorClasses.text}`} />
               <h2 className="text-3xl text-foreground">Processo di Certificazione</h2>
@@ -268,7 +268,7 @@ export function ISODetail({ isoType, onBack }: ISODetailProps) {
                 </div>
               ))}
             </div>
-          </section>
+          </section> */}
 
           {/* CTA */}
           <section className={`p-8 ${colorClasses.bg} border ${colorClasses.border} rounded-2xl text-center`}>

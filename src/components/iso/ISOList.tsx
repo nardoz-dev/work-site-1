@@ -2,6 +2,7 @@ import { Button } from "../ui/button";
 import { ArrowLeft, Award, CheckCircle2 } from "lucide-react";
 import { ISOModal } from "./ISOModal";
 import { useState } from "react";
+import { CTABanner } from "../CTABanner";
 
 
 const allISOs = [
@@ -156,6 +157,14 @@ export function ISOList() {
           isoType={selectedISO}
         />
       )}
+
+      {/* CTA Banner */}
+      <CTABanner
+        title="Vuoi certificare la tua azienda?"
+        subtitle="Richiedi un audit di certificazione"
+        buttonText="Contattaci"
+        onButtonClick={() => window.location.href = "/#contact"}
+      />
     
     </>
   );

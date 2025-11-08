@@ -1,3 +1,4 @@
+import { CTABanner } from "../CTABanner";
 import { Button } from "../ui/button";
 import { ArrowLeft, Shield, HardHat, ClipboardCheck, Building2, FileText, Users, CheckCircle2 } from "lucide-react";
 
@@ -256,6 +257,14 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
           </section>
         </div>
       </div>
+
+      {/* CTA Banner */}
+      <CTABanner
+        title={`Hai bisogno di un ${data.title}?`} // UUUUUU GG
+        subtitle="Contattaci per una consulenza personalizzata"
+        buttonText="Contattaci"
+        onButtonClick={() => window.location.href = "/#contact"}
+      />
     </div>
   );
 }
