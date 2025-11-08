@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+
+import { Header } from '../components/Header.tsx';
+import { Home } from '../components/Home.tsx';
+// Import dei componenti piu importanti della pagina
+import { ConsISO } from '../components/iso/ISOSection.tsx';
+import { Security } from '../components/security/SecuritySection.tsx';
+import { Assignments } from '../components/assignment/AssignmentSection.tsx';
+import { NewsSection } from '../components/news/ArticleSection.tsx';
+import { Contact } from '../components/contact/ContactSection.tsx';
+import { Stats } from '../components/FooterStat.tsx';
+import BaseLayout from '../layout/BaseLayout.astro';
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Studio Venturiero</title> </head>
+  <body>
+
+  <BaseLayout activeSectionID="home">
+    <Home client:load />
+    <ConsISO client:load />
+    <Security client:load />
+    <Assignments client:load />
+    <NewsSection client:load />
+    <Contact client:load />
+
+    <!-- For the moment disabled. -->
+    <!-- <Stats client:load /> -->
+
+  </BaseLayout>
+
+  </body>
+</html>

@@ -1,0 +1,9 @@
+---
+import '../../styles/global.css';
+import { ArticleList } from '../../components/news/AllArticle.tsx';
+import BaseLayout from '../../layout/BaseLayout.astro';
+---
+
+<BaseLayout activeSectionID="news">
+  <ArticleList client:load />
+</BaseLayout>
