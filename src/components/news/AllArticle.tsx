@@ -9,11 +9,8 @@ import {
   Clock,
 } from "lucide-react";
 import { ImageWithFallback } from "../utils/fallback";
+import { CTABanner } from "../CTABanner";
 
-interface ArticleListProps {
-  onBack: () => void;
-  onSelectArticle: (articleId: string) => void;
-}
 
 const allArticles = [
   {
@@ -90,10 +87,7 @@ const categories = [
   "Innovazione",
 ];
 
-export function ArticleList({
-  onBack,
-  onSelectArticle,
-}: ArticleListProps) {
+export function ArticleList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState("Tutte");
@@ -119,14 +113,13 @@ export function ArticleList({
       {/* Header */}
       <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
         <div className="container mx-auto px-4 py-12">
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent"
+          <a
+            href="/#news"
+            className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Torna alla home
-          </Button>
+            Torna alla pagina principale
+          </a>
           <div className="max-w-4xl">
             <h1 className="text-4xl lg:text-5xl mb-4 text-blue-600 dark:text-blue-400">
               Tutti gli Articoli
@@ -188,10 +181,10 @@ export function ArticleList({
           {/* Articles Grid */}
           <div className="grid md:grid-cols-2 gap-6">
             {filteredArticles.map((article) => (
-              <div
+              <a
                 key={article.id}
                 className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer group"
-                onClick={() => onSelectArticle(article.id)}
+                href={`/news/${article.id}`}
               >
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -228,7 +221,7 @@ export function ArticleList({
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
@@ -251,23 +244,17 @@ export function ArticleList({
             </div>
           )}
 
-          {/* CTA Section */}
-          <div className="mt-16 p-8 lg:p-12 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl text-center">
-            <h3 className="text-2xl lg:text-3xl mb-4 text-foreground">
-              Vuoi rimanere sempre aggiornato?
-            </h3>
-            <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
-              Iscriviti alla nostra newsletter per ricevere gli
-              ultimi articoli, aggiornamenti normativi e
-              consigli pratici direttamente nella tua casella
-              email.
-            </p>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-              Iscriviti alla Newsletter
-            </Button>
-          </div>
         </div>
+
       </div>
+
+      {/* CTA Banner */}
+      <CTABanner
+        title="Hai bisogno di supporto?"
+        subtitle="Contattaci per una consulenza personalizzata"
+        buttonText="Contattaci"
+        onButtonClick={() => window.location.href = "/#contact"}
+      />
     </div>
   );
 }

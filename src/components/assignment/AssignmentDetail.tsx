@@ -139,7 +139,7 @@ export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailPro
           </Button> */}
 
           <a
-          href={`/`}
+          href={`/#assignment`}
           className={`mb-6 ${colorClasses.text} hover:bg-transparent flex items-center`}
           >
           <ArrowLeft className="w-4 h-4 mr-2" />

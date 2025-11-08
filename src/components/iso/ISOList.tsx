@@ -81,7 +81,7 @@ export function ISOList() {
         <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
           <div className="container mx-auto px-4 py-12">
               <a
-              href={`/`}
+              href={`/#iso`}
               className={`mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center`}
               >
               <ArrowLeft className="w-4 h-4 mr-2" />

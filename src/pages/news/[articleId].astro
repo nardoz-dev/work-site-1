@@ -1,6 +1,6 @@
 ---
 import '../../styles/global.css';
-import { articlesData } from '../../components/news/ArticleDetail.tsx';
+import { articlesData } from '../../data/articlesData.ts';
 import { ArticleDetail } from '../../components/news/ArticleDetail.tsx';
 import BaseLayout from '../../layout/BaseLayout.astro';
 
@@ -21,5 +21,5 @@ if (!selectedArticle) {
 
 <BaseLayout >
   <Fragment slot="title">{selectedArticle.title}</Fragment>
-  <ArticleDetail articleId={articleId} />
+  <ArticleDetail articleId={articleId} client:load />
 </BaseLayout>

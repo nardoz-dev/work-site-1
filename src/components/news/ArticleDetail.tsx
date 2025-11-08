@@ -1,119 +1,61 @@
+import { useState } from "react";
 import { Button } from "../ui/button";
-import { ArrowLeft, Calendar, User, Clock, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, User, Clock, Share2, Check } from "lucide-react";
 import { ImageWithFallback } from "../utils/fallback";
+import { CTABanner } from "../CTABanner";
+import { articlesData } from "../../data/articlesData";
 
 interface ArticleDetailProps {
   articleId: string;
-  onBack: () => void;
 }
 
-const articlesData: Record<string, {
-  title: string;
-  category: string;
-  date: string;
-  author: string;
-  readTime: string;
-  image: string;
-  content: {
-    intro: string;
-    sections: Array<{
-      title: string;
-      content: string;
-    }>;
-  };
-}> = {
-  "1": {
-    title: "Nuove Normative ISO 2024: Cosa Cambia per le Aziende",
-    category: "Normative",
-    date: "15 Gennaio 2024",
-    author: "Dr. Marco Rossi",
-    readTime: "5 min",
-    image: "business meeting",
-    content: {
-      intro: "Le normative ISO 2024 introducono importanti cambiamenti che ogni azienda certificata deve conoscere. Questa guida completa vi aiuterà a comprendere le novità e ad adeguarvi tempestivamente.",
-      sections: [
-        {
-          title: "Le Principali Novità",
-          content: "Il 2024 porta con sé significativi aggiornamenti agli standard ISO, con particolare attenzione alla sostenibilità ambientale e alla digitalizzazione dei processi. Le aziende certificate dovranno adeguarsi entro il primo semestre per mantenere la conformità."
-        },
-        {
-          title: "Impatto sulla ISO 9001",
-          content: "La ISO 9001 subisce modifiche che rafforzano il focus sulla customer satisfaction e sull'analisi del rischio. Viene introdotto un nuovo requisito per la gestione delle informazioni documentate in formato digitale, facilitando l'audit e il monitoraggio continuo."
-        },
-        {
-          title: "Tempistiche di Adeguamento",
-          content: "Le aziende hanno tempo fino al 30 giugno 2024 per implementare le nuove modifiche. Il nostro team è a disposizione per supportarvi nella transizione, garantendo continuità della certificazione e conformità normativa."
-        },
-        {
-          title: "Come Possiamo Aiutarvi",
-          content: "GEOCAD STUDIO offre un servizio di consulenza specializzato per l'aggiornamento alle nuove normative ISO 2024. Il nostro approccio comprende un audit preliminare, la formazione del personale e l'assistenza durante tutto il processo di transizione."
-        }
-      ]
-    }
-  },
-  "2": {
-    title: "L'Importanza della Formazione sulla Sicurezza sul Lavoro",
-    category: "Sicurezza",
-    date: "10 Gennaio 2024",
-    author: "Ing. Laura Bianchi",
-    readTime: "4 min",
-    image: "safety training",
-    content: {
-      intro: "La formazione sulla sicurezza non è solo un obbligo normativo, ma un investimento strategico per la tutela dei lavoratori e la riduzione degli infortuni in azienda.",
-      sections: [
-        {
-          title: "Perché è Fondamentale",
-          content: "Una corretta formazione sulla sicurezza riduce del 60% il rischio di infortuni sul lavoro. I lavoratori formati sono più consapevoli dei rischi e adottano comportamenti preventivi che salvaguardano la loro salute e quella dei colleghi."
-        },
-        {
-          title: "Obblighi Normativi",
-          content: "Il D.Lgs 81/08 impone specifici obblighi formativi al datore di lavoro. Ogni lavoratore deve ricevere formazione generale e specifica in base ai rischi della mansione, con aggiornamenti periodici obbligatori."
-        },
-        {
-          title: "I Nostri Corsi",
-          content: "GEOCAD STUDIO organizza corsi di formazione certificati per tutte le figure della sicurezza: lavoratori, preposti, dirigenti, RSPP e addetti alle emergenze. I nostri corsi sono riconosciuti e rispettano tutti i requisiti normativi."
-        }
-      ]
-    }
-  },
-  "3": {
-    title: "Guida alla Certificazione ISO 14001",
-    category: "Ambiente",
-    date: "5 Gennaio 2024",
-    author: "Dr. Paolo Verdi",
-    readTime: "6 min",
-    image: "environmental protection",
-    content: {
-      intro: "La certificazione ISO 14001 è lo strumento principale per le aziende che vogliono dimostrare il proprio impegno verso la sostenibilità ambientale e la gestione responsabile delle risorse.",
-      sections: [
-        {
-          title: "Cos'è la ISO 14001",
-          content: "La ISO 14001 è lo standard internazionale per i Sistemi di Gestione Ambientale (SGA). Fornisce un framework strutturato per identificare, gestire e ridurre l'impatto ambientale delle attività aziendali."
-        },
-        {
-          title: "Vantaggi per l'Azienda",
-          content: "Oltre alla conformità normativa, la certificazione porta numerosi vantaggi: riduzione dei costi energetici, miglioramento dell'immagine aziendale, accesso a bandi green, maggiore competitività sul mercato internazionale."
-        },
-        {
-          title: "Il Processo di Certificazione",
-          content: "Il percorso verso la certificazione ISO 14001 richiede tipicamente 6-12 mesi. Include l'analisi ambientale iniziale, l'implementazione del SGA, la formazione del personale e gli audit di certificazione."
-        }
-      ]
-    }
-  }
-};
 
 export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
   const article = articlesData[articleId];
+
+  // 2. Aggiungi uno stato per il feedback "Copiato!"
+  const [isCopied, setIsCopied] = useState(false);
+
+  // 3. Crea la funzione di condivisione
+  const handleShare = async () => {
+    // Dati da condividere
+    const shareData = {
+      title: article.title,
+      text: article.content.intro, // Usa l'intro come testo
+      url: window.location.href, // L'URL della pagina corrente
+    };
+
+    // Controlla se l'API Web Share è disponibile
+    if (navigator.share) {
+      try {
+        // --- Metodo Moderno (Mobile/Chrome) ---
+        await navigator.share(shareData);
+        console.log("Articolo condiviso con successo!");
+      } catch (err) {
+        // L'utente ha chiuso la condivisione, non è un errore
+        console.log("Condivisione annullata.");
+      }
+    } else {
+      // --- Fallback: Copia negli appunti (Desktop/Firefox) ---
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setIsCopied(true);
+        // Resetta il bottone dopo 2 secondi
+        setTimeout(() => setIsCopied(false), 2000); 
+      } catch (err) {
+        console.error("Impossibile copiare il link:", err);
+      }
+    }
+  };
 
   if (!article) {
     return (
       <div className="min-h-screen bg-background pt-20 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl mb-4">Articolo non trovato</h2>
-          <Button onClick={onBack} className="bg-blue-600 hover:bg-blue-700 text-white">
+          <a href="/news" className="bg-blue-600 hover:bg-blue-700 text-white">
             Torna agli articoli
-          </Button>
+          </a>
         </div>
       </div>
     );
@@ -124,14 +66,14 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
       {/* Header */}
       <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
         <div className="container mx-auto px-4 py-8">
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent"
+          <a
+            href="/news"
+            className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center"
+            //className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Torna agli articoli
-          </Button>
+          </a>
         </div>
       </div>
 
@@ -199,12 +141,40 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
         <div className="mt-16 pt-8 border-t border-border">
           <div className="flex items-center justify-between">
             <h3 className="text-lg text-foreground/80">Condividi questo articolo</h3>
+            
+            {/* Aggiungi onClick e gestisci lo stato (isCopied) */}
+            <Button
+              variant="outline"
+              className="text-blue-600 dark:text-blue-400 border-blue-600"
+              onClick={handleShare}
+              disabled={isCopied} // Disabilita brevemente il bottone
+            >
+              {isCopied ? (
+                // Stato "Copiato"
+                <>
+                  <Check className="w-4 h-4 mr-2" />
+                  Link Copiato!
+                </>
+              ) : (
+                // Stato Normale
+                <>
+                  <Share2 className="w-4 h-4 mr-2" />
+                  {/* Cambia il testo se il fallback è attivo */}
+                  {navigator.share ? "Condividi" : "Copia Link"}
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+        {/* <div className="mt-16 pt-8 border-t border-border">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg text-foreground/80">Condividi questo articolo</h3>
             <Button variant="outline" className="text-blue-600 dark:text-blue-400 border-blue-600">
               <Share2 className="w-4 h-4 mr-2" />
               Condividi
             </Button>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <div className="mt-12 p-8 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl text-center">
@@ -219,6 +189,13 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
           </Button>
         </div>
       </article>
+
+      <CTABanner
+        title="Hai bisogno di supporto?"
+        subtitle="Contattaci per una consulenza personalizzata"
+        buttonText="Contattaci"
+        onButtonClick={() => window.location.href = "/#contact"}
+      />
     </div>
   );
 }

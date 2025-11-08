@@ -55,74 +55,78 @@ export function NewsSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsArticles.map((article) => (
-            <Card 
-              key={article.id} 
-              className="group relative bg-white dark:bg-[#2d2d2f] border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.02] transition-all duration-500 overflow-hidden rounded-2xl flex flex-col"
+            <a
+              key={article.id}
+              href={`/news/${article.id}`}
+              className="group h-full"
             >
-              <div className="relative">
-                <div className="relative h-56 overflow-hidden">
-                  <ImageWithFallback
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                  
-                  {/* Category Badge - Bottom Left */}
-                  <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-white/95 dark:bg-gray-800/95 text-gray-800 dark:text-white backdrop-blur-sm">
-                      {article.category}
-                    </Badge>
-                  </div>
-                  
-                  {/* New Badge - Top Right */}
-                  {article.isNew && (
-                    <div className="absolute top-4 right-4">
-                      <Badge className="bg-blue-600 text-white shadow-lg">
-                        NUOVO
+              <Card 
+                key={article.id} 
+                className="group relative bg-white dark:bg-[#2d2d2f] border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.02] transition-all duration-500 overflow-hidden rounded-2xl flex flex-col h-full"
+              >
+                <div className="relative">
+                  <div className="relative h-56 overflow-hidden">
+                    <ImageWithFallback
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    
+                    {/* Category Badge - Bottom Left */}
+                    <div className="absolute bottom-4 left-4">
+                      <Badge className="bg-white/95 dark:bg-gray-800/95 text-gray-800 dark:text-white backdrop-blur-sm">
+                        {article.category}
                       </Badge>
                     </div>
-                  )}
-                  
-                  {/* Stats overlay */}
-                  <div className="absolute bottom-4 right-4 flex items-center gap-3 text-white text-xs">
-                    <div className="flex items-center gap-1 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
-                      <Clock className="w-3 h-3" />
-                      <span>{article.readTime}</span>
-                    </div>
-                    <div className="flex items-center gap-1 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
-                      <Eye className="w-3 h-3" />
-                      <span>{article.views}</span>
+                    
+                    {/* New Badge - Top Right */}
+                    {article.isNew && (
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-blue-600 text-white shadow-lg">
+                          NUOVO
+                        </Badge>
+                      </div>
+                    )}
+                    
+                    {/* Stats overlay */}
+                    <div className="absolute bottom-4 right-4 flex items-center gap-3 text-white text-xs">
+                      <div className="flex items-center gap-1 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{article.readTime}</span>
+                      </div>
+                      <div className="flex items-center gap-1 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
+                        <Eye className="w-3 h-3" />
+                        <span>{article.views}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{article.date}</span>
-                </div>
                 
-                <CardTitle className="text-lg leading-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500 transition-colors cursor-pointer">
-                  {article.title}
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="pt-0 flex-grow flex flex-col">
-                <CardDescription className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-400 flex-grow">
-                  {article.excerpt}
-                </CardDescription>
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{article.date}</span>
+                  </div>
+                  
+                  <CardTitle className="text-lg leading-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500 transition-colors cursor-pointer">
+                    {article.title}
+                  </CardTitle>
+                </CardHeader>
                 
-                <Button 
-                  variant="ghost" 
-                  className="group/btn p-0 h-auto text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 self-start mt-auto"
-                >
-                  Leggi tutto
-                  <ChevronRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
+                <CardContent className="pt-0 flex-grow flex flex-col">
+                  <CardDescription className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-400 flex-grow">
+                    {article.excerpt}
+                  </CardDescription>
+                  
+                  <div
+                    className="group/btn p-0 text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 self-start mt-auto"
+                  >
+                    Leggi tutto 
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
 
