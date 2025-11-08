@@ -19,7 +19,7 @@ if (!selectedAssignment) {
 }
 ---
 
-<BaseLayout>
+<BaseLayout activeSectionID="assignment">
   <Fragment slot="title">{selectedAssignment.title}</Fragment>
-  <AssignmentDetail assignmentType={assCode} />
+  <AssignmentDetail assignmentType={assCode} client:load/>
 </BaseLayout>

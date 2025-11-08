@@ -4,7 +4,6 @@ import { ArrowLeft, Shield, HardHat, ClipboardCheck, Building2, FileText, Users,
 
 interface AssignmentDetailProps {
   assignmentType: string;
-  onBack: () => void;
 }
 
 const assignmentData: Record<string, {
@@ -111,7 +110,7 @@ const assignmentData: Record<string, {
   },
 };
 
-export function AssignmentDetail({ assignmentType, onBack }: AssignmentDetailProps) {
+export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
   const data = assignmentData[assignmentType] || assignmentData["hse"];
   const IconComponent = data.icon;
 

@@ -1,6 +1,6 @@
 ---
 // src/layout/BaseLayout.astro
-import { Header } from '../components/Header.tsx';
+import { NavBar } from '../components/NavBar.tsx';
 import { Footer } from '../components/Footer.tsx';
 
 ---
@@ -11,7 +11,7 @@ import { Footer } from '../components/Footer.tsx';
   <body>
 
     <main class="pt-16">
-      <Header client:load />
+      <NavBar client:load />
       <slot /> 
     </main>
     

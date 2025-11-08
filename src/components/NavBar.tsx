@@ -7,14 +7,7 @@ import { Button } from "./ui/button";
 import { activeSection } from '../stores/navigationStore'; 
 import { motion, AnimatePresence } from "framer-motion";
 
-interface HeaderProps {
-  currentPage?: string;
-  onNavigate?: (page: string) => void;
-}
-export function NavBar({
-  currentPage = "home",
-  onNavigate,
-}: HeaderProps) 
+export function NavBar() 
  {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -89,6 +82,7 @@ export function NavBar({
     const openItem = navItems.find(item => item.id === activeDropdown && item.dropdown);
 
     return (
+      <>
       <nav className="w-full fixed top-0 left-0 right-0 z-50 bg-background bg-gray-700 dark:bg-[#1d1d1f]/80 backdrop-blur-md border-b border-border/50 transition-colors duration-500">
       {/* <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 dark:bg-[#1d1d1f]/80 backdrop-blur-lg border-b border-white/10 transition-all duration-300 h-16"> */}
           <div className="container mx-auto px-4 py-2">
@@ -245,7 +239,7 @@ export function NavBar({
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
                     className={`text-left px-4 py-3 text-sm rounded-lg transition-colors ${
-                      currentPage === item.id
+                      page_by_scroll === item.id
                         ? "bg-blue-50 dark:bg-blue-950/20 text-blue-600 dark:text-blue-400"
                         : "text-white/80 hover:bg-gray-100 dark:hover:bg-gray-800"
                     }`}
@@ -259,6 +253,7 @@ export function NavBar({
         )}
       </AnimatePresence>
   </nav>
+  </>
   );
 }
 

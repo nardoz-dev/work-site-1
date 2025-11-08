@@ -3,7 +3,6 @@ import { ArrowLeft, CheckCircle2, FileText, Users, Target, Award } from "lucide-
 
 interface ISODetailProps {
   isoType: string;
-  onBack: () => void;
 }
 
 const isoData: Record<string, {
@@ -161,7 +160,7 @@ const isoData: Record<string, {
   }
 };
 
-export function ISODetail({ isoType, onBack }: ISODetailProps) {
+export function ISODetail({ isoType }: ISODetailProps) {
   const data = isoData[isoType] || isoData["9001"];
 
   // Usa sempre il colore blu per tutte le ISO
