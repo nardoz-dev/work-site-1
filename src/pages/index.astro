@@ -7,9 +7,8 @@ import { Home } from '../components/Home.tsx';
 import { ConsISO } from '../components/iso/ISOSection.tsx';
 import { Security } from '../components/security/SecuritySection.tsx';
 import { Assignments } from '../components/assignment/AssignmentSection.tsx';
-import { Training } from '../components/training/TrainingSection.tsx';
 import { NewsSection } from '../components/news/ArticleSection.tsx';
-import { ContactNew } from '../components/contact/ContactSection.tsx';
+import { Contact } from '../components/contact/ContactSection.tsx';
 import { Stats } from '../components/FooterStat.tsx';
 import BaseLayout from '../layout/BaseLayout.astro';
 ---
@@ -23,16 +22,16 @@ import BaseLayout from '../layout/BaseLayout.astro';
     <title>Studio Venturiero</title> </head>
   <body>
 
-  <BaseLayout>
+  <BaseLayout activeSectionID="home">
     <Home client:load />
     <ConsISO client:load />
     <Security client:load />
     <Assignments client:load />
-    <Training client:load />
     <NewsSection client:load />
-    <ContactNew client:load />
+    <Contact client:load />
 
-    <Stats client:load />
+    <!-- For the moment disabled. -->
+    <!-- <Stats client:load /> -->
 
   </BaseLayout>
 

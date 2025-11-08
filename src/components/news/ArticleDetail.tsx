@@ -120,7 +120,7 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-20">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
         <div className="container mx-auto px-4 py-8">

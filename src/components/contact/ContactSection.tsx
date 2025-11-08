@@ -1,250 +1,263 @@
-import { 
-  FileText, 
-  Phone, 
-  Calendar, 
-  Shield, 
-  Building2, 
-  HardHat, 
-  Utensils, 
-  Users, 
-  GraduationCap, 
-  FileCheck, 
-  Mail, 
-  MapPin, 
-  ChevronRight,
-  Clock,
-  MessageSquare,
-  CheckCircle2
-} from "lucide-react";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Label } from "../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Phone, Mail, MapPin, Clock, Send, Star } from "lucide-react";
 
-const quickActions = [
+const contactInfo = [
   {
-    icon: FileText,
-    title: "Richiedi un preventivo",
-    link: "#"
+    icon: Phone,
+    title: "Telefono",
+    details: ["+39 333 75 58 507", "Disponibile 24/7"]
   },
   {
-    icon: Calendar,
-    title: "Prenota una consulenza personalizzata",
-    link: "#"
-  },
-  // {
-  //   icon: CheckCircle2,
-  //   title: "Verifica lo stato della pratica",
-  //   link: "#"
-  // }
-];
-
-const serviceCategories = [
-  {
-    icon: Shield,
-    label: "Sicurezza sul Lavoro",
-    link: "#"
+    icon: Mail,
+    title: "Email",
+    details: ["info@studioventuriero.it", "preventivi@studioventuriero.it"]
   },
   {
-    icon: Building2,
-    label: "Sistemi di Gestione",
-    link: "#"
+    icon: MapPin,
+    title: "Sede",
+    details: ["Via Aaaaaa Km 106,500", "Aaaaaa (LT) - 04019"]
   },
   {
-    icon: HardHat,
-    label: "Sicurezza Cantieri",
-    link: "#"
-  },
-  {
-    icon: Utensils,
-    label: "Sicurezza Alimentare",
-    link: "#"
-  },
-  {
-    icon: Users,
-    label: "Consulenza Aziendale",
-    link: "#"
-  },
-  {
-    icon: GraduationCap,
-    label: "Formazione",
-    link: "#"
-  },
-  {
-    icon: FileCheck,
-    label: "Verifiche e Certificazioni",
-    link: "#"
+    icon: Clock,
+    title: "Orari",
+    details: ["Lun-Ven: 9:00 - 18:00", "Orario Continuato"]
   }
 ];
 
-const contactMethods = [
+const testimonials = [
   {
-    title: "Supporto telefonico",
-    description: "Puoi parlare con un o una consulente chiamando il numero di telefono del supporto del tuo Paese o della tua area geografica.",
-    link: "Trova il numero per il tuo Paese",
-    linkHref: "#"
+    name: "Marco Rossi",
+    company: "Edil Costruzioni SRL",
+    rating: 5,
+    text: "Professionalità e competenza eccezionali. Hanno gestito tutte le pratiche di sicurezza del nostro cantiere con estrema precisione.",
+    date: "2 settimane fa"
   },
   {
-    title: "Assistenza via email",
-    description: "Visita la pagina dei moduli di contatto per inviare la tua richiesta e ricevere supporto personalizzato.",
-    link: "Invia una richiesta",
-    linkHref: "#"
+    name: "Laura Bianchi",
+    company: "TechStart Innovation",
+    rating: 5,
+    text: "Grazie a Studio Venturiero abbiamo ottenuto la certificazione ISO 9001 in tempi record. Consulenti preparati e sempre disponibili.",
+    date: "1 mese fa"
   },
   {
-    title: "Consulenza in sede",
-    description: "Prenota un appuntamento presso il nostro ufficio per una consulenza personalizzata sui tuoi progetti.",
-    link: "Prenota un appuntamento",
-    linkHref: "#"
+    name: "Giuseppe Verdi",
+    company: "Industrie Manifatturiere SpA",
+    rating: 5,
+    text: "Ottimo supporto per la valutazione dei rischi e formazione del personale. Consiglio vivamente i loro servizi.",
+    date: "3 settimane fa"
   }
 ];
 
-const otherTopics = [
-  "Operatori e consulenti certificati",
-  "Verifica la copertura dell'assistenza",
-  "Documenti e normative di riferimento",
-  "FAQ e guide operative"
-];
-
-export function ContactNew() {
+export function Contact() {
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-gray-950 transition-colors duration-500">
+    <section id="contact" className="py-20 bg-background dark:bg-[#000000] transition-colors duration-500">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl text-foreground mb-4">
+          <h1 className="text-4xl lg:text-5xl text-foreground mb-8">
             Contatta Studio Venturiero
           </h1>
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {quickActions.map((action, index) => {
-            const IconComponent = action.icon;
-            return (
-              <a
-                key={index}
-                href={action.link}
-                className="group flex flex-col items-center text-center p-6 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300"
-              >
-                <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                  <IconComponent className="w-12 h-12 text-foreground/80" strokeWidth={1.5} />
-                </div>
-                <p className="text-sm text-blue-600 dark:text-blue-500 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
-                  {action.title} →
+        <div className="grid lg:grid-cols-3 gap-12">
+          {/* Left Column - Contact Info */}
+          <div className="lg:col-span-1 space-y-8">
+            {/* Contact Details Card */}
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 rounded-2xl p-8 text-white shadow-lg">
+              <h3 className="text-xl mb-6">Parliamo del tuo progetto</h3>
+              <div className="space-y-6">
+                {contactInfo.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-white mb-1">{item.title}</h4>
+                        {item.details.map((detail, idx) => (
+                          <p key={idx} className="text-blue-100 text-sm">{detail}</p>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              <div className="mt-8 pt-6 border-t border-white/20">
+                <p className="text-blue-100 text-sm mb-4">
+                  Seguici sui social media
                 </p>
-              </a>
-            );
-          })}
-        </div>
+                <div className="flex gap-3">
+                  {['L', 'F', 'I'].map((social, idx) => (
+                    <div 
+                      key={idx} 
+                      className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors"
+                    >
+                      <span className="text-sm">{social}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
 
-        {/* Category Selection */}
-        <div className="mb-20">
-          <h2 className="text-center text-3xl mb-12 text-foreground">
-            Scegli un servizio
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
-            {serviceCategories.map((category, index) => {
-              const IconComponent = category.icon;
-              return (
-                <a
-                  key={index}
-                  href={category.link}
-                  className="group flex flex-col items-center text-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300"
-                >
-                  <div className="w-14 h-14 mb-3 flex items-center justify-center">
-                    <IconComponent className="w-10 h-10 text-foreground/70 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
+          {/* Right Column - Contact Form */}
+          <div className="lg:col-span-2">
+            <Card className="shadow-xl border-0 bg-white dark:bg-[#1d1d1f] dark:border dark:border-gray-800">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-[#2a2a2c] dark:to-[#2d2f3f] rounded-t-xl">
+                <CardTitle className="text-2xl text-foreground flex items-center gap-2">
+                  <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <Send className="w-4 h-4 text-white" />
                   </div>
-                  <p className="text-xs text-foreground/80 group-hover:text-foreground transition-colors">
-                    {category.label}
+                  Invia una Richiesta
+                </CardTitle>
+                <CardDescription className="text-foreground/60">
+                  Compila il form e ti contatteremo entro 24 ore per discutere delle tue esigenze.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6 p-8">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName" className="text-foreground/80">Nome *</Label>
+                    <Input 
+                      id="firstName" 
+                      placeholder="Il tuo nome" 
+                      className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName" className="text-foreground/80">Cognome *</Label>
+                    <Input 
+                      id="lastName" 
+                      placeholder="Il tuo cognome"
+                      className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-foreground/80">Email *</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="la-tua-email@esempio.com"
+                      className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-foreground/80">Telefono</Label>
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="+39 123 456 7890"
+                      className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="company" className="text-foreground/80">Azienda</Label>
+                    <Input 
+                      id="company" 
+                      placeholder="Nome della tua azienda"
+                      className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="service" className="text-foreground/80">Servizio di Interesse</Label>
+                    <Select>
+                      <SelectTrigger className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500">
+                        <SelectValue placeholder="Seleziona un servizio" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="sistemi-gestione">Sistemi di Gestione</SelectItem>
+                        <SelectItem value="sicurezza-cantieri">Sicurezza Cantieri</SelectItem>
+                        <SelectItem value="sicurezza-lavoro">Sicurezza sul Lavoro</SelectItem>
+                        <SelectItem value="sicurezza-alimentare">Sicurezza Alimentare</SelectItem>
+                        <SelectItem value="formazione">Corsi di Formazione</SelectItem>
+                        <SelectItem value="verifica-impianti">Verifica Impianti</SelectItem>
+                        <SelectItem value="altro">Altro</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="text-foreground/80">Messaggio *</Label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="Descrivi brevemente le tue esigenze..."
+                    className="min-h-[120px] border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                  <Button 
+                    size="lg" 
+                    className="bg-blue-600 hover:bg-blue-700 text-white flex-1 sm:flex-none shadow-lg"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    Invia Richiesta
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="flex-1 sm:flex-none border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-950/30"
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Chiamaci Ora
+                  </Button>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-[#2a2a2c] rounded-lg p-4 mt-6 border border-gray-200 dark:border-gray-800">
+                  <p className="text-xs text-foreground/60 flex items-start gap-2">
+                    <span className="w-2 h-2 bg-blue-600 rounded-full mt-1.5 flex-shrink-0"></span>
+                    * Campi obbligatori. I tuoi dati saranno trattati secondo la normativa sulla privacy GDPR.
+                    Tempo di risposta garantito: 24 ore lavorative.
                   </p>
-                </a>
-              );
-            })}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
-        {/* Contact Methods */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {contactMethods.map((method, index) => (
-            <div key={index} className="space-y-4">
-              <h3 className="text-xl text-foreground">
-                {method.title}
-              </h3>
-              <p className="text-sm text-foreground/60 leading-relaxed">
-                {method.description}
-              </p>
-              <a
-                href={method.linkHref}
-                className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 transition-colors group"
-              >
-                {method.link}
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          ))}
-        </div>
-
-        {/* Detailed Contact Info */}
-        <div className="bg-gray-50 dark:bg-white/5 rounded-3xl p-8 md:p-12 mb-20">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-600 dark:bg-blue-700 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-foreground/60">Telefono</p>
-                  <a href="tel:+393337558507" className="text-foreground hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
-                    +39 333 75 58 507
-                  </a>
-                </div>
-              </div>
-              <p className="text-xs text-foreground/50 ml-13">Disponibile 24/7</p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-600 dark:bg-blue-700 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-foreground/60">Email</p>
-                  <a href="mailto:info@studioventuriero.it" className="text-foreground hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
-                    info@studioventuriero.it
-                  </a>
-                </div>
-              </div>
-              <p className="text-xs text-foreground/50 ml-13">Risposta in 24h</p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-600 dark:bg-blue-700 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-foreground/60">Sede</p>
-                  <p className="text-foreground text-sm">Via Aaaaaa Km 106,500</p>
-                  <p className="text-foreground text-sm">Aaaaaa (LT) - 04019</p>
-                </div>
-              </div>
-              <p className="text-xs text-foreground/50 ml-13">Lun-Ven: 9:00 - 18:00</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Other Topics */}
-        <div className="text-center">
-          <h2 className="text-2xl mb-8 text-foreground">
-            Altri argomenti
+        {/* Testimonials Section */}
+        <div className="mt-20">
+          <h2 className="text-center text-3xl mb-12 text-foreground">
+            Cosa dicono i nostri clienti
           </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {otherTopics.map((topic, index) => (
-              <a
-                key={index}
-                href="#"
-                className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 transition-colors group"
-              >
-                {topic}
-                <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </a>
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white dark:bg-[#1d1d1f] border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  {/* Rating Stars */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  
+                  {/* Testimonial Text */}
+                  <p className="text-foreground/80 text-sm mb-4 leading-relaxed">
+                    "{testimonial.text}"
+                  </p>
+                  
+                  {/* Author Info */}
+                  <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <p className="text-foreground">{testimonial.name}</p>
+                    <p className="text-sm text-foreground/60">{testimonial.company}</p>
+                    <p className="text-xs text-foreground/40 mt-1">{testimonial.date}</p>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
