@@ -5,13 +5,22 @@ import {ThemeToggle} from "./ThemeToggle";
 import Logo from "../assets/LogoNew.png?url"; 
 import { Button } from "./ui/button";
 import { activeSection } from '../stores/navigationStore'; 
+import { motion, AnimatePresence } from "framer-motion";
+
+// interface HeaderProps {
+//   currentPage?: string;
+//   onNavigate?: (page: string) => void;
+// }
+// export function Header({
+//   currentPage = "home",
+//   onNavigate,
+// }: HeaderProps) 
 
 export function NavBar({
 }) {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    
+
     const page_by_scroll = useStore(activeSection);
 
     const navItems = [
@@ -22,25 +31,52 @@ export function NavBar({
       href: "/#iso", // Link per lo scroll sulla pagina
       dropdown: true,
       dropdownLinks: [
-        { href: "/iso/9001", label: "ISO 9001" },
-        { href: "/iso/14001", label: "ISO 14001" },
-        { href: "/iso/45001", label: "ISO 45001" },
-        { href: "/iso/", label: "Altre ISO" },
+        {
+          title: "Sistemi di Gestione Qualità",
+          items: [
+            { label: "ISO 9001", id: "iso-9001" },
+            { label: "ISO 14001", id: "iso-14001" },
+            { label: "ISO 45001", id: "iso-45001" },
+          ]
+        },
+        {
+          title: "Sicurezza e Compliance",
+          items: [
+            { label: "ISO 27001", id: "iso-27001" },
+            { label: "ISO 37001", id: "iso-37001" },
+            { label: "ISO 22000", id: "iso-22000" },
+          ]
+        },
+        {
+          title: "Altro",
+          items: [
+            { label: "Tutte le certificazioni ISO", id: "all-iso" },
+            { label: "Consulenza personalizzata", id: "custom-consulting" },
+          ]
+        }
       ],
     },
-    { id: "security", label: "Sicurezza", href: "/#security", dropdown: false },
+    {
+      id: "security",
+      label: "Sicurezza",
+      href: "/#security",
+      dropdown: false,
+    },
     {
         id: "assignment",
         label: "Incarichi",
         href: "/#assignment",
         dropdown: true,
-        dropdownLinks: [
-          { href: "/assignment/rspp", label: "RSPP Esterno" },
-          { href: "/assignment/hse", label: "Incarico HSE" },
-          { href: "/assignment/auditor", label: "Auditor Esterno" },
-        ],
+        dropdownLinks: [{
+          title: "Sistemi di Gestione Qualità",
+          items: [
+            { label: "RSPP Esterno", id: "rspp" },
+            { label: "Incarico HSE", id: "hse" },
+            { label: "Auditor Esterno", id: "auditor" },
+          ]
+        },
+      ], 
       },
-      { id: "training", label: "Formazione", href: "/#training", dropdown: false },
       { id: "news", label: "News", href: "/#news", dropdown: false },
       { id: "contact", label: "Contatti", href: "/#contact", dropdown: false },
     ];
@@ -49,26 +85,16 @@ export function NavBar({
     const handleNavClick = (id: string) => {
       activeSection.set(id);
       setMobileMenuOpen(false);
+      setOpenDropdown(null);
     };
 
-
-    const isoLinks = [
-      { code: "9001", label: "ISO 9001" },
-      { code: "14001", label: "ISO 14001" },
-      { code: "45001", label: "ISO 45001" },
-    ];
-
-    const assignmentLinks = [
-      { code: "rspp", label: "RSPP Esterno" },
-      { code: "hse", label: "Incarico HSE" },
-      { code: "auditor", label: "Auditor Esterno" },
-    ];
+    const openItem = navItems.find(item => item.id === openDropdown && item.dropdown);
 
     return (
     // Top Navigation - Sticky
-    <nav className="w-full fixed top-0 left-0 right-0 z-50 bg-background/80 bg-gray-900/80 dark:bg-[#1d1d1f]/80 backdrop-blur-md border-b border-border/50 transition-colors duration-500">
+    <nav className="w-full fixed top-0 left-0 right-0 z-50 bg-background bg-gray-700 dark:bg-[#1d1d1f]/80 backdrop-blur-md border-b border-border/50 transition-colors duration-500">
     {/* <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 dark:bg-[#1d1d1f]/80 backdrop-blur-lg border-b border-white/10 transition-all duration-300 h-16"> */}
-        <div className="container mx-auto px-4 py-2.5">
+        <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between">
               {/* Logo e Titolo */}
               <div
@@ -85,12 +111,13 @@ export function NavBar({
                   />
                 </a>
                 <div className="flex flex-col">
-                  <span className="tracking-wide  text-white">
-                    VENTURIERO
-                  </span>
                   <span className="text-xs  text-white/60">
                     STUDIO
                   </span>
+                  <span className="tracking-wide  text-white">
+                    VENTURIERO
+                  </span>
+ 
                 </div>
               </div>
 
@@ -125,9 +152,8 @@ export function NavBar({
                   </a>
 
                   {/* Dropdown Menu: */}
-                  {item.dropdown && openDropdown === item.id && (
+                  {/* {item.dropdown && openDropdown === item.id && (
                     <div className="absolute left-0 mt-0 w-48 bg-gray-800 text-white rounded shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
-                      {/* Loop sui link del dropdown */}
                       {item.dropdownLinks?.map((link) => (
                         <a
                           key={link.href}
@@ -138,7 +164,7 @@ export function NavBar({
                         </a>
                       ))}
                     </div>
-                  )}
+                  )} */}
                 </div>
               ))}
               </nav>
@@ -158,6 +184,61 @@ export function NavBar({
                 </Button>
               </div>
           </div>
+
+          {/* Dropdown Menu */}
+          <AnimatePresence>
+            {openItem && ( //navItems[openDropdown as keyof typeof navItems] && (
+              <>
+                {/* Backdrop - solo sotto la navbar */}
+                {/* <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="fixed top-17 left-0 right-0 bottom-0 bg-black/40 backdrop-blur-sm z-40"
+                  onMouseEnter={() => setOpenDropdown(null)}
+                /> */}
+                
+                {/* Dropdown Content */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="fixed top-18 left-0 right-0 z-50 bg-background bg-gray-700 dark:bg-[#1d1d1f]/80 backdrop-blur-2xl border-b border-white/10"
+                  onMouseEnter={() => setOpenDropdown(openItem.id)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                 <div className="container mx-auto px-4 py-12">
+                  <div className="grid grid-cols-3 gap-12 max-w-4xl">
+                    {/* Usa openItem.dropdownLinks */}
+                    {openItem?.dropdownLinks?.map((section, idx) => (
+                      <div key={idx}>
+                        <h3 className="text-xs text-[#f5f5f7]/60 mb-4 ...">
+                          {section.title}
+                        </h3>
+                        <ul className="space-y-3">
+                          {section.items.map((item, itemIdx) => (
+                            <li key={itemIdx}>
+                              <button
+                                // Usa 'openItem.id' per impostare la categoria attiva
+                                onClick={() => handleNavClick(openItem.id)}
+                                className="text-xl text-[#f5f5f7] ..."
+                              >
+                                {item.label}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+      
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
