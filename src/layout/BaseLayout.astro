@@ -1,8 +1,14 @@
 ---
 // src/layout/BaseLayout.astro
 import { NavBar } from '../components/NavBar.tsx';
-import { Footer } from '../components/Footer.tsx';
+import { FooterMinimal } from '../components/FooterMinimal.tsx';
 
+interface Props {
+  activeSectionID?: string;
+}
+  
+// Default a "home" se non specificato
+const { activeSectionID } = Astro.props;
 ---
 
 <html lang="it">
@@ -11,32 +17,27 @@ import { Footer } from '../components/Footer.tsx';
   <body>
 
     <main class="pt-16">
-      <NavBar client:load />
+      <NavBar currentPage={activeSectionID} client:load />
       <slot /> 
     </main>
     
     <script>
       import { activeSection } from '../stores/navigationStore';
-
-      // Seleziona tutte le sezioni figlie di <main> che hanno un ID
+      // Search all the sections 
       const sections = document.querySelectorAll('main section[id]');
 
+      // Enable the observer
       if (sections.length > 0) {
         const observer = new IntersectionObserver((entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
-              // Appena una sezione entra nel viewport, 
-              // aggiorna lo store globale.
               activeSection.set(entry.target.id);
-              break; // Ci interessa solo la prima che intercetta
+              break; 
             }
           }
         }, {
-          // 'rootMargin' imposta la "linea" di trigger.
-          // -160px dall'alto, -30% dal basso.
-          // Regola questi valori per perfezionare quando si attiva il link.
           rootMargin: '-160px 0px -30% 0px',
-          threshold: 0 // Si attiva appena 1px è visibile
+          threshold: 0 
         });
 
         sections.forEach((section) => {
@@ -46,6 +47,6 @@ import { Footer } from '../components/Footer.tsx';
     </script>
   </body>
   <footer>
-    <Footer client:load />
+    <FooterMinimal client:load />
   </footer>
 </html>

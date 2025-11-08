@@ -1,4 +1,5 @@
 import { Button } from "../ui/button";
+import { useEffect } from "react";
 import { ArrowLeft, Award, CheckCircle2 } from "lucide-react";
 import { ISOModal } from "./ISOModal";
 import { useState } from "react";
@@ -68,11 +69,20 @@ export function ISOList() {
   const [selectedISO, setSelectedISO] = useState<string | null>(null);
 
   const handleISOClick = (isoCode: string) => {
-    console.log("ISO selezionata:", isoCode);
     setSelectedISO(isoCode);
     setModalOpen(true);
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const isoToOpen = params.get('open'); 
+    if (isoToOpen) {
+      const isValidISO = allISOs.some(iso => iso.code === isoToOpen);
+      if (isValidISO) {
+        handleISOClick(isoToOpen);
+      }
+    }
+  }, []);
 
   return (  
     <>

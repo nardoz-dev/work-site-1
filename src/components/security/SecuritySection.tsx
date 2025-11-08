@@ -57,7 +57,7 @@ export function Security() {
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
 
   return (
-    <section id="security" className="py-20 bg-[#f5f5f7] dark:bg-[#000000] transition-colors duration-500">
+    <section id="security" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-4">SICUREZZA SUL LAVORO</p>

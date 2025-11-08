@@ -50,7 +50,7 @@ export function ConsISO() {
     <>
       <section
         id="iso"
-        className="py-20 bg-gradient-to-b bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500"
+        className="py-20 bg-gradient-to-b bg-gray-50 dark:bg-[#000000]  transition-colors duration-500"
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { ChevronDown, Heart, Menu } from "lucide-react"; 
 import { useStore } from '@nanostores/react';
 import {ThemeToggle} from "./ThemeToggle"; 
@@ -6,13 +6,21 @@ import Logo from "../assets/LogoNew.png?url";
 import { Button } from "./ui/button";
 import { activeSection } from '../stores/navigationStore'; 
 import { motion, AnimatePresence } from "framer-motion";
+interface NavBarProps {
+  currentPage?: string;
+}
 
-export function NavBar() 
- {
+export function NavBar({ currentPage }: NavBarProps) {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const page_by_scroll = useStore(activeSection);
+
+    useEffect(() => {
+      if (currentPage) {
+        activeSection.set(currentPage);
+      }
+    }, [currentPage]);
 
     const navItems = [
     { id: "home", label: "Home", href: "/", dropdown: false },
@@ -25,17 +33,17 @@ export function NavBar()
         {
           title: "Sistemi di Gestione Qualità",
           items: [
-            { label: "ISO 9001", id: "iso-9001", href: "/iso" },
-            { label: "ISO 14001", id: "iso-14001", href: "/iso" },
-            { label: "ISO 45001", id: "iso-45001", href: "/iso" },
+            { label: "ISO 9001", id: "iso-9001", href: "/iso?open=9001" },
+            { label: "ISO 14001", id: "iso-14001", href: "/iso?open=14001" },
+            { label: "ISO 45001", id: "iso-45001", href: "/iso?open=45001" },
           ]
         },
         {
           title: "Sicurezza e Compliance",
           items: [
-            { label: "ISO 27001", id: "iso-27001", href: "/iso" },
-            { label: "ISO 37001", id: "iso-37001", href: "/iso" },
-            { label: "ISO 22000", id: "iso-22000", href: "/iso" },
+            { label: "ISO 27001", id: "iso-27001", href: "/iso?open=27001" },
+            { label: "ISO 37001", id: "iso-37001", href: "/iso?open=37001" },
+            { label: "ISO 22000", id: "iso-22000", href: "/iso?open=22000" },
           ]
         },
         {
@@ -83,7 +91,7 @@ export function NavBar()
 
     return (
       <>
-      <nav className="w-full fixed top-0 left-0 right-0 z-50 bg-background bg-gray-700 dark:bg-[#1d1d1f]/80 backdrop-blur-md border-b border-border/50 transition-colors duration-500">
+      <nav className="w-full fixed top-0 left-0 right-0 z-50 bg-background bg-gray-700 dark:bg-[#1d1d1f] backdrop-blur-md border-b border-border/50 transition-colors duration-500">
       {/* <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 dark:bg-[#1d1d1f]/80 backdrop-blur-lg border-b border-white/10 transition-all duration-300 h-16"> */}
           <div className="container mx-auto px-4 py-2">
             <div className="flex items-center justify-between">
@@ -187,7 +195,7 @@ export function NavBar()
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="fixed top-18 left-0 right-0 z-50  bg-background bg-gray-700 dark:bg-[#1d1d1f]/80 backdrop-blur-2xl border-b"
+              className="fixed top-18 left-0 right-0 z-50  bg-background bg-gray-700 dark:bg-[#1d1d1f] backdrop-blur-2xl border-b"
               onMouseEnter={() => setActiveDropdown(activeDropdown)}
               onMouseLeave={() => setActiveDropdown(null)}
             >

@@ -26,7 +26,7 @@ const mainAssignment = Object.keys(assData).map((assCode) => {
 
 export function Assignments() {
   return (
-    <section id="assignment" className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+    <section id="assignment" className="py-20 bg-gray-50 dark:bg-[#000000] transition-colors duration-500">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-2">
