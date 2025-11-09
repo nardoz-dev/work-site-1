@@ -1,0 +1,25 @@
+---
+import '../../styles/global.css';
+import { articlesData } from '../../data/articlesData.ts';
+import { ArticleDetail } from '../../components/news/ArticleDetail.tsx';
+import BaseLayout from '../../layout/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const paths = Object.keys(articlesData).map((articleId) => ({
+    params: { articleId },
+  }));
+  return paths;
+}
+
+const { articleId } = Astro.params;
+const selectedArticle = articlesData[articleId];
+
+if (!selectedArticle) {
+  throw new Error(`Articolo con ID ${articleId} non trovato.`);
+}
+---
+
+<BaseLayout >
+  <Fragment slot="title">{selectedArticle.title}</Fragment>
+  <ArticleDetail articleId={articleId} client:load />
+</BaseLayout>

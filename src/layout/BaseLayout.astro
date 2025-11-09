@@ -1,0 +1,52 @@
+---
+// src/layout/BaseLayout.astro
+import { NavBar } from '../components/NavBar.tsx';
+import { FooterMinimal } from '../components/FooterMinimal.tsx';
+
+interface Props {
+  activeSectionID?: string;
+}
+  
+// Default a "home" se non specificato
+const { activeSectionID } = Astro.props;
+---
+
+<html lang="it">
+  <head>
+    </head>
+  <body>
+
+    <main class="pt-16">
+      <NavBar currentPage={activeSectionID} client:load />
+      <slot /> 
+    </main>
+    
+    <script>
+      import { activeSection } from '../stores/navigationStore';
+      // Search all the sections 
+      const sections = document.querySelectorAll('main section[id]');
+
+      // Enable the observer
+      if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              activeSection.set(entry.target.id);
+              break; 
+            }
+          }
+        }, {
+          rootMargin: '-160px 0px -30% 0px',
+          threshold: 0 
+        });
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+      }
+    </script>
+  </body>
+  <footer>
+    <FooterMinimal client:load />
+  </footer>
+</html>

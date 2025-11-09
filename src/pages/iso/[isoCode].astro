@@ -1,0 +1,29 @@
+---
+// Importazioni necessarie
+import '../../styles/global.css';
+import { isoData } from '../../data/isoData';
+import { ISODetail } from '../../components/iso/ISODetail.tsx';
+import BaseLayout from '../../layout/BaseLayout.astro';
+
+export async function getStaticPaths() {
+    const paths = Object.keys(isoData).map((isoCode) => ({
+    params: { isoCode },
+    }));
+
+    return paths;
+}
+
+
+
+const { isoCode } = Astro.params;
+const selectedISO = isoData[isoCode];
+
+if (!selectedISO) {
+  throw new Error(`ISO con codice ${isoCode} non trovata.`);
+}
+---
+
+<BaseLayout activeSectionID="iso">
+  <Fragment slot="title">{selectedISO.title}</Fragment>
+  <ISODetail isoType={isoCode} />
+</BaseLayout>
