@@ -100,7 +100,7 @@ export function Footer() {
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-blue-600 dark:text-blue-500 flex-shrink-0" />
                   <a href="tel:+393337558507" className="text-sm text-foreground/60 hover:text-foreground transition-colors">
-                    +39 333 75 58 507
+                    +39 333 -- -- ---
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-xs text-foreground/60 text-center md:text-left">
-              © 2024 GEOCAD STUDIO. Tutti i diritti riservati.
+              © 2024 STUDIO VENTURIERO. Tutti i diritti riservati.
             </div>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs">
               <a href="#" className="text-foreground/60 hover:text-foreground transition-colors">

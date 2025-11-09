@@ -41,7 +41,7 @@ export function FooterMinimal() {
                   href="tel:+393337558507"
                   className="text-foreground/70 hover:text-foreground transition-colors"
                 >
-                  +39 333 75 58 507
+                  +39 333 -- -- ---
                 </a>
               </div>
               <div className="flex items-center gap-3">
