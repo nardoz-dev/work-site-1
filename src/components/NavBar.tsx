@@ -17,10 +17,12 @@ export function NavBar({ currentPage }: NavBarProps) {
     const page_by_scroll = useStore(activeSection);
     
     // In locale / , in prod con GitHub Pages : work-site-1/
-    const base = import.meta.env.BASE_URL;
-    // Rimuove lo slash iniziale dal path se c'è, per evitare doppi slash (es. //iso)
-    const mkLink = (path: string) => `${base}${path.startsWith('/') ? path.slice(1) : path}`;
 
+    // Rimuove lo slash iniziale dal path se c'è, per evitare doppi slash (es. //iso)
+    //const mkLink = (path: string) => `${base}${path.startsWith('/') ? path.slice(1) : path}`;
+    // TODO: Non rimuovere lo slash
+    const base = import.meta.env.BASE_URL;
+    const mkLink = (path: string) => `${base}${path}`;
 
     useEffect(() => {
       if (currentPage) {
@@ -29,34 +31,34 @@ export function NavBar({ currentPage }: NavBarProps) {
     }, [currentPage]);
 
     const navItems = [
-    { id: "home", label: "Home", href: "/", dropdown: false },
+    { id: "home", label: "Home", href: mkLink("/"), dropdown: false },
     {
       id: "iso",
       label: "Cons. ISO",
-      href: "/#iso", // Link per lo scroll sulla pagina
+      href: mkLink("/#iso"), // Link per lo scroll sulla pagina
       dropdown: true,
       dropdownLinks: [
         {
           title: "Sistemi di Gestione Qualità",
           items: [
-            { label: "ISO 9001", id: "iso-9001", href: mkLink("iso?open=9001")},
-            { label: "ISO 14001", id: "iso-14001", href: mkLink("iso?open=14001") },
-            { label: "ISO 45001", id: "iso-45001", href: mkLink("iso?open=45001") },
+            { label: "ISO 9001", id: "iso-9001", href: mkLink("/iso?open=9001")},
+            { label: "ISO 14001", id: "iso-14001", href: mkLink("/iso?open=14001") },
+            { label: "ISO 45001", id: "iso-45001", href: mkLink("/iso?open=45001") },
           ]
         },
         {
           title: "Sicurezza e Compliance",
           items: [
-            { label: "ISO 27001", id: "iso-27001", href: mkLink("iso?open=27001") },
-            { label: "ISO 37001", id: "iso-37001", href: mkLink("iso?open=37001") },
-            { label: "ISO 22000", id: "iso-22000", href: mkLink("iso?open=22000") },
+            { label: "ISO 27001", id: "iso-27001", href: mkLink("/iso?open=27001") },
+            { label: "ISO 37001", id: "iso-37001", href: mkLink("/iso?open=37001") },
+            { label: "ISO 22000", id: "iso-22000", href: mkLink("/iso?open=22000") },
           ]
         },
         {
           title: "Altro",
           items: [
-            { label: "Tutte le certificazioni ISO", id: "all-iso", href: mkLink("iso") },
-            { label: "Consulenza personalizzata", id: "custom-consulting", href: mkLink("#contact") },
+            { label: "Tutte le certificazioni ISO", id: "all-iso", href: mkLink("/iso") },
+            { label: "Consulenza personalizzata", id: "custom-consulting", href: mkLink("/#contact") },
           ]
         }
       ],
@@ -64,26 +66,26 @@ export function NavBar({ currentPage }: NavBarProps) {
     {
       id: "security",
       label: "Sicurezza",
-      href: "/#security",
+      href: mkLink("/#security"),
       dropdown: false,
     },
     {
         id: "assignment",
         label: "Incarichi",
-        href: "/#assignment",
+        href: mkLink("/#assignment"),
         dropdown: true,
         dropdownLinks: [{
           title: "Sistemi di Gestione Qualità",
           items: [
-            { label: "RSPP Esterno", id: "rspp", href: "/assignment/rspp" },
-            { label: "Incarico HSE", id: "hse", href: "/assignment/hse" },
-            { label: "Auditor Esterno", id: "auditor", href: "/assignment/auditor" },
+            { label: "RSPP Esterno", id: "rspp", href: mkLink("/assignment/rspp") },
+            { label: "Incarico HSE", id: "hse", href: mkLink("/assignment/hse") },
+            { label: "Auditor Esterno", id: "auditor", href: mkLink("/assignment/auditor") },
           ]
         },
       ], 
       },
-      { id: "news", label: "News", href: "/#news", dropdown: false },
-      { id: "contact", label: "Contatti", href: "/#contact", dropdown: false },
+      { id: "news", label: "News", href: mkLink("/#news"), dropdown: false },
+      { id: "contact", label: "Contatti", href: mkLink("/#contact"), dropdown: false },
     ];
 
 
@@ -107,7 +109,7 @@ export function NavBar({ currentPage }: NavBarProps) {
                   onClick={() => handleNavClick("home")}
                 >
                   <a
-                    href="/"
+                    href={mkLink("/")}
                   >
                     <img
                       src={Logo}

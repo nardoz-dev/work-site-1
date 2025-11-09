@@ -202,7 +202,7 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
         title="Hai bisogno di supporto?"
         subtitle="Contattaci per una consulenza personalizzata"
         buttonText="Contattaci"
-        onButtonClick={() => window.location.href = "/#contact"}
+        onButtonClick={() => window.location.href = mkLink("/#contact")}
       />
     </div>
   );

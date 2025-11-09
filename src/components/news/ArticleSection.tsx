@@ -4,6 +4,10 @@ import { Button } from "../ui/button";
 import { Calendar, ChevronRight, Eye, Clock } from "lucide-react";
 import { ImageWithFallback } from "../utils/fallback";
 
+// Calculate path based on deployment base URL
+const base = import.meta.env.BASE_URL;
+const mkLink = (path: string) => `${base}${path}`;
+
 const newsArticles = [
   {
     id: 1,
@@ -57,7 +61,7 @@ export function NewsSection() {
           {newsArticles.map((article) => (
             <a
               key={article.id}
-              href={`/news/${article.id}`}
+              href={mkLink(`/news/${article.id}`)}
               className="group h-full"
             >
               <Card 
@@ -132,7 +136,7 @@ export function NewsSection() {
 
         <div className="text-center mt-12">
           <a
-            href="/news/"
+            href={mkLink("/news/")}
             className="inline-block px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-600 dark:hover:text-white rounded-lg transition-colors"
           >
             Vedi tutti gli articoli

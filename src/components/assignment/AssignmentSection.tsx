@@ -10,6 +10,8 @@ import { Badge } from "../ui/badge";
 import { Shield, Building2, FileSearch, CheckCircle } from "lucide-react";
 
 import { assData } from "../../data/assData"
+const base = import.meta.env.BASE_URL;
+const mkLink = (path: string) => `${base}${path}`;
 
 const mainAssignment = Object.keys(assData).map((assCode) => {
   const { icon: IconComponent, title, description, features, badge } = assData[assCode];
@@ -20,7 +22,7 @@ const mainAssignment = Object.keys(assData).map((assCode) => {
     features,
     badge,
     badgeColor: "text-blue-600 border-blue-600",
-    link: `/assignment/${assCode}`, // Link dinamico
+    link: mkLink(`/assignment/${assCode}`), // Link dinamico
   };
 });
 
@@ -84,7 +86,7 @@ export function Assignments() {
                   </Button> */}
 
                   <a
-                    href={assignment.link}
+                    href={mkLink(assignment.link)}
                     className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all inline-block"
                   >
                     Cerca Informazioni

@@ -18,6 +18,10 @@ const mainServices = Object.keys(isoData).map((isoCode) => ({
   modal: true,
 }));
 
+// Understand new path based on deployment base URL
+const base = import.meta.env.BASE_URL;
+const mkLink = (path: string) => `${base}${path}`;
+
 mainServices.push({
   icon: Award,
   title: "Altre ISO",
@@ -25,7 +29,7 @@ mainServices.push({
   bgColor: "bg-white dark:bg-gray-800",
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
-  link: "/iso", // Link statico
+  link: mkLink("/iso"), // Link statico
   code: " ",
   modal: false,
 });
