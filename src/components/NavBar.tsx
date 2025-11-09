@@ -15,6 +15,12 @@ export function NavBar({ currentPage }: NavBarProps) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const page_by_scroll = useStore(activeSection);
+    
+    // In locale / , in prod con GitHub Pages : work-site-1/
+    const base = import.meta.env.BASE_URL;
+    // Rimuove lo slash iniziale dal path se c'è, per evitare doppi slash (es. //iso)
+    const mkLink = (path: string) => `${base}${path.startsWith('/') ? path.slice(1) : path}`;
+
 
     useEffect(() => {
       if (currentPage) {
@@ -33,24 +39,24 @@ export function NavBar({ currentPage }: NavBarProps) {
         {
           title: "Sistemi di Gestione Qualità",
           items: [
-            { label: "ISO 9001", id: "iso-9001", href: "/iso?open=9001" },
-            { label: "ISO 14001", id: "iso-14001", href: "/iso?open=14001" },
-            { label: "ISO 45001", id: "iso-45001", href: "/iso?open=45001" },
+            { label: "ISO 9001", id: "iso-9001", href: mkLink("iso?open=9001")},
+            { label: "ISO 14001", id: "iso-14001", href: mkLink("iso?open=14001") },
+            { label: "ISO 45001", id: "iso-45001", href: mkLink("iso?open=45001") },
           ]
         },
         {
           title: "Sicurezza e Compliance",
           items: [
-            { label: "ISO 27001", id: "iso-27001", href: "/iso?open=27001" },
-            { label: "ISO 37001", id: "iso-37001", href: "/iso?open=37001" },
-            { label: "ISO 22000", id: "iso-22000", href: "/iso?open=22000" },
+            { label: "ISO 27001", id: "iso-27001", href: mkLink("iso?open=27001") },
+            { label: "ISO 37001", id: "iso-37001", href: mkLink("iso?open=37001") },
+            { label: "ISO 22000", id: "iso-22000", href: mkLink("iso?open=22000") },
           ]
         },
         {
           title: "Altro",
           items: [
-            { label: "Tutte le certificazioni ISO", id: "all-iso", href: "/iso" },
-            { label: "Consulenza personalizzata", id: "custom-consulting", href: "/#contact" },
+            { label: "Tutte le certificazioni ISO", id: "all-iso", href: mkLink("iso") },
+            { label: "Consulenza personalizzata", id: "custom-consulting", href: mkLink("#contact") },
           ]
         }
       ],
