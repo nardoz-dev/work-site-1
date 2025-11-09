@@ -10,7 +10,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Telefono",
-    details: ["+39 333 75 58 507", "Disponibile 24/7"]
+    details: ["+39 333 -- -- ---", "Disponibile 24/7"]
   },
   {
     icon: Mail,

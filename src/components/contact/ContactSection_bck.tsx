@@ -191,8 +191,8 @@ export function ContactNew() {
                 </div>
                 <div>
                   <p className="text-sm text-foreground/60">Telefono</p>
-                  <a href="tel:+393337558507" className="text-foreground hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
-                    +39 333 75 58 507
+                  <a href="tel:333-------" className="text-foreground hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+                    +39 333 -- -- ---
                   </a>
                 </div>
               </div>
