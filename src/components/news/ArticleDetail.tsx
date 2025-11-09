@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { ArrowLeft, Calendar, User, Clock, Share2, Check } from "lucide-react";
 import { ImageWithFallback } from "../utils/fallback";
@@ -16,6 +16,17 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
   // 2. Aggiungi uno stato per il feedback "Copiato!"
   const [isCopied, setIsCopied] = useState(false);
 
+  const [shareText, setShareText] = useState("Copia Link");
+
+  // 3. Aggiungi un useEffect
+  //    Questo codice si esegue SOLO nel browser, dopo il caricamento.
+  useEffect(() => {
+    // Se 'navigator.share' esiste, aggiorniamo il testo del bottone.
+    if (navigator.share) {
+      setShareText("Condividi");
+    }
+  }, []);
+
   // 3. Crea la funzione di condivisione
   const handleShare = async () => {
     // Dati da condividere
@@ -25,22 +36,18 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
       url: window.location.href, // L'URL della pagina corrente
     };
 
-    // Controlla se l'API Web Share è disponibile
     if (navigator.share) {
       try {
-        // --- Metodo Moderno (Mobile/Chrome) ---
+     
         await navigator.share(shareData);
         console.log("Articolo condiviso con successo!");
       } catch (err) {
-        // L'utente ha chiuso la condivisione, non è un errore
         console.log("Condivisione annullata.");
       }
     } else {
-      // --- Fallback: Copia negli appunti (Desktop/Firefox) ---
       try {
         await navigator.clipboard.writeText(window.location.href);
         setIsCopied(true);
-        // Resetta il bottone dopo 2 secondi
         setTimeout(() => setIsCopied(false), 2000); 
       } catch (err) {
         console.error("Impossibile copiare il link:", err);
@@ -160,7 +167,8 @@ export function ArticleDetail({ articleId, onBack }: ArticleDetailProps) {
                 <>
                   <Share2 className="w-4 h-4 mr-2" />
                   {/* Cambia il testo se il fallback è attivo */}
-                  {navigator.share ? "Condividi" : "Copia Link"}
+                  { shareText } 
+                  {/* {navigator.share ? "Condividi" : "Copia Link"} */}
                 </>
               )}
             </Button>
