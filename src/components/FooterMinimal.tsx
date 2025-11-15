@@ -129,6 +129,15 @@ export function FooterMinimal() {
                 Cookie Policy
               </a>
               <span className="text-foreground/30 hidden md:inline">|</span>
+
+
+              <a
+                href="/sitemap-index.xml"
+                className="text-foreground/60 hover:text-foreground transition-colors"
+              >
+                Sitemap
+              </a>
+
             </div>
           </div>
         </div>

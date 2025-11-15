@@ -29,7 +29,8 @@ mainServices.push({
   bgColor: "bg-white dark:bg-gray-800",
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
-  link: mkLink("/iso"), // Link statico
+  link: "/iso",
+  // link: mkLink("/iso"), // Link statico
   code: " ",
   modal: false,
 });
@@ -40,6 +41,7 @@ export function ConsISO() {
   const [selectedISO, setSelectedISO] = useState<string | null>(null);
 
   const handleISOClick = (service: typeof mainServices[0]) => {
+
     if(service.modal && service.code) {
       // Open Modal for the specific ISO
       setSelectedISO(service.code);
@@ -65,15 +67,16 @@ export function ConsISO() {
               Studio Venturiero
             </h2>
             <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-              Offriamo una vasta gamma di certificazioni per il
-              lavoro. Ecco le nostre principali ISO, pensate per
-              soddisfare le esigenze della tua azienda.
+              Offriamo una consulenza ISO completa e personalizzata, 
+              con un percorso guidato che semplifica ogni fase fino alla certificazione.
+              Ti accompagniamo passo dopo passo, garantendo supporto continuo 
+              e assistenza dedicata durante gli audit
             </p>
           </div>
 
           {/* Main Services Grid - 2x2 layout with better spacing */}
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-            {mainServices.map((service, index) => {
+            {mainServices.slice(0, 3).map((service, index) => {
               const IconComponent = service.icon;
               return (
               <div
@@ -106,6 +109,26 @@ export function ConsISO() {
               </div>
               );
             })}
+            {(() => {
+              const service = mainServices[mainServices.length - 1];
+              const IconComponent = service.icon;
+              return (
+                <div key="last" className={`${service.bgColor} ${service.textColor} rounded-xl p-6 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-500 border border-gray-200 dark:border-gray-700`}>
+                  <div className="text-center mb-4">
+                    <div className={`${service.iconBg} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md`}>
+                      <IconComponent className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-lg uppercase tracking-wide mb-2">{service.title}</h3>
+                  </div>
+                  <p className="text-sm leading-relaxed mb-4 text-center min-h-[2.5rem]">{service.description}</p>
+                  <div className="text-center">
+                    <Button onClick={() => handleISOClick(service)} className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-6 py-2 rounded-md shadow-sm hover:shadow-md transition-all">
+                      Scopri di più
+                    </Button>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </div>
       </section>

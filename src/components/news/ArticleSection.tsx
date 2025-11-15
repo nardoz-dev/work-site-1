@@ -43,9 +43,22 @@ const newsArticles = [
   }
 ];
 
+
 export function NewsSection() {
+  const base = import.meta.env.BASE_URL; 
+  const mkLink = (path: string) => {
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    
+    if (path === "") return cleanBase + "/"; 
+    if (path.startsWith("#")) return cleanBase + "/" + path; // Link Hash (es. /#contact)
+    if (path.startsWith("?")) return cleanBase + "/" + path; // Query (es. /?open=...)
+    
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    return `${cleanBase}/${cleanPath}`; 
+  }
+
   return (
-    <section id="news"className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
+    <section id="article" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl text-gray-900 dark:text-white mb-4">
@@ -136,7 +149,7 @@ export function NewsSection() {
 
         <div className="text-center mt-12">
           <a
-            href={mkLink("/news/")}
+            href={mkLink("/news")}
             className="inline-block px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-600 dark:hover:text-white rounded-lg transition-colors"
           >
             Vedi tutti gli articoli

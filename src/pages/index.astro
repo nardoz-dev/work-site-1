@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 
-import { Header } from '../components/Header.tsx';
 import { Home } from '../components/Home.tsx';
 // Import dei componenti piu importanti della pagina
 import { ConsISO } from '../components/iso/ISOSection.tsx';
@@ -19,10 +18,11 @@ import BaseLayout from '../layout/BaseLayout.astro';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Studio Venturiero</title> </head>
+    <title>Studio Venturiero</title>   
+  </head>
   <body>
 
-  <BaseLayout activeSectionID="home">
+  <BaseLayout>
     <Home client:load />
     <ConsISO client:load />
     <Security client:load />

@@ -116,7 +116,7 @@ export function ArticleList() {
       <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
         <div className="container mx-auto px-4 py-12">
           <a
-            href={mkLink("/#news")}
+            href={mkLink("#article")}
             className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -186,7 +186,7 @@ export function ArticleList() {
               <a
                 key={article.id}
                 className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer group"
-                href={mkLink(`/news/${article.id}`)}
+                href={mkLink(`news/${article.id}`)}
               >
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -255,7 +255,7 @@ export function ArticleList() {
         title="Hai bisogno di supporto?"
         subtitle="Contattaci per una consulenza personalizzata"
         buttonText="Contattaci"
-        onButtonClick={() => window.location.href = mkLink("/#contact")}
+        onButtonClick={() => window.location.href = "/#contact"}
       />
     </div>
   );
