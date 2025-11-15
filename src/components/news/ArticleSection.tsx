@@ -50,8 +50,8 @@ export function NewsSection() {
     const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
     
     if (path === "") return cleanBase + "/"; 
-    if (path.startsWith("#")) return cleanBase + "/" + path; // Link Hash (es. /#contact)
-    if (path.startsWith("?")) return cleanBase + "/" + path; // Query (es. /?open=...)
+    if (path.startsWith("#")) return cleanBase + "/" + path; 
+    if (path.startsWith("?")) return cleanBase + "/" + path; 
     
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
     return `${cleanBase}/${cleanPath}`; 
