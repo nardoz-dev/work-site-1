@@ -29,8 +29,8 @@ mainServices.push({
   bgColor: "bg-white dark:bg-gray-800",
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
-  link: "/iso",
-  // link: mkLink("/iso"), // Link statico
+  // link: "/iso",
+  link: mkLink("/iso"), // Link statico
   code: " ",
   modal: false,
 });
