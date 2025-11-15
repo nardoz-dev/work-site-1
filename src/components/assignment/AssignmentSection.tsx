@@ -10,9 +10,10 @@ import { Badge } from "../ui/badge";
 import { Shield, Building2, FileSearch, CheckCircle } from "lucide-react";
 
 import { assData } from "../../data/assData"
-const base = import.meta.env.BASE_URL;
-const mkLink = (path: string) => `${base}${path}`;
+// const base = import.meta.env.BASE_URL;
+// const mkLink = (path: string) => `${base}${path}`;
 
+// NOTE: Questo è il modo con il quale posso rendere globale il mkLink nel momento in cui si fà un deploy ( almeno per github pages )
 const mainAssignment = Object.keys(assData).map((assCode) => {
   const { icon: IconComponent, title, description, features, badge } = assData[assCode];
   return {
@@ -22,7 +23,8 @@ const mainAssignment = Object.keys(assData).map((assCode) => {
     features,
     badge,
     badgeColor: "text-blue-600 border-blue-600",
-    link: mkLink(`/assignment/${assCode}`), // Link dinamico
+    link: `/assignment/${assCode}`,
+    //link: mkLink(`/assignment/${assCode}`), // Link dinamico
   };
 });
 
@@ -86,7 +88,7 @@ export function Assignments() {
                   </Button> */}
 
                   <a
-                    href={mkLink(assignment.link)}
+                    href={assignment.link}
                     className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all inline-block"
                   >
                     Cerca Informazioni

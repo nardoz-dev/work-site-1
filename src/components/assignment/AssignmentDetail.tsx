@@ -1,117 +1,13 @@
 import { CTABanner } from "../CTABanner";
 import { Button } from "../ui/button";
 import { ArrowLeft, Shield, HardHat, ClipboardCheck, Building2, FileText, Users, CheckCircle2 } from "lucide-react";
-
+import { assData } from "../../data/assData";
 interface AssignmentDetailProps {
   assignmentType: string;
 }
 
-const assignmentData: Record<string, {
-  title: string;
-  subtitle: string;
-  icon: any;
-  description: string;
-  responsibilities: string[];
-  qualifications: string[];
-  services: string[];
-}> = {
-  "hse": {
-    title: "Coordinatore della Sicurezza",
-    subtitle: "Coordinatore in fase di progettazione ed esecuzione",
-    icon: HardHat,
-    description: "Il Coordinatore per la Sicurezza è una figura professionale prevista dal D.Lgs. 81/08 obbligatoria nei cantieri temporanei o mobili in cui è prevista la presenza di più imprese, anche non contemporanea. Il coordinatore garantisce la sicurezza e la salute dei lavoratori durante tutte le fasi del progetto.",
-    responsibilities: [
-      "Redazione del Piano di Sicurezza e Coordinamento (PSC)",
-      "Predisposizione del fascicolo dell'opera",
-      "Coordinamento delle imprese esecutrici",
-      "Verifica dell'applicazione delle disposizioni del PSC",
-      "Segnalazione al committente delle inadempienze",
-      "Proposta di sospensione lavori in caso di pericolo grave e imminente",
-      "Verifica dei POS delle imprese esecutrici",
-      "Organizzazione della cooperazione e coordinamento"
-    ],
-    qualifications: [
-      "Laurea in ingegneria, architettura o geologia",
-      "Corso di formazione specifico (120 ore)",
-      "Esperienza lavorativa certificata nel settore",
-      "Aggiornamento quinquennale (40 ore)"
-    ],
-    services: [
-      "Redazione PSC e fascicolo tecnico dell'opera",
-      "Coordinamento sicurezza in fase di progettazione",
-      "Coordinamento sicurezza in fase di esecuzione",
-      "Verifiche periodiche in cantiere",
-      "Redazione verbali e report",
-      "Assistenza durante ispezioni ASL"
-    ]
-  },
-  "rspp": {
-    title: "RSPP - Responsabile Servizio Prevenzione e Protezione",
-    subtitle: "Gestione della sicurezza aziendale",
-    icon: Shield,
-    description: "Il Responsabile del Servizio di Prevenzione e Protezione (RSPP) è una figura obbligatoria in tutte le aziende, designata dal datore di lavoro per coordinare il servizio di prevenzione e protezione dai rischi. L'RSPP è il punto di riferimento per tutte le questioni relative alla sicurezza sul lavoro.",
-    responsibilities: [
-      "Individuazione dei fattori di rischio e valutazione dei rischi",
-      "Elaborazione delle misure preventive e protettive",
-      "Elaborazione delle procedure di sicurezza",
-      "Proposta dei programmi di informazione e formazione",
-      "Partecipazione alle consultazioni in materia di SSL",
-      "Fornire informazioni ai lavoratori sui rischi",
-      "Collaborazione con il Medico Competente",
-      "Aggiornamento del Documento di Valutazione dei Rischi"
-    ],
-    qualifications: [
-      "Attestato di frequenza a specifici corsi di formazione",
-      "Modulo A (28 ore) - Base",
-      "Modulo B (varia per settore) - Specialistico",
-      "Modulo C (24 ore) - Gestionale",
-      "Aggiornamento quinquennale (40-100 ore)"
-    ],
-    services: [
-      "Servizio RSPP esterno completo",
-      "Redazione e aggiornamento DVR",
-      "Elaborazione procedure di sicurezza",
-      "Sopralluoghi e valutazioni dei rischi",
-      "Programmazione formazione sicurezza",
-      "Assistenza in caso di ispezioni",
-      "Redazione DUVRI per interferenze"
-    ]
-  },
-  "auditor": {
-    title: "Direttore dei Lavori",
-    subtitle: "Direzione e controllo dell'esecuzione dei lavori",
-    icon: Building2,
-    description: "Il Direttore dei Lavori è il professionista incaricato dal committente di vigilare sulla corretta esecuzione dei lavori, verificando la rispondenza delle opere realizzate al progetto approvato e alle norme tecniche vigenti. Rappresenta il committente nei confronti dell'impresa esecutrice.",
-    responsibilities: [
-      "Verifica della conformità delle opere al progetto esecutivo",
-      "Controllo qualità dei materiali e delle lavorazioni",
-      "Direzione e coordinamento delle attività di cantiere",
-      "Redazione del giornale dei lavori",
-      "Contabilizzazione dei lavori eseguiti",
-      "Emissione di Stati Avanzamento Lavori (SAL)",
-      "Verifica della sicurezza in cantiere",
-      "Gestione delle varianti in corso d'opera"
-    ],
-    qualifications: [
-      "Abilitazione professionale (Ingegnere, Architetto, Geometra)",
-      "Iscrizione all'albo professionale",
-      "Competenza specifica per tipologia di opere",
-      "Esperienza documentata nel settore"
-    ],
-    services: [
-      "Direzione lavori opere edili",
-      "Direzione lavori opere strutturali",
-      "Direzione lavori impianti tecnologici",
-      "Contabilità e amministrazione cantiere",
-      "Redazione atti e certificazioni",
-      "Coordinamento tecnico",
-      "Collaudo tecnico-amministrativo"
-    ]
-  },
-};
-
 export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
-  const data = assignmentData[assignmentType] || assignmentData["hse"];
+  const data = assData[assignmentType] || assData["hse"];
   const IconComponent = data.icon;
 
   // Usa sempre il colore blu per tutti gli incarichi
@@ -124,6 +20,7 @@ export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
   };
 
   return (
+    <>
     <div className="min-h-screen  bg-background">
       {/* Header */}
       <div className={`${colorClasses.bg} border-b ${colorClasses.border} transition-colors duration-500`}>
@@ -238,7 +135,7 @@ export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
           </section>
 
           {/* CTA */}
-          <section className={`p-8 lg:p-12 ${colorClasses.bg} border ${colorClasses.border} rounded-2xl text-center`}>
+          {/* <section className={`p-8 lg:p-12 ${colorClasses.bg} border ${colorClasses.border} rounded-2xl text-center`}>
             <h3 className="text-2xl lg:text-3xl mb-4 text-foreground">
               Hai bisogno di un {data.title}?
             </h3>
@@ -253,17 +150,20 @@ export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
                 Parla con un Esperto
               </Button>
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
-
-      {/* CTA Banner */}
-      <CTABanner
-        title={`Hai bisogno di un ${data.title}?`} // UUUUUU GG
-        subtitle="Contattaci per una consulenza personalizzata"
-        buttonText="Contattaci"
-        onButtonClick={() => window.location.href = "/#contact"}
-      />
     </div>
+    {/* CTA Banner */}
+    <CTABanner
+      title={`Hai bisogno di un ${data.title}?`}
+      subtitle="Affidati a noi per una valutazione personalizzata delle tue esigenze."
+      buttons={[
+        { text: "Contattaci", onClick: () => window.location.href = "/#contact" },
+        { text: "Parla con un esperto", onClick: () => window.location.href = "/#contact", className: "bg-gray-100 text-blue-600 hover:bg-gray-200" }
+      ]}
+    />
+    </>
+
   );
 }

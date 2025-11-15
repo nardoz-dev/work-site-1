@@ -1,68 +1,12 @@
 import { Button } from "../ui/button";
 import { useEffect } from "react";
-import { ArrowLeft, Award, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Award, CheckCircle2, ChevronRight } from "lucide-react";
 import { ISOModal } from "./ISOModal";
 import { useState } from "react";
 import { CTABanner } from "../CTABanner";
+import { isoData } from "../../data/isoData";
+import { ImageWithFallback } from "../utils/fallback";
 
-
-const allISOs = [
-  {
-    code: "9001",
-    title: "ISO 9001",
-    subtitle: "Sistema di Gestione per la Qualità",
-    description: "Lo standard più riconosciuto per i Sistemi di Gestione per la Qualità (SGQ). Aiuta le organizzazioni a dimostrare la capacità di fornire prodotti e servizi che soddisfano costantemente i requisiti dei clienti."
-  },
-  {
-    code: "14001",
-    title: "ISO 14001",
-    subtitle: "Sistema di Gestione Ambientale",
-    description: "Definisce i requisiti per un Sistema di Gestione Ambientale efficace, permettendo di migliorare le prestazioni ambientali attraverso un uso più efficiente delle risorse."
-  },
-  {
-    code: "45001",
-    title: "ISO 45001",
-    subtitle: "Sistema di Gestione della Salute e Sicurezza sul Lavoro",
-    description: "Fornisce un framework per migliorare la sicurezza dei lavoratori, ridurre i rischi sul posto di lavoro e creare condizioni di lavoro migliori e più sicure."
-  },
-  {
-    code: "27001",
-    title: "ISO 27001",
-    subtitle: "Sistema di Gestione della Sicurezza delle Informazioni",
-    description: "Specifica i requisiti per stabilire, implementare e migliorare continuamente un Sistema di Gestione della Sicurezza delle Informazioni (SGSI)."
-  },
-  {
-    code: "22000",
-    title: "ISO 22000",
-    subtitle: "Sistema di Gestione per la Sicurezza Alimentare",
-    description: "Definisce i requisiti per un Sistema di Gestione per la Sicurezza Alimentare che combina i principi HACCP con i sistemi di gestione."
-  },
-  {
-    code: "50001",
-    title: "ISO 50001",
-    subtitle: "Sistema di Gestione dell'Energia",
-    description: "Standard per la gestione dell'energia che aiuta le organizzazioni a sviluppare sistemi per migliorare l'efficienza energetica e ridurre i costi."
-  },
-  {
-    code: "37001",
-    title: "ISO 37001",
-    subtitle: "Sistema di Gestione Anti-Corruzione",
-    description: "Fornisce requisiti e linee guida per prevenire, rilevare e affrontare la corruzione nelle organizzazioni di qualsiasi dimensione."
-  },
-  {
-    code: "20000",
-    title: "ISO 20000",
-    subtitle: "Sistema di Gestione dei Servizi IT",
-    description: "Standard internazionale per la gestione dei servizi IT che aiuta le organizzazioni a fornire servizi IT gestiti di qualità."
-  }
-];
-
-
-// interface ISOListProps {
-//   onBack: () => void;
-//   onSelectISO: (isoType: string) => void;
-// }
-// export function ISOList({ onBack, onSelectISO }: ISOListProps) {
 export function ISOList() {
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -77,7 +21,7 @@ export function ISOList() {
     const params = new URLSearchParams(window.location.search);
     const isoToOpen = params.get('open'); 
     if (isoToOpen) {
-      const isValidISO = allISOs.some(iso => iso.code === isoToOpen);
+      const isValidISO = Object.keys(isoData).includes(isoToOpen);
       if (isValidISO) {
         handleISOClick(isoToOpen);
       }
@@ -111,12 +55,12 @@ export function ISOList() {
         {/* Content */}
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
-              {allISOs.map((iso) => (
+            {/* <div className="grid md:grid-cols-2 gap-6">
+              {Object.entries(isoData).map(([code, iso]) => (
                 <div
-                  key={iso.code}
+                  key={code}
                   className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer group"
-                  onClick={() => handleISOClick(iso.code)}
+                  onClick={() => handleISOClick(code)}
                 >
                   <div className="flex items-start gap-6 mb-6">
                     <div className="bg-blue-600 dark:bg-blue-700 w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -140,24 +84,68 @@ export function ISOList() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
+            <div className="space-y-6">
+            {Object.entries(isoData).map(([code,iso]) => (
+              <div
+                key={code}
+                onClick={() => handleISOClick(code)}
+                className="relative w-full h-[250px] overflow-hidden rounded-2xl cursor-pointer group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <ImageWithFallback
+                    src={iso.imageUrl}
+                    alt={iso.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+                </div>
 
-            {/* CTA Section */}
-            <div className="mt-16 p-8 lg:p-12 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl text-center">
-              <h3 className="text-2xl lg:text-3xl mb-4 text-foreground">
-                Non trovi la certificazione che cerchi?
-              </h3>
-              <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
-                Offriamo supporto su molte altre certificazioni e standard internazionali.
-                Contattaci per scoprire come possiamo aiutarti.
-              </p>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-                Contattaci per Maggiori Informazioni
-              </Button>
-            </div>
+                {/* Content */}
+                <div className="relative z-10 h-full flex items-center">
+                  <div className="container mx-auto px-8">
+                    <div className="max-w-3xl">
+
+                      {/* Title */}
+                      <h2 className="text-3xl lg:text-4xl text-white mb-3 group-hover:text-blue-400 transition-colors">
+                        {iso.title}
+                      </h2>
+
+                      {/* Subtitle */}
+                      <h3 className="text-xl text-white/90 mb-4">
+                        {iso.subtitle}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-white/80 text-sm lg:text-base leading-relaxed mb-4 line-clamp-2">
+                        {iso.description}
+                      </p>
+
+                      {/* CTA */}
+                      <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
+                        <span className="mr-2">Scopri di più</span>
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
           </div>
         </div>
       </div>
+
+      {/* CTA Banner */}
+      <CTABanner
+        title="Non trovi la certificazione che cerchi?"
+        subtitle="Rivolgiti a noi per scoprire come possiamo aiutarti."
+        buttonText="Contattaci"
+        onButtonClick={() => window.location.href = "/#contact"}
+      />
 
       {/* 8. Renderizza il modale in base allo stato locale */}
       {selectedISO && modalOpen && (
@@ -168,13 +156,7 @@ export function ISOList() {
         />
       )}
 
-      {/* CTA Banner */}
-      <CTABanner
-        title="Vuoi certificare la tua azienda?"
-        subtitle="Richiedi un audit di certificazione"
-        buttonText="Contattaci"
-        onButtonClick={() => window.location.href = "/#contact"}
-      />
+
     
     </>
   );

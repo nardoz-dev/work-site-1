@@ -1,5 +1,8 @@
 // src/stores/navigationStore.ts
 import { atom } from 'nanostores';
 
-// Questo store conterrà l'ID della sezione visibile, es: "home"
+// Id section
 export const activeSection = atom('home');
+
+// Feature section only for security
+export const activeFeature = atom<string | null>(null);

@@ -3,6 +3,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X, CheckCircle2, Award, FileCheck, Settings } from "lucide-react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
+import { isoData } from "../../data/isoData";
 
 interface ISOModalProps {
   isOpen: boolean;
@@ -10,160 +11,6 @@ interface ISOModalProps {
   isoType: string;
 }
 
-const isoData: Record<string, {
-  title: string;
-  subtitle: string;
-  description: string;
-  benefits: string[];
-  requirements: string[];
-  process: string[];
-}> = {
-  "9001": {
-    title: "ISO 9001",
-    subtitle: "Sistema di Gestione per la Qualità",
-    description: "La ISO 9001 è lo standard internazionale più riconosciuto per i Sistemi di Gestione per la Qualità (SGQ). Aiuta le organizzazioni a dimostrare la loro capacità di fornire prodotti e servizi che soddisfano costantemente i requisiti dei clienti e le normative applicabili.",
-    benefits: [
-      "Miglioramento della soddisfazione del cliente",
-      "Maggiore efficienza operativa",
-      "Riduzione dei costi attraverso l'ottimizzazione dei processi",
-      "Accesso a nuovi mercati e opportunità di business",
-      "Miglioramento della reputazione aziendale",
-      "Conformità normativa e riduzione dei rischi"
-    ],
-    requirements: [
-      "Definizione del contesto organizzativo",
-      "Leadership e impegno della direzione",
-      "Pianificazione del sistema di gestione",
-      "Risorse e competenze adeguate",
-      "Controllo operativo e gestione dei processi",
-      "Valutazione delle prestazioni e miglioramento continuo"
-    ],
-    process: [
-      "Analisi iniziale (Gap Analysis)",
-      "Pianificazione del progetto di certificazione",
-      "Sviluppo della documentazione del SGQ",
-      "Implementazione e formazione del personale",
-      "Audit interno e riesame della direzione",
-      "Audit di certificazione e ottenimento della certificazione"
-    ]
-  },
-  "14001": {
-    title: "ISO 14001",
-    subtitle: "Sistema di Gestione Ambientale",
-    description: "La ISO 14001 definisce i requisiti per un Sistema di Gestione Ambientale (SGA) efficace. Permette alle organizzazioni di migliorare le proprie prestazioni ambientali attraverso un uso più efficiente delle risorse e la riduzione dei rifiuti.",
-    benefits: [
-      "Riduzione dell'impatto ambientale",
-      "Conformità alla legislazione ambientale",
-      "Risparmio sui costi energetici e di gestione rifiuti",
-      "Miglioramento dell'immagine aziendale",
-      "Accesso a finanziamenti e bandi pubblici",
-      "Vantaggio competitivo nel mercato"
-    ],
-    requirements: [
-      "Identificazione degli aspetti ambientali significativi",
-      "Conformità agli obblighi di legge",
-      "Definizione di obiettivi e target ambientali",
-      "Competenza e consapevolezza del personale",
-      "Controllo operativo dei processi critici",
-      "Monitoraggio e misurazione delle prestazioni ambientali"
-    ],
-    process: [
-      "Analisi ambientale iniziale",
-      "Identificazione degli aspetti e impatti ambientali",
-      "Sviluppo della politica ambientale",
-      "Pianificazione e implementazione del SGA",
-      "Audit interno e verifica di conformità",
-      "Certificazione da parte di ente accreditato"
-    ]
-  },
-  "45001": {
-    title: "ISO 45001",
-    subtitle: "Sistema di Gestione della Salute e Sicurezza sul Lavoro",
-    description: "La ISO 45001 è lo standard internazionale per i Sistemi di Gestione della Salute e Sicurezza sul Lavoro (SGSSL). Fornisce un framework per migliorare la sicurezza dei lavoratori, ridurre i rischi sul posto di lavoro e creare condizioni di lavoro migliori e più sicure.",
-    benefits: [
-      "Riduzione degli infortuni e delle malattie professionali",
-      "Miglioramento della cultura della sicurezza",
-      "Conformità alle normative di sicurezza",
-      "Riduzione dei costi assicurativi e delle assenze",
-      "Maggiore produttività e morale dei dipendenti",
-      "Protezione della reputazione aziendale"
-    ],
-    requirements: [
-      "Identificazione dei pericoli e valutazione dei rischi",
-      "Conformità ai requisiti legali in materia di SSL",
-      "Definizione di obiettivi di sicurezza misurabili",
-      "Consultazione e partecipazione dei lavoratori",
-      "Controllo operativo e preparazione alle emergenze",
-      "Monitoraggio delle prestazioni e audit periodici"
-    ],
-    process: [
-      "Valutazione iniziale dello stato della sicurezza",
-      "Identificazione dei pericoli e valutazione dei rischi",
-      "Definizione della politica SSL",
-      "Implementazione di misure di controllo",
-      "Formazione e coinvolgimento dei lavoratori",
-      "Audit e certificazione del sistema"
-    ]
-  },
-  "27001": {
-    title: "ISO 27001",
-    subtitle: "Sistema di Gestione della Sicurezza delle Informazioni",
-    description: "La ISO 27001 specifica i requisiti per stabilire, implementare, mantenere e migliorare continuamente un Sistema di Gestione della Sicurezza delle Informazioni (SGSI). Aiuta le organizzazioni a proteggere i propri dati sensibili.",
-    benefits: [
-      "Protezione dei dati sensibili e della proprietà intellettuale",
-      "Conformità al GDPR e altre normative sulla privacy",
-      "Riduzione del rischio di violazioni dei dati",
-      "Aumento della fiducia di clienti e partner",
-      "Vantaggio competitivo nel settore IT",
-      "Miglioramento della gestione del rischio informatico"
-    ],
-    requirements: [
-      "Definizione del contesto e degli obiettivi di sicurezza",
-      "Valutazione e trattamento dei rischi informatici",
-      "Implementazione di controlli di sicurezza appropriati",
-      "Politiche e procedure documentate",
-      "Formazione e sensibilizzazione del personale",
-      "Monitoraggio continuo e gestione degli incidenti"
-    ],
-    process: [
-      "Analisi del contesto e dei requisiti di sicurezza",
-      "Valutazione dei rischi informatici",
-      "Selezione e implementazione dei controlli",
-      "Sviluppo della documentazione SGSI",
-      "Test e verifica dell'efficacia dei controlli",
-      "Audit di certificazione"
-    ]
-  },
-  "22000": {
-    title: "ISO 22000",
-    subtitle: "Sistema di Gestione per la Sicurezza Alimentare",
-    description: "La ISO 22000 definisce i requisiti per un Sistema di Gestione per la Sicurezza Alimentare che combina i principi HACCP con i sistemi di gestione. È applicabile a tutte le organizzazioni della filiera alimentare.",
-    benefits: [
-      "Garanzia della sicurezza dei prodotti alimentari",
-      "Conformità alle normative alimentari internazionali",
-      "Riduzione dei rischi di contaminazione",
-      "Maggiore fiducia dei consumatori",
-      "Accesso a mercati internazionali",
-      "Ottimizzazione dei processi produttivi"
-    ],
-    requirements: [
-      "Programmi di prerequisiti (PRP)",
-      "Analisi dei pericoli HACCP",
-      "Sistema di tracciabilità completo",
-      "Gestione delle emergenze e ritiro prodotti",
-      "Formazione del personale addetto",
-      "Verifica e validazione del sistema"
-    ],
-    process: [
-      "Mappatura della filiera alimentare",
-      "Implementazione dei prerequisiti",
-      "Analisi dei pericoli e punti critici di controllo",
-      "Sviluppo del piano HACCP",
-      "Formazione e implementazione operativa",
-      "Verifica e certificazione"
-    ]
-  }
-};
 
 export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
   const data = isoData[isoType];
@@ -286,7 +133,7 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
           {/* Footer */}
           <div className="p-6 bg-blue-50 dark:bg-blue-950/20 border-t border-blue-200 dark:border-blue-900 flex items-center justify-between gap-4">
             <p className="text-sm text-foreground/70">
-              Vuoi saperne di più sulla certificazione ISO 9001?
+              Vuoi saperne di più sulla certificazione {data.title}?
             </p>
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white"

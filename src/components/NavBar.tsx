@@ -4,8 +4,9 @@ import { useStore } from '@nanostores/react';
 import {ThemeToggle} from "./ThemeToggle"; 
 import Logo from "../assets/LogoNew.png?url"; 
 import { Button } from "./ui/button";
-import { activeSection } from '../stores/navigationStore'; 
+import { activeFeature, activeSection } from '../stores/navigationStore'; 
 import { motion, AnimatePresence } from "framer-motion";
+import { navItems } from "../data/navData";
 interface NavBarProps {
   currentPage?: string;
 }
@@ -13,84 +14,44 @@ interface NavBarProps {
 export function NavBar({ currentPage }: NavBarProps) {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+    const [activeId, setActiveId] = useState(currentPage || 'home');
     const page_by_scroll = useStore(activeSection);
     
-    // In locale / , in prod con GitHub Pages : work-site-1/
 
-    // Rimuove lo slash iniziale dal path se c'è, per evitare doppi slash (es. //iso)
-    //const mkLink = (path: string) => `${base}${path.startsWith('/') ? path.slice(1) : path}`;
-    // TODO: Non rimuovere lo slash
-    const base = import.meta.env.BASE_URL;
-    const mkLink = (path: string) => `${base}${path}`;
+    // In locale / , in prod con GitHub Pages : work-site-1/
+    const base = import.meta.env.BASE_URL; 
+    const mkLink = (path: string) => {
+      const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+      
+      if (path === "") return cleanBase + "/"; 
+      if (path.startsWith("#")) return cleanBase + "/" + path; // Link Hash (es. /#contact)
+      if (path.startsWith("?")) return cleanBase + "/" + path; // Query (es. /?open=...)
+      
+      const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+      return `${cleanBase}/${cleanPath}`; 
+    }
+
+    // Sync activeSection with currentPage prop to handle indicator changes
+    useEffect(() => {
+      if (page_by_scroll !== activeId) {
+        setActiveId(page_by_scroll);
+      }
+    }, [page_by_scroll]); 
 
     useEffect(() => {
       if (currentPage) {
+        setActiveId(currentPage);
         activeSection.set(currentPage);
       }
     }, [currentPage]);
 
-    const navItems = [
-    { id: "home", label: "Home", href: mkLink("/"), dropdown: false },
-    {
-      id: "iso",
-      label: "Cons. ISO",
-      href: mkLink("/#iso"), // Link per lo scroll sulla pagina
-      dropdown: true,
-      dropdownLinks: [
-        {
-          title: "Sistemi di Gestione Qualità",
-          items: [
-            { label: "ISO 9001", id: "iso-9001", href: mkLink("/iso?open=9001")},
-            { label: "ISO 14001", id: "iso-14001", href: mkLink("/iso?open=14001") },
-            { label: "ISO 45001", id: "iso-45001", href: mkLink("/iso?open=45001") },
-          ]
-        },
-        {
-          title: "Sicurezza e Compliance",
-          items: [
-            { label: "ISO 27001", id: "iso-27001", href: mkLink("/iso?open=27001") },
-            { label: "ISO 37001", id: "iso-37001", href: mkLink("/iso?open=37001") },
-            { label: "ISO 22000", id: "iso-22000", href: mkLink("/iso?open=22000") },
-          ]
-        },
-        {
-          title: "Altro",
-          items: [
-            { label: "Tutte le certificazioni ISO", id: "all-iso", href: mkLink("/iso") },
-            { label: "Consulenza personalizzata", id: "custom-consulting", href: mkLink("/#contact") },
-          ]
-        }
-      ],
-    },
-    {
-      id: "security",
-      label: "Sicurezza",
-      href: mkLink("/#security"),
-      dropdown: false,
-    },
-    {
-        id: "assignment",
-        label: "Incarichi",
-        href: mkLink("/#assignment"),
-        dropdown: true,
-        dropdownLinks: [{
-          title: "Sistemi di Gestione Qualità",
-          items: [
-            { label: "RSPP Esterno", id: "rspp", href: mkLink("/assignment/rspp") },
-            { label: "Incarico HSE", id: "hse", href: mkLink("/assignment/hse") },
-            { label: "Auditor Esterno", id: "auditor", href: mkLink("/assignment/auditor") },
-          ]
-        },
-      ], 
-      },
-      { id: "news", label: "News", href: mkLink("/#news"), dropdown: false },
-      { id: "contact", label: "Contatti", href: mkLink("/#contact"), dropdown: false },
-    ];
-
-
     const handleNavClick = (id: string) => {
-      activeSection.set(id);
+      console.log("HandleNavClick del a href della navbar su ID : ", id);
+      const targetElement = document.getElementById(id);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth"  });
+        activeSection.set(id); // Update the indicator
+      }
       setMobileMenuOpen(false);
       setActiveDropdown(null);
     };
@@ -104,19 +65,22 @@ export function NavBar({ currentPage }: NavBarProps) {
           <div className="container mx-auto px-4 py-2">
             <div className="flex items-center justify-between">
                 {/* Logo e Titolo */}
-                <div
+                <a
+                  href={mkLink("")} // Link corretto
                   className="flex items-center space-x-3 cursor-pointer"
-                  onClick={() => handleNavClick("home")}
+                  onClick={(e) => {
+                    // TODO: TO CHECK
+                    if (window.location.pathname === base) { 
+                      e.preventDefault(); 
+                      handleNavClick("home"); 
+                    }
+                  }}
                 >
-                  <a
-                    href={mkLink("/")}
-                  >
-                    <img
-                      src={Logo}
-                      alt="Studio Venturiero Logo"
-                      className="w-12 h-12 rounded object-cover"
-                    />
-                  </a>
+                  <img
+                    src={Logo}
+                    alt="Studio Venturiero Logo"
+                    className="w-12 h-12 rounded object-cover"
+                  />
                   <div className="flex flex-col">
                     <span className="text-xs  text-white/60">
                       STUDIO
@@ -124,10 +88,10 @@ export function NavBar({ currentPage }: NavBarProps) {
                     <span className="tracking-wide  text-white">
                       VENTURIERO
                     </span>
-  
-                  </div>
-                </div>
 
+                  </div>
+                </a>
+                
                 
 
               {/* --- 3. Loop di Rendering Dinamico --- */}
@@ -141,14 +105,24 @@ export function NavBar({ currentPage }: NavBarProps) {
                     onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
                   >
                     <a
-                      href={item.href}
-                      onClick={() => handleNavClick(item.id)}
+                      href={mkLink(item.href)} 
+                      onClick={(e) => {
+                        const isAnchorLink = item.href.startsWith('#') || item.href === "home";
+                        const targetElement = document.getElementById(item.id);
+                        console.log("Clicked nav item:", item.id);
+                        if (isAnchorLink && targetElement ) {
+                          // SOLO se è un'ancora su questa pagina, previeni e scrolla
+                          e.preventDefault(); 
+                          handleNavClick(item.id); 
+                        }
+                    
+                      }}  
                       className="relative flex text-white items-center justify-center px-3 py-5 text-sm text-foreground/80 transition-colors group"
                     >
                       {/* Indicatore Attivo (Linea Blu) */}
                       <div
                         className={`absolute top-0 left-0 right-0 h-0.5 bg-white transition-all duration-500 ${
-                          page_by_scroll === item.id
+                          activeId === item.id
                             ? "opacity-100 scale-x-100"
                             : "opacity-0 scale-x-0 group-hover:opacity-50 group-hover:scale-x-100"
                         }`}
@@ -157,21 +131,6 @@ export function NavBar({ currentPage }: NavBarProps) {
                       {item.label}
                       {item.dropdown && <ChevronDown className="w-3.5 h-3.5" />}
                     </a>
-
-                    {/* Dropdown Menu: */}
-                    {/* {item.dropdown && activeDropdown === item.id && (
-                      <div className="absolute left-0 mt-0 w-48 bg-gray-800 text-white rounded shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
-                        {item.dropdownLinks?.map((link) => (
-                          <a
-                            key={link.href}
-                            href={link.href} // Link Astro per cambiare pagina
-                            className="block px-4 py-2 hover:bg-gray-700 text-sm"
-                          >
-                            {link.label}
-                          </a>
-                        ))}
-                      </div>
-                    )} */}
                   </div>
                 ))}
                 </nav>
@@ -209,23 +168,48 @@ export function NavBar({ currentPage }: NavBarProps) {
             >
               <div className="container mx-auto px-4 py-6">
                 <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
-                  {openItem?.dropdownLinks?.map((section, idx) => (
+                   {openItem?.dropdownLinks?.map((section, idx) => (
                     <div key={idx}>
                       <h3 className="text-xs text-[#f5f5f7]/50 mb-3 tracking-wide uppercase">
                         {section.title}
                       </h3>
                       <ul className="space-y-2">
                         {section.items.map((item, itemIdx) => {
-                          console.log(item);
+                          if (openItem.id === "security" ) {
+                            // USA IL <button> (per lo Scenario 2)
+                            return (
+                              <li key={itemIdx}>
+                                 <button
+                                  className="text-sm text-[#f5f5f7] hover:text-white transition-colors block w-full text-left bg-transparent"
+                                  onClick={() => {
+                                    // Controlla se siamo sulla homepage
+                                    const isHomePage = window.location.pathname === base || window.location.pathname === base + '/';
+                                    
+                                    if (isHomePage) {
+                                      handleNavClick("security");
+                                      activeFeature.set(item.id); 
+                                    } else {
+                                      window.location.href = mkLink(item.href);
+                                    }
+                                    
+                                    setActiveDropdown(null);
+                                  }}
+                                >
+                                  {item.label}
+                                </button>
+                              </li>
+                            );
+                          }
                           return (
                             <li key={itemIdx}>
                               <a
-                                href={item.href}
+                                href={mkLink(item.href)} 
                                 className="text-sm text-[#f5f5f7] hover:text-white transition-colors block"
+                                onClick={() => setActiveDropdown(null)}
                               >
-                              {item.label}
-                            </a>
-                          </li>
+                                {item.label}
+                              </a>
+                            </li>
                           );
                         })}
                       </ul>
@@ -251,17 +235,25 @@ export function NavBar({ currentPage }: NavBarProps) {
             <nav className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-2">
                 {navItems.map((item) => (
-                  <button
+                  <a
                     key={item.id}
-                    onClick={() => handleNavClick(item.id)}
+                    href={mkLink(item.href)} // Usa <a> invece di <button>
+                    onClick={(e) => {
+                      if (item.href.startsWith("#")) {
+                        e.preventDefault();
+                        handleNavClick(item.id);
+                      } else {
+                        activeSection.set(item.id);
+                      }
+                    }}
                     className={`text-left px-4 py-3 text-sm rounded-lg transition-colors ${
-                      page_by_scroll === item.id
+                      activeId === item.id
                         ? "bg-blue-50 dark:bg-blue-950/20 text-blue-600 dark:text-blue-400"
                         : "text-white/80 hover:bg-gray-100 dark:hover:bg-gray-800"
                     }`}
                   >
                     {item.label}
-                  </button>
+                  </a>
                 ))}
               </div>
             </nav>
