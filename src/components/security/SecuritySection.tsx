@@ -1,60 +1,65 @@
 import { Button } from "../ui/button";
-import { 
-  Shield, 
-  FileText, 
-  HardHat, 
-  FileCheck, 
-  Stethoscope, 
-  Settings,
-} from "lucide-react";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-const securityFeatures = [
-  {
-    icon: Shield,
-    label: "Valutazione dei Rischi (DVR)",
-    description: "Analisi approfondita dei rischi aziendali con soluzioni personalizzate per ogni ambiente di lavoro."
-  },
-  {
-    icon: FileText,
-    label: "Valutazioni specifiche dei rischi",
-    description: "Documento di Valutazione dei Rischi conforme al D.Lgs 81/08 con aggiornamenti periodici inclusi."
-  },
-  {
-    icon: HardHat,
-    label: "Piani di emergenza ed evacuazione",
-    description: "POS per cantieri e attività complesse, garantendo la massima sicurezza durante i lavori."
-  },
-  {
-    icon: FileCheck,
-    label: "Verifiche ed audit interni",
-    description: "Supporto completo per tutti gli adempimenti normativi in materia di sicurezza sul lavoro."
-  },
-  {
-    icon: Stethoscope,
-    label: "Formazione dei lavoratori",
-    description: "Coordinamento delle visite mediche periodiche e gestione della documentazione sanitaria."
-  },
-  {
-    icon: Settings,
-    label: "Sorveglianza sanitaria e visite mediche",
-    description: "Verifica e manutenzione programmata di impianti e attrezzature secondo le normative vigenti."
-  },
-  {
-    icon: FileText,
-    label: "HACCP",
-    description: "Analisi e gestione dei rischi alimentari secondo il protocollo HACCP."
-  },
-  {
-    icon: HardHat,
-    label: "Sopralluoghi e controlli di monitoraggio",
-    description: "Verifiche periodiche per garantire la sicurezza nei luoghi di lavoro."
-  },
-];
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { securityFeatures } from "../../data/securityData";
+import { activeFeature } from "../../stores/navigationStore";
+import { useStore } from "@nanostores/react";
 
 export function Security() {
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
+
+  // 2. Ascolta lo store 'activeFeature'
+  const featureToOpen = useStore(activeFeature);
+
+  // 3. Sostituisci il tuo vecchio 'useEffect' con questo
+  // Questo si attiva ogni volta che 'featureToOpen' (dallo store) cambia
+  useEffect(() => {
+    if (featureToOpen) {
+      // Trova il 'label' corrispondente all' 'id'
+      const feature = securityFeatures.find(f => f.id === featureToOpen);
+      if (feature) {
+        setSelectedFeature(feature.label);
+      }
+    } else {
+      // Se lo store è nullo (es. si chiude il menu), chiudi la card
+      setSelectedFeature(null);
+    }
+  }, [featureToOpen]);
+
+
+  // useEffect(() => {
+    
+  //   // 2. Questa funzione legge l'URL e imposta lo stato
+  //   const checkUrlForFeature = () => {
+  //     // Usa window.location.hash per ottenere l'URL *dopo* il #
+  //     // es. #security?feature=dvr
+  //     const hash = window.location.hash; 
+      
+  //     // Usiamo URLSearchParams per analizzare solo la parte ?feature=...
+  //     const params = new URLSearchParams(hash.split('?')[1]); 
+  //     const featureToOpen = params.get('feature'); // es. "dvr"
+
+  //     if (featureToOpen) {
+  //       const feature = securityFeatures.find(f => f.id === featureToOpen);
+  //       if (feature) {
+  //         setSelectedFeature(feature.label);
+  //       }
+  //     }
+  //   };
+
+  //   // 3. Esegui la funzione ORA (per il caricamento da un'altra pagina)
+  //   checkUrlForFeature(); 
+
+  //   // 4. Esegui la funzione OGNI VOLTA che l'hash cambia
+  //   //    (per i click sulla navbar mentre sei sulla home)
+  //   window.addEventListener('hashchange', checkUrlForFeature);
+
+  //   // 5. Pulisci l'event listener quando il componente "muore"
+  //   return () => {
+  //     window.removeEventListener('hashchange', checkUrlForFeature);
+  //   };
+  // }, []); // L'array [] assicura che questo setup avvenga solo una volta
 
   return (
     <section id="security" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">

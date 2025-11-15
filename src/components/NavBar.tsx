@@ -4,7 +4,7 @@ import { useStore } from '@nanostores/react';
 import {ThemeToggle} from "./ThemeToggle"; 
 import Logo from "../assets/LogoNew.png?url"; 
 import { Button } from "./ui/button";
-import { activeSection } from '../stores/navigationStore'; 
+import { activeFeature, activeSection } from '../stores/navigationStore'; 
 import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "../data/navData";
 interface NavBarProps {
@@ -14,15 +14,13 @@ interface NavBarProps {
 export function NavBar({ currentPage }: NavBarProps) {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
     const [activeId, setActiveId] = useState(currentPage || 'home');
     const page_by_scroll = useStore(activeSection);
     
-    // In locale / , in prod con GitHub Pages : work-site-1/
 
+    // In locale / , in prod con GitHub Pages : work-site-1/
     const base = import.meta.env.BASE_URL; 
     const mkLink = (path: string) => {
-      // Pulisce la base (es. /work-site-1/ -> /work-site-1)
       const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
       
       if (path === "") return cleanBase + "/"; 
@@ -177,25 +175,37 @@ export function NavBar({ currentPage }: NavBarProps) {
                       </h3>
                       <ul className="space-y-2">
                         {section.items.map((item, itemIdx) => {
-                          // Se il dropdown è quello della security, gestisci con handleNavClick
-                          if (openItem.id === "security") {
+                          if (openItem.id === "security" ) {
+                            // USA IL <button> (per lo Scenario 2)
                             return (
                               <li key={itemIdx}>
-                                <button
+                                 <button
                                   className="text-sm text-[#f5f5f7] hover:text-white transition-colors block w-full text-left bg-transparent"
-                                  onClick={() => handleNavClick("security")}
+                                  onClick={() => {
+                                    // Controlla se siamo sulla homepage
+                                    const isHomePage = window.location.pathname === base || window.location.pathname === base + '/';
+                                    
+                                    if (isHomePage) {
+                                      handleNavClick("security");
+                                      activeFeature.set(item.id); 
+                                    } else {
+                                      window.location.href = mkLink(item.href);
+                                    }
+                                    
+                                    setActiveDropdown(null);
+                                  }}
                                 >
                                   {item.label}
                                 </button>
                               </li>
                             );
                           }
-                          // Altrimenti usa il link normale
                           return (
                             <li key={itemIdx}>
                               <a
-                                href={mkLink(item.href)} // Usa mkLink
+                                href={mkLink(item.href)} 
                                 className="text-sm text-[#f5f5f7] hover:text-white transition-colors block"
+                                onClick={() => setActiveDropdown(null)}
                               >
                                 {item.label}
                               </a>
