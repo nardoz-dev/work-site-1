@@ -133,7 +133,7 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
           {/* Footer */}
           <div className="p-6 bg-blue-50 dark:bg-blue-950/20 border-t border-blue-200 dark:border-blue-900 flex items-center justify-between gap-4">
             <p className="text-sm text-foreground/70">
-              Vuoi saperne di più sulla certificazione ISO 9001?
+              Vuoi saperne di più sulla certificazione {data.title}?
             </p>
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white"

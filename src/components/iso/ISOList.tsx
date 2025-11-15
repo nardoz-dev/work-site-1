@@ -1,10 +1,11 @@
 import { Button } from "../ui/button";
 import { useEffect } from "react";
-import { ArrowLeft, Award, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Award, CheckCircle2, ChevronRight } from "lucide-react";
 import { ISOModal } from "./ISOModal";
 import { useState } from "react";
 import { CTABanner } from "../CTABanner";
 import { isoData } from "../../data/isoData";
+import { ImageWithFallback } from "../utils/fallback";
 
 export function ISOList() {
 
@@ -54,7 +55,7 @@ export function ISOList() {
         {/* Content */}
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
+            {/* <div className="grid md:grid-cols-2 gap-6">
               {Object.entries(isoData).map(([code, iso]) => (
                 <div
                   key={code}
@@ -83,21 +84,57 @@ export function ISOList() {
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* CTA Section */}
-            {/* <div className="mt-16 p-8 lg:p-12 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl text-center">
-              <h3 className="text-2xl lg:text-3xl mb-4 text-foreground">
-                Non trovi la certificazione che cerchi?
-              </h3>
-              <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
-                Offriamo supporto su molte altre certificazioni e standard internazionali.
-                Contattaci per scoprire come possiamo aiutarti.
-              </p>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-                Contattaci per Maggiori Informazioni
-              </Button>
             </div> */}
+            <div className="space-y-6">
+            {Object.entries(isoData).map(([code,iso]) => (
+              <div
+                key={code}
+                onClick={() => handleISOClick(code)}
+                className="relative w-full h-[250px] overflow-hidden rounded-2xl cursor-pointer group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <ImageWithFallback
+                    src={iso.imageUrl}
+                    alt={iso.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10 h-full flex items-center">
+                  <div className="container mx-auto px-8">
+                    <div className="max-w-3xl">
+
+                      {/* Title */}
+                      <h2 className="text-3xl lg:text-4xl text-white mb-3 group-hover:text-blue-400 transition-colors">
+                        {iso.title}
+                      </h2>
+
+                      {/* Subtitle */}
+                      <h3 className="text-xl text-white/90 mb-4">
+                        {iso.subtitle}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-white/80 text-sm lg:text-base leading-relaxed mb-4 line-clamp-2">
+                        {iso.description}
+                      </p>
+
+                      {/* CTA */}
+                      <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
+                        <span className="mr-2">Scopri di più</span>
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
           </div>
         </div>
       </div>
