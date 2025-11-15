@@ -9,7 +9,8 @@ export default defineConfig({
   
   // Configurazioni per GitHub Pages
   site: 'https://nardoz-dev.github.io', 
-  base: '/work-site-1',
+  // base: '/work-site-1',
+  base: '/',
   
   integrations: [react()],
   vite: {

@@ -45,7 +45,7 @@ const newsArticles = [
 
 export function NewsSection() {
   return (
-    <section id="news"className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
+    <section id="article" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl text-gray-900 dark:text-white mb-4">

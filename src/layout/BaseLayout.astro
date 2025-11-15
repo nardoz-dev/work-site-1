@@ -1,52 +1,43 @@
 ---
-// src/layout/BaseLayout.astro
 import { NavBar } from '../components/NavBar.tsx';
 import { FooterMinimal } from '../components/FooterMinimal.tsx';
+import { ScrollSpy } from '../components/utils/ScrollSpy.tsx'; 
+import { activeSection } from '../stores/navigationStore';
 
 interface Props {
   activeSectionID?: string;
 }
   
-// Default a "home" se non specificato
-const { activeSectionID } = Astro.props;
+const { activeSectionID = 'home' } = Astro.props;
+// if(activeSectionID){
+//   activeSection.set(activeSectionID);
+// }
+console.log('NavBar activeSectionID:', activeSectionID);
 ---
 
 <html lang="it">
   <head>
-    </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Nardoz</title>
+  </head>
   <body>
+    <div class="bg-background text-foreground">
+      
+      <NavBar currentPage={activeSectionID} client:load /> 
 
-    <main class="pt-16">
-      <NavBar currentPage={activeSectionID} client:load />
-      <slot /> 
-    </main>
-    
-    <script>
-      import { activeSection } from '../stores/navigationStore';
-      // Search all the sections 
-      const sections = document.querySelectorAll('main section[id]');
+      <main class="pt-16">
+        <slot />
+      </main>
+      
+      <FooterMinimal client:load />
+    </div>
 
-      // Enable the observer
-      if (sections.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              activeSection.set(entry.target.id);
-              break; 
-            }
-          }
-        }, {
-          rootMargin: '-160px 0px -30% 0px',
-          threshold: 0 
-        });
+    {/* Carica ScrollSpy solo sulla homepage */}
+    {Astro.url.pathname === import.meta.env.BASE_URL && <ScrollSpy client:load />}
 
-        sections.forEach((section) => {
-          observer.observe(section);
-        });
-      }
-    </script>
+
   </body>
-  <footer>
-    <FooterMinimal client:load />
-  </footer>
 </html>
