@@ -27,40 +27,6 @@ export function Security() {
     }
   }, [featureToOpen]);
 
-
-  // useEffect(() => {
-    
-  //   // 2. Questa funzione legge l'URL e imposta lo stato
-  //   const checkUrlForFeature = () => {
-  //     // Usa window.location.hash per ottenere l'URL *dopo* il #
-  //     // es. #security?feature=dvr
-  //     const hash = window.location.hash; 
-      
-  //     // Usiamo URLSearchParams per analizzare solo la parte ?feature=...
-  //     const params = new URLSearchParams(hash.split('?')[1]); 
-  //     const featureToOpen = params.get('feature'); // es. "dvr"
-
-  //     if (featureToOpen) {
-  //       const feature = securityFeatures.find(f => f.id === featureToOpen);
-  //       if (feature) {
-  //         setSelectedFeature(feature.label);
-  //       }
-  //     }
-  //   };
-
-  //   // 3. Esegui la funzione ORA (per il caricamento da un'altra pagina)
-  //   checkUrlForFeature(); 
-
-  //   // 4. Esegui la funzione OGNI VOLTA che l'hash cambia
-  //   //    (per i click sulla navbar mentre sei sulla home)
-  //   window.addEventListener('hashchange', checkUrlForFeature);
-
-  //   // 5. Pulisci l'event listener quando il componente "muore"
-  //   return () => {
-  //     window.removeEventListener('hashchange', checkUrlForFeature);
-  //   };
-  // }, []); // L'array [] assicura che questo setup avvenga solo una volta
-
   return (
     <section id="security" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
       <div className="container mx-auto px-4 max-w-6xl">
