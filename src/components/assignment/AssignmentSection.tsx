@@ -12,6 +12,17 @@ import { Shield, Building2, FileSearch, CheckCircle } from "lucide-react";
 import { assData } from "../../data/assData"
 // const base = import.meta.env.BASE_URL;
 // const mkLink = (path: string) => `${base}${path}`;
+const base = import.meta.env.BASE_URL;
+const mkLink = (path: string) => {
+  const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+  
+  if (path === "") return cleanBase + "/"; 
+  if (path.startsWith("#")) return cleanBase + "/" + path; 
+  if (path.startsWith("?")) return cleanBase + "/" + path; 
+  
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${cleanBase}/${cleanPath}`; 
+}
 
 // NOTE: Questo è il modo con il quale posso rendere globale il mkLink nel momento in cui si fà un deploy ( almeno per github pages )
 const mainAssignment = Object.keys(assData).map((assCode) => {
@@ -23,12 +34,13 @@ const mainAssignment = Object.keys(assData).map((assCode) => {
     features,
     badge,
     badgeColor: "text-blue-600 border-blue-600",
-    link: `/assignment/${assCode}`,
-    //link: mkLink(`/assignment/${assCode}`), // Link dinamico
+    //link: `/assignment/${assCode}`,
+    link: mkLink(`/assignment/${assCode}`), // Link dinamico
   };
 });
 
 export function Assignments() {
+  
   return (
     <section id="assignment" className="py-20 bg-gray-50 dark:bg-[#000000] transition-colors duration-500">
       <div className="container mx-auto px-4">

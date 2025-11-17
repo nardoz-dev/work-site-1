@@ -17,6 +17,18 @@ export function ISOList() {
     setModalOpen(true);
   };
 
+  const base = import.meta.env.BASE_URL;
+  const mkLink = (path: string) => {
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    
+    if (path === "") return cleanBase + "/"; 
+    if (path.startsWith("#")) return cleanBase + "/" + path; 
+    if (path.startsWith("?")) return cleanBase + "/" + path; 
+    
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    return `${cleanBase}/${cleanPath}`; 
+  }
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const isoToOpen = params.get('open'); 
@@ -35,7 +47,7 @@ export function ISOList() {
         <div className="bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900 transition-colors duration-500">
           <div className="container mx-auto px-4 py-12">
               <a
-              href={`/#iso`}
+              href={`${mkLink("#iso")}`}
               className={`mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center`}
               >
               <ArrowLeft className="w-4 h-4 mr-2" />

@@ -1,6 +1,5 @@
 import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter ,ArrowUp} from "lucide-react";
 
-
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -9,6 +8,7 @@ const scrollToTop = () => {
 };
 
 export function FooterMinimal() {
+  const base = import.meta.env.BASE_URL;
   return (
     <footer className="bg-[#f5f5f7] dark:bg-[#1d1d1f] border-t border-border/50 transition-colors duration-500">
 
@@ -132,7 +132,7 @@ export function FooterMinimal() {
 
 
               <a
-                href="/sitemap-index.xml"
+                href={`${base}sitemap-index.xml`}
                 className="text-foreground/60 hover:text-foreground transition-colors"
               >
                 Sitemap

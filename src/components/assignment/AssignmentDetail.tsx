@@ -19,6 +19,19 @@ export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
     icon: "bg-blue-600 dark:bg-blue-700"
   };
 
+  const base = import.meta.env.BASE_URL;
+  const mkLink = (path: string) => {
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    
+    if (path === "") return cleanBase + "/"; 
+    if (path.startsWith("#")) return cleanBase + "/" + path; 
+    if (path.startsWith("?")) return cleanBase + "/" + path; 
+    
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    return `${cleanBase}/${cleanPath}`; 
+  }
+
+
   return (
     <>
     <div className="min-h-screen  bg-background">
@@ -35,7 +48,7 @@ export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
           </Button> */}
 
           <a
-          href={`/#assignment`}
+          href={`${mkLink("#assignment")}`}
           className={`mb-6 ${colorClasses.text} hover:bg-transparent flex items-center`}
           >
           <ArrowLeft className="w-4 h-4 mr-2" />

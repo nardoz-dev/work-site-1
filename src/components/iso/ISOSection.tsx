@@ -20,7 +20,16 @@ const mainServices = Object.keys(isoData).map((isoCode) => ({
 
 // Understand new path based on deployment base URL
 const base = import.meta.env.BASE_URL;
-const mkLink = (path: string) => `${base}${path}`;
+const mkLink = (path: string) => {
+  const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+  
+  if (path === "") return cleanBase + "/"; 
+  if (path.startsWith("#")) return cleanBase + "/" + path; 
+  if (path.startsWith("?")) return cleanBase + "/" + path; 
+  
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${cleanBase}/${cleanPath}`; 
+}
 
 mainServices.push({
   icon: Award,
@@ -29,8 +38,8 @@ mainServices.push({
   bgColor: "bg-white dark:bg-gray-800",
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
-  link: "/iso",
-  // link: mkLink("/iso"), // Link statico
+  // link: "/iso",
+  link: mkLink("/iso"), 
   code: " ",
   modal: false,
 });
