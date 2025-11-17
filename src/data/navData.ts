@@ -1,5 +1,5 @@
 export const navItems = [
-    { id: "home", label: "Home", href: ("home"), dropdown: false },
+    { id: "home", label: "Home", href: "#home", dropdown: false },
     {
       id: "iso",
       label: "Cons. ISO",
@@ -85,3 +85,5 @@ export const navItems = [
       { id: "article", label: "Articoli", href: "#article", dropdown: false },
       { id: "contact", label: "Contatti", href: "#contact", dropdown: false },
     ];
+
+
