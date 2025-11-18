@@ -3,22 +3,24 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useState, useEffect } from "react";
 import { ImageWithFallback } from "./utils/fallback";
-import Logo from "../assets/LogoNew.png?url";
-import photo1 from "../../src/assets/Photo_1.png";
-import photo2 from "../../src/assets/Photo_2.png";
-import photo3 from "../../src/assets/Photo_3.png";
-import photo4 from "../../src/assets/Photo_4.png";
+import { number } from "astro:schema";
 
-export function Home() {
+
+interface HomeProps{
+  logo: {
+    src: string;
+    width: number;
+    height: number;
+  };
+  sliderImages: {
+    src: string;
+    width: number;
+    height: number;
+  }[];
+}
+export function Home( {logo, sliderImages}: HomeProps) {
 
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const sliderImages = [
-    photo1,
-    photo2,
-    photo3,
-    photo4
-  ];
 
 
   // Auto-advance slides
@@ -56,7 +58,7 @@ export function Home() {
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             style={{
               opacity: currentSlide === index ? 1 : 0,
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url(${image.src})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -67,7 +69,7 @@ export function Home() {
       </div>
 
       {/* Slider Navigation Controls */}
-      {/* <div className="absolute bottom-32 right-8 z-30 flex gap-3">
+      <div className="absolute bottom-32 right-8 z-30 flex gap-3">
         <button
           onClick={goToPrevious}
           className="w-12 h-12 rounded-full bg-gray-800/20 dark:bg-white/10 backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/30 dark:hover:bg-white/20 transition-all duration-300 group"
@@ -82,7 +84,7 @@ export function Home() {
         >
           <ChevronRight className="w-6 h-6 text-gray-900 dark:text-white group-hover:scale-110 transition-transform" />
         </button>
-      </div> */}
+      </div>
 
       {/* Slider Dots */}
       <div className="absolute bottom-[120px] left-1/2 transform -translate-x-1/2 z-30 flex gap-2">
@@ -152,8 +154,11 @@ export function Home() {
             {/* Logo */}
             <div className="relative z-10 flex items-center justify-center">
               <img 
-                src={Logo}
-                alt="Studio Venturiero Logo"
+                src={logo.src}
+                width={logo.width}
+                height={logo.height}
+                decoding="async"
+                alt="Studio Latina Consulenza iso lavoro diritti sicurezza formazione consulente Logo"
                 className=" rounded object-cover"
               />
             </div>
