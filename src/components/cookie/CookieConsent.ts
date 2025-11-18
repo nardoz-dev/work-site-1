@@ -3,12 +3,11 @@ import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 export const config: CookieConsentConfig = {
   guiOptions: {
     consentModal: {
-      layout: 'box inline',
-      position: 'bottom left',
+      layout: 'bar',
+      position: 'bottom',
     },
     preferencesModal: {
-      layout: 'box',
-      position: 'right',
+      layout: 'bar',
       equalWeightButtons: true,
       flipButtons: false,
     },
