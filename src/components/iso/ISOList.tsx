@@ -132,7 +132,7 @@ export function ISOList() {
 
                       {/* Description */}
                       <p className="text-white/80 text-sm lg:text-base leading-relaxed mb-4 line-clamp-2">
-                        {iso.description}
+                        {iso.details}
                       </p>
 
                       {/* CTA */}

@@ -18,7 +18,6 @@ export const navItems = [
           title: "",
           items: [
             { label: "ISO 27001", id: "iso-27001", href: "iso?open=27001" },
-            { label: "ISO 45001", id: "iso-45001", href: "iso?open=45001" },
             { label: "PDR 125", id: "pdr-125", href: "iso?open=PDR125" },
           ]
         },

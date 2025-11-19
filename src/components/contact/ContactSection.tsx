@@ -1,3 +1,4 @@
+import { useState } from "react"; // <--- IMPORTANTE: Aggiunto useState
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
@@ -54,6 +55,69 @@ const testimonials = [
 ];
 
 export function Contact() {
+  
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    service: "",
+    message: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({ ...prev, service: value }));
+  };
+
+  const handleMailto = () => {
+
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+      alert("Per favore compila almeno Nome, Cognome");
+      return;
+    }
+    const mailTo = "info@studioventuriero.it";
+    
+    const subject = `Sito Web: ${formData.service || "Informazioni Generiche"} - ${formData.firstName} ${formData.lastName}`;
+
+    const body = `
+Buongiorno Studio Venturiero,
+
+Vorrei richiedere informazioni riguardo: ${formData.service || "N/D"}.
+
+--- DATI CONTATTO ---
+Nome: ${formData.firstName} ${formData.lastName}
+Azienda: ${formData.company || "Privato"}
+Email: ${formData.email}
+Telefono: ${formData.phone || "N/D"}
+
+--- MESSAGGIO ---
+${formData.message}
+
+Cordiali saluti,
+${formData.firstName} ${formData.lastName}
+    `.trim();
+
+    // Build final mailto link
+    window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      company: "",
+      service: "",
+      message: ""
+    });
+
+  };
+
   return (
     <section id="contact" className="py-20 bg-background dark:bg-[#000000] transition-colors duration-500">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -67,7 +131,6 @@ export function Contact() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Left Column - Contact Info */}
           <div className="lg:col-span-1 space-y-8">
-            {/* Contact Details Card */}
             <div className="bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 rounded-2xl p-8 text-white shadow-lg">
               <h3 className="text-xl mb-6">Parliamo del tuo progetto</h3>
               <div className="space-y-6">
@@ -127,6 +190,8 @@ export function Contact() {
                     <Label htmlFor="firstName" className="text-foreground/80">Nome *</Label>
                     <Input 
                       id="firstName" 
+                      value={formData.firstName} 
+                      onChange={handleChange}    
                       placeholder="Il tuo nome" 
                       className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -135,6 +200,8 @@ export function Contact() {
                     <Label htmlFor="lastName" className="text-foreground/80">Cognome *</Label>
                     <Input 
                       id="lastName" 
+                      value={formData.lastName}
+                      onChange={handleChange}
                       placeholder="Il tuo cognome"
                       className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -143,10 +210,12 @@ export function Contact() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-foreground/80">Email *</Label>
+                    <Label htmlFor="email" className="text-foreground/80">Email</Label>
                     <Input 
                       id="email" 
                       type="email" 
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder="la-tua-email@esempio.com"
                       className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -156,6 +225,8 @@ export function Contact() {
                     <Input 
                       id="phone" 
                       type="tel" 
+                      value={formData.phone}
+                      onChange={handleChange}
                       placeholder="+39 123 456 7890"
                       className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -167,33 +238,36 @@ export function Contact() {
                     <Label htmlFor="company" className="text-foreground/80">Azienda</Label>
                     <Input 
                       id="company" 
+                      value={formData.company}
+                      onChange={handleChange}
                       placeholder="Nome della tua azienda"
                       className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="service" className="text-foreground/80">Servizio di Interesse</Label>
-                    <Select>
+                
+                    <Select onValueChange={handleSelectChange}> 
                       <SelectTrigger className="border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500">
                         <SelectValue placeholder="Seleziona un servizio" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="sistemi-gestione">Sistemi di Gestione</SelectItem>
-                        <SelectItem value="sicurezza-cantieri">Sicurezza Cantieri</SelectItem>
-                        <SelectItem value="sicurezza-lavoro">Sicurezza sul Lavoro</SelectItem>
-                        <SelectItem value="sicurezza-alimentare">Sicurezza Alimentare</SelectItem>
-                        <SelectItem value="formazione">Corsi di Formazione</SelectItem>
-                        <SelectItem value="verifica-impianti">Verifica Impianti</SelectItem>
-                        <SelectItem value="altro">Altro</SelectItem>
+                        <SelectItem value="Sistemi di Gestione">Sistemi di Gestione</SelectItem>
+                        <SelectItem value="Sicurezza sul Lavoro">Sicurezza sul Lavoro</SelectItem>
+                        <SelectItem value="Sicurezza Alimentare">Sicurezza Alimentare</SelectItem>
+                        <SelectItem value="Corsi di Formazione">Corsi di Formazione</SelectItem>
+                        <SelectItem value="Altro">Altro</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-foreground/80">Messaggio *</Label>
+                  <Label htmlFor="message" className="text-foreground/80">Messaggio</Label>
                   <Textarea 
                     id="message" 
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Descrivi brevemente le tue esigenze..."
                     className="min-h-[120px] border-gray-200 dark:border-gray-700 dark:bg-[#2a2a2c] focus:border-blue-500 focus:ring-blue-500"
                   />
@@ -202,14 +276,18 @@ export function Contact() {
                 <div className="flex flex-col sm:flex-row gap-4 pt-6">
                   <Button 
                     size="lg" 
+                    onClick={handleMailto} 
                     className="bg-blue-600 hover:bg-blue-700 text-white flex-1 sm:flex-none shadow-lg"
                   >
                     <Send className="w-4 h-4 mr-2" />
                     Invia Richiesta
                   </Button>
+                  
+                  
                   <Button 
                     size="lg" 
                     variant="outline" 
+                    onClick={() => window.location.href = "tel:+393333333333"}
                     className="flex-1 sm:flex-none border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-950/30"
                   >
                     <Phone className="w-4 h-4 mr-2" />
@@ -221,7 +299,7 @@ export function Contact() {
                   <p className="text-xs text-foreground/60 flex items-start gap-2">
                     <span className="w-2 h-2 bg-blue-600 rounded-full mt-1.5 flex-shrink-0"></span>
                     * Campi obbligatori. I tuoi dati saranno trattati secondo la normativa sulla privacy GDPR.
-                    Tempo di risposta garantito: 24 ore lavorative.
+                    Cliccando Invia si aprirà il tuo client di posta predefinito.
                   </p>
                 </div>
               </CardContent>
@@ -238,19 +316,14 @@ export function Contact() {
             {testimonials.map((testimonial, index) => (
               <Card key={index} className="bg-white dark:bg-[#1d1d1f] border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  {/* Rating Stars */}
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  
-                  {/* Testimonial Text */}
                   <p className="text-foreground/80 text-sm mb-4 leading-relaxed">
                     "{testimonial.text}"
                   </p>
-                  
-                  {/* Author Info */}
                   <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
                     <p className="text-foreground">{testimonial.name}</p>
                     <p className="text-sm text-foreground/60">{testimonial.company}</p>

@@ -12,48 +12,48 @@ export const securityFeatures = [
     id:"dvr",
     icon: Shield,
     label: "Valutazione dei Rischi (DVR)",
-    description: "Analisi approfondita dei rischi aziendali con soluzioni personalizzate per ogni ambiente di lavoro."
+    description: "Redazione del Documento di Valutazione dei Rischi obbligatorio (D.Lgs 81/08) con analisi personalizzata per ogni ambiente di lavoro."
   },
   {
     id: "specific-assessments",
     icon: FileText,
     label: "Valutazioni specifiche dei rischi",
-    description: "Documento di Valutazione dei Rischi conforme al D.Lgs 81/08 con aggiornamenti periodici inclusi."
+    description: "Indagini tecniche strumentali per rischi specifici: Rumore, Vibrazioni, Chimico, Incendio, Stress Lavoro-Correlato e MMC.",
   },
   {
     id: "fire-plan",
     icon: HardHat,
     label: "Piani di emergenza ed evacuazione",
-    description: "POS per cantieri e attività complesse, garantendo la massima sicurezza durante i lavori."
+    description: "Elaborazione delle procedure operative e delle planimetrie per la gestione immediata delle emergenze e l'evacuazione sicura.",
   },
   {
     id: "training",
     icon: FileCheck,
     label: "Verifiche ed audit interni",
-    description: "Supporto completo per tutti gli adempimenti normativi in materia di sicurezza sul lavoro."
+    description: "Ispezioni periodiche per verificare il mantenimento degli standard di sicurezza e la piena conformità legislativa nel tempo.",
   },
   {
     id: "haccp",
     icon: Stethoscope,
     label: "Formazione dei lavoratori",
-    description: "Coordinamento delle visite mediche periodiche e gestione della documentazione sanitaria."
+    description: "Corsi obbligatori e di aggiornamento (Generale, Specifica, Preposti, Antincendio, Primo Soccorso) per sviluppare la cultura della sicurezza.",
   },
   {
     id: "inspections",
     icon: Settings,
     label: "Sorveglianza sanitaria e visite mediche",
-    description: "Verifica e manutenzione programmata di impianti e attrezzature secondo le normative vigenti."
+    description: "Gestione completa della Medicina del Lavoro: nomina del Medico Competente, stesura protocolli sanitari e visite di idoneità.",
   },
   {
     id: "haccp",
     icon: FileText,
     label: "HACCP",
-    description: "Analisi e gestione dei rischi alimentari secondo il protocollo HACCP."
+    description: "Consulenza per la sicurezza alimentare, redazione del Manuale di Autocontrollo e analisi dei punti critici per il settore Ho.Re.Ca.",
   },
   {
     id: "inspections-2",
     icon: HardHat,
     label: "Sopralluoghi e controlli di monitoraggio",
-    description: "Verifiche periodiche per garantire la sicurezza nei luoghi di lavoro."
-  },
+    description: "Visite tecniche ricorrenti negli ambienti di lavoro per identificare nuove criticità e monitorare l'efficacia delle misure adottate.",
+  }
 ];

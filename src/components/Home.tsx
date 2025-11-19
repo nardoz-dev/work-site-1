@@ -65,24 +65,25 @@ export function Home( {logo, sliderImages}: HomeProps) {
           />
         ))}
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/25 via-blue-100/80 to-gray-800/75 dark:from-gray-950/90 dark:via-blue-950/85 dark:to-gray-950/90" />
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-gray-800/25 via-blue-100/80 to-gray-800/75 dark:from-gray-950/90 dark:via-blue-950/85 dark:to-gray-950/90" /> */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/25 via-blue-300/50 to-gray-950/90 dark:from-gray-700/90 dark:via-blue-950/85 dark:to-gray-950/90" />
       </div>
 
       {/* Slider Navigation Controls */}
       <div className="absolute bottom-32 right-8 z-30 flex gap-3">
         <button
           onClick={goToPrevious}
-          className="w-12 h-12 rounded-full bg-gray-800/20 dark:bg-white/10 backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/30 dark:hover:bg-white/20 transition-all duration-300 group"
+          className="w-12 h-12 rounded-full bg-background bg-gray-700 dark:bg-[#1d1d1f] backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/90 dark:hover:bg-white/20 transition-all duration-300 group"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6 text-gray-900 dark:text-white group-hover:scale-110 transition-transform" />
+          <ChevronLeft className="w-6 h-6 text-white dark:text-white group-hover:scale-110 transition-transform" />
         </button>
         <button
           onClick={goToNext}
-          className="w-12 h-12 rounded-full bg-gray-800/20 dark:bg-white/10 backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/30 dark:hover:bg-white/20 transition-all duration-300 group"
+          className="w-12 h-12 rounded-full bg-background bg-gray-700 dark:bg-[#1d1d1f] backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/90 dark:hover:bg-white/20 transition-all duration-300 group"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6 text-gray-900 dark:text-white group-hover:scale-110 transition-transform" />
+          <ChevronRight className="w-6 h-6 text-white dark:text-white group-hover:scale-110 transition-transform" />
         </button>
       </div>
 
