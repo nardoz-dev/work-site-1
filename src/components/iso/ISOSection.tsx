@@ -52,7 +52,7 @@ export function ConsISO() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-2">
+            <p className="text-destructive tracking-wide mb-2">
               LE NOSTRE PRINCIPALI CERTIFICAZIONI
             </p>
             <h2 className="text-3xl lg:text-4xl text-foreground mb-4">
