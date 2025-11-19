@@ -11,8 +11,8 @@ export default defineConfig({
   
   // Configurazioni per GitHub Pages
   site: 'https://nardoz-dev.github.io', 
-  base: '/',
-  // base: '/work-site-1',
+  // base: '/',
+  base: '/work-site-1',
   
   integrations: [react(), sitemap(), partytown()],
   vite: {
