@@ -1,5 +1,13 @@
 import { Button } from "../ui/button";
-
+import { 
+  Shield, 
+  FileText, 
+  HardHat, 
+  FileCheck, 
+  Stethoscope, 
+  Settings,
+  X,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { securityFeatures } from "../../data/securityData";
@@ -8,36 +16,34 @@ import { useStore } from "@nanostores/react";
 
 export function Security() {
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
-
-  // 2. Ascolta lo store 'activeFeature'
   const featureToOpen = useStore(activeFeature);
-
-  // 3. Sostituisci il tuo vecchio 'useEffect' con questo
-  // Questo si attiva ogni volta che 'featureToOpen' (dallo store) cambia
   useEffect(() => {
     if (featureToOpen) {
-      // Trova il 'label' corrispondente all' 'id'
       const feature = securityFeatures.find(f => f.id === featureToOpen);
       if (feature) {
         setSelectedFeature(feature.label);
       }
     } else {
-      // Se lo store è nullo (es. si chiude il menu), chiudi la card
       setSelectedFeature(null);
     }
   }, [featureToOpen]);
 
   return (
-    <section id="security" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
+    // PRIMA: bg-[#f5f5f7] dark:bg-[#1d1d1f]
+    // DOPO: Usiamo le variabili di background del tema. 'muted' per il grigio chiaro.
+    <section id="security" className="py-20 bg-muted text-foreground transition-colors duration-500">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-4">SICUREZZA SUL LAVORO</p>
+          {/* Manteniamo un blu specifico come accento, ma potremmo usare text-primary */}
+          <p className="text-destructive tracking-wide mb-4">SICUREZZA SUL LAVORO</p>
           <h2 className="text-3xl lg:text-4xl text-foreground mb-4">
-            Affidati a chi fa della sicurezza un valore, <span className="text-blue-600 dark:text-blue-400">non un obbligo.</span>
+            Affidati a chi fa della sicurezza un valore, <span className="text-destructive">non un obbligo.</span>
             <br />
             Sicurezza sul lavoro: la nostra esperienza al servizio della tua azienda.
           </h2>
-          <p className="text-foreground/70 text-lg leading-relaxed max-w-3xl mx-auto">
+          {/* PRIMA: text-foreground/70 */}
+          {/* DOPO: Usiamo il colore "muted" per il testo secondario */}
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
             La consulenza per la sicurezza sul lavoro è un servizio fondamentale per garantire la tutela dei lavoratori, 
             la conformità alle normative vigenti e la prevenzione degli infortuni e delle malattie professionali.
             Attraverso un approccio tecnico e personalizzato, STUDIO VENTURIERO supporta le aziende nell’applicazione del D.Lgs.
@@ -45,11 +51,12 @@ export function Security() {
              documentata e conforme del sistema sicurezza.
           </p>
         </div>
+
         {/* CTA Button */}
         <div className="text-center mb-8">
           <Button 
             size="lg" 
-            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
             onClick={() => window.location.href = "/#contact"}
           >
             Contattami per una consulenza gratuita
@@ -57,76 +64,68 @@ export function Security() {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-          {securityFeatures.map((feature, index) => {
-            const IconComponent = feature.icon;
-            const isSelected = selectedFeature === feature.label;
-            return (
-              <button
-                key={index}
-                onClick={() => setSelectedFeature(isSelected ? null : feature.label)}
-                className={`group flex flex-col items-center text-center p-6 rounded-2xl transition-all duration-300 border-2 ${
-                  isSelected
-                    ? "bg-blue-50 dark:bg-blue-950/20 border-blue-600 dark:border-blue-500 shadow-lg"
-                    : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md"
-                }`}
-              >
-                <div className={`w-16 h-16 mb-4 flex items-center justify-center rounded-xl transition-colors ${
-                  isSelected
-                    ? "bg-blue-600 dark:bg-blue-600"
-                    : "bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30"
-                }`}>
-                  <IconComponent 
-                    className={`w-8 h-8 transition-colors ${
-                      isSelected
-                        ? "text-white"
-                        : "text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    }`} 
-                    strokeWidth={1.5} 
-                  />
-                </div>
-                <p className={`text-sm transition-colors ${
-                  isSelected
-                    ? "text-blue-600 dark:text-blue-500"
-                    : "text-foreground/80 group-hover:text-foreground"
-                }`}>
-                  {feature.label}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Selected Feature Description - Fixed Height Container */}
-        <div className="min-h-[120px]">
-          <AnimatePresence mode="wait">
-            {selectedFeature && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-[#1d1d1f] rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-800"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    {(() => {
-                      const feature = securityFeatures.find(f => f.label === selectedFeature);
-                      if (!feature) return null;
-                      const IconComponent = feature.icon;
-                      return <IconComponent className="w-5 h-5 text-white" />;
-                    })()}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg text-foreground mb-1">{selectedFeature}</h3>
-                    <p className="text-foreground/70 text-sm leading-relaxed">
-                      {securityFeatures.find(f => f.label === selectedFeature)?.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        <div className="h-[650px] bg-card/50 rounded-3xl p-6 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50">
+          <div className="h-full grid grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-4" style={{ gridAutoFlow: 'dense' }}>
+            {securityFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              const isSelected = selectedFeature === feature.label;
+              const isLastElement = index === securityFeatures.length - 1; //To handle last case
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => setSelectedFeature(isSelected ? null : feature.label)}
+                  className={`group flex rounded-2xl transition-all duration-300 border-2 relative overflow-hidden ${
+                    isSelected
+                      ? "col-span-3 row-span-3 bg-blue-50 dark:bg-blue-950/20 border-primary shadow-lg p-6 items-start"
+                      : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md p-6 flex-col items-center text-center justify-center"
+                  }`}
+                  style={isSelected && isLastElement ? { gridRow: '1 / 3', gridColumn: '3 / 5' } : undefined}
+                >
+                  {isSelected ? (
+                    // Expanded Layout
+                    <div className="flex items-start h-full w-full">
+                      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-primary">
+                        <IconComponent className="w-6 h-6 text-white" strokeWidth={1.5} />
+                      </div>
+                      
+                      <div className="flex-1 text-left ml-4 pr-12 h-full flex flex-col">
+                        <p className="text-destructive text-lg mb-3">
+                          {feature.label}
+                        </p>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                      
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedFeature(null);
+                        }}
+                        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 text-white transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    // Collapsed Layout
+                    <>
+                      <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30 transition-colors">
+                        <IconComponent 
+                          className="w-8 h-8 text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-primary transition-colors" 
+                          strokeWidth={1.5} 
+                        />
+                      </div>
+                      <p className="text-sm text-foreground/80 group-hover:text-foreground transition-colors">
+                        {feature.label}
+                      </p>
+                    </>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

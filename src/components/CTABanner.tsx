@@ -41,7 +41,7 @@ export function CTABanner({
                 <Button
                   key={idx}
                   size="lg"
-                  className={btn.className ?? "bg-blue-600 hover:bg-blue-700 text-white shadow-xl"}
+                  className={btn.className ?? "bg-primary text-white shadow-xl"}
                   onClick={btn.onClick}
                 >
                   {btn.text}
@@ -50,7 +50,7 @@ export function CTABanner({
             : (
                 <Button
                   size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white shadow-xl"
+                  className="bg-primary text-white shadow-xl"
                   onClick={onButtonClick}
                 >
                   {buttonText}
@@ -58,13 +58,7 @@ export function CTABanner({
               )
           }
         </div>
-        {/* <Button
-          size="lg"
-          className="bg-blue-600 hover:bg-blue-700 text-white shadow-xl"
-          onClick={onButtonClick}
-        >
-          {buttonText}
-        </Button> */}
+
       </div>
     </section>
   );

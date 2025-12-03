@@ -26,11 +26,11 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
           <DialogHeader className="p-8 pb-6 bg-blue-50 dark:bg-blue-950/20 border-b border-blue-200 dark:border-blue-900">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-4 flex-1">
-                <div className="bg-blue-600 dark:bg-blue-700 w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="bg-primary w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Award className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <DialogTitle className="text-3xl text-blue-600 dark:text-blue-400 mb-2">
+                  <DialogTitle className="text-3xl text-primary mb-2">
                     {data.title}
                   </DialogTitle>
                   <p className="text-lg text-foreground/70">
@@ -59,7 +59,7 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                  <CheckCircle2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  <CheckCircle2 className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-2xl text-foreground">
                   Vantaggi
@@ -71,64 +71,13 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
                     key={index}
                     className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-950/10 rounded-lg border border-blue-200 dark:border-blue-900"
                   >
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                     <span className="text-foreground/80">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Requirements Section */}
-            {/* <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                  <FileCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="text-2xl text-foreground">
-                  Requisiti Principali
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {data.requirements.map((requirement, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700"
-                  >
-                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm">
-                      {index + 1}
-                    </div>
-                    <span className="text-foreground/80">{requirement}</span>
-                  </div>
-                ))}
-              </div>
-            </div> */}
-
-            {/* Process Section */}
-            {/* <div className="mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                  <Settings className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="text-2xl text-foreground">
-                  Processo di Certificazione
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {data.process.map((step, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-950/10 dark:to-transparent rounded-lg border-l-4 border-blue-600"
-                  >
-                    <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                      {index + 1}
-                    </div>
-                    <span className="text-foreground/80 pt-1">{step}</span>
-                  </div>
-                ))}
-              </div>
-            </div> */}
           </div>
-        {/* </ScrollArea> */}
 
           {/* Footer */}
           <div className="p-6 bg-blue-50 dark:bg-blue-950/20 border-t border-blue-200 dark:border-blue-900 flex items-center justify-between gap-4">
@@ -136,7 +85,7 @@ export function ISOModal({ isOpen, onClose, isoType }: ISOModalProps) {
               Vuoi saperne di più sulla certificazione {data.title}?
             </p>
             <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-primary text-white"
               onClick={() => {
                 onClose();
                 window.location.href = "/#contact";

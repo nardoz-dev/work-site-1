@@ -35,7 +35,7 @@ export function FooterMinimal() {
             <h4 className="text-white mb-6 dark:text-white">Contatti</h4>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0" />
+                <Phone className="w-5 h-5 text-accent flex-shrink-0" />
                 <a
                   href="tel:+393337558507"
                   className="text-white/70 hover:text-white transition-colors"
@@ -44,7 +44,7 @@ export function FooterMinimal() {
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-accent flex-shrink-0" />
                 <a
                   href="mailto:info@studioventuriero.it"
                   className="text-white/70 hover:text-white transition-colors"
@@ -53,7 +53,7 @@ export function FooterMinimal() {
                 </a>
               </div>
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-500 mt-0.5 flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
                 <div className="text-white/70 hover:text-white transition-colors">
                   <div>Via Aaaaaa Km 106,500</div>
                   <div>Aaaaaa (LT) - 04019</div>
@@ -70,7 +70,7 @@ export function FooterMinimal() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-blue-600 dark:hover:bg-blue-500 flex items-center justify-center transition-all group"
+                className="w-12 h-12 rounded-full bg-primary flex items-center justify-center transition-all group"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
@@ -79,7 +79,7 @@ export function FooterMinimal() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-blue-600 dark:hover:bg-blue-500 flex items-center justify-center transition-all group"
+                className="w-12 h-12 rounded-full bg-primary flex items-center justify-center transition-all group"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
@@ -88,7 +88,7 @@ export function FooterMinimal() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-blue-600 dark:hover:bg-blue-500 flex items-center justify-center transition-all group"
+                className="w-12 h-12 rounded-full bg-primary flex items-center justify-center transition-all group"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
