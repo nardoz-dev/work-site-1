@@ -3,18 +3,24 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useState, useEffect } from "react";
 import { ImageWithFallback } from "./utils/fallback";
-import Logo from "../assets/LogoNew.png?url";
+import { number } from "astro:schema";
 
-export function Home() {
+
+interface HomeProps{
+  logo: {
+    src: string;
+    width: number;
+    height: number;
+  };
+  sliderImages: {
+    src: string;
+    width: number;
+    height: number;
+  }[];
+}
+export function Home( {logo, sliderImages}: HomeProps) {
 
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const sliderImages = [
-    "https://images.unsplash.com/photo-1681216868987-b7268753b81c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjBidWlsZGluZ3xlbnwxfHx8fDE3NjE4NTIwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    "https://images.unsplash.com/photo-1641998148499-cb6b55a3c0d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBvZmZpY2UlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NjE3Njc2Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    "https://images.unsplash.com/photo-1629257647184-756447632d19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBzaXRlJTIwc2FmZXR5fGVufDF8fHx8MTc2MTg1NTI4NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    "https://images.unsplash.com/photo-1758518727707-b023e285b709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm58ZW58MXx8fHwxNzYxODAxOTc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  ];
 
 
   // Auto-advance slides
@@ -52,33 +58,34 @@ export function Home() {
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             style={{
               opacity: currentSlide === index ? 1 : 0,
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url(${image.src})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           />
         ))}
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/25 via-blue-100/80 to-gray-800/75 dark:from-gray-950/90 dark:via-blue-950/85 dark:to-gray-950/90" />
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-gray-800/25 via-blue-100/80 to-gray-800/75 dark:from-gray-950/90 dark:via-blue-950/85 dark:to-gray-950/90" /> */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/25 via-blue-300/50 to-gray-950/90 dark:from-gray-700/90 dark:via-blue-950/85 dark:to-gray-950/90" />
       </div>
 
       {/* Slider Navigation Controls */}
-      {/* <div className="absolute bottom-32 right-8 z-30 flex gap-3">
+      <div className="absolute bottom-32 right-8 z-30 flex gap-3">
         <button
           onClick={goToPrevious}
-          className="w-12 h-12 rounded-full bg-gray-800/20 dark:bg-white/10 backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/30 dark:hover:bg-white/20 transition-all duration-300 group"
+          className="w-12 h-12 rounded-full bg-background bg-gray-700 dark:bg-[#1d1d1f] backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/90 dark:hover:bg-white/20 transition-all duration-300 group"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6 text-gray-900 dark:text-white group-hover:scale-110 transition-transform" />
+          <ChevronLeft className="w-6 h-6 text-white dark:text-white group-hover:scale-110 transition-transform" />
         </button>
         <button
           onClick={goToNext}
-          className="w-12 h-12 rounded-full bg-gray-800/20 dark:bg-white/10 backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/30 dark:hover:bg-white/20 transition-all duration-300 group"
+          className="w-12 h-12 rounded-full bg-background bg-gray-700 dark:bg-[#1d1d1f] backdrop-blur-md border border-gray-800/30 dark:border-white/20 flex items-center justify-center hover:bg-gray-800/90 dark:hover:bg-white/20 transition-all duration-300 group"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6 text-gray-900 dark:text-white group-hover:scale-110 transition-transform" />
+          <ChevronRight className="w-6 h-6 text-white dark:text-white group-hover:scale-110 transition-transform" />
         </button>
-      </div> */}
+      </div>
 
       {/* Slider Dots */}
       <div className="absolute bottom-[120px] left-1/2 transform -translate-x-1/2 z-30 flex gap-2">
@@ -103,7 +110,7 @@ export function Home() {
           <div className="space-y-8">
             <div className="space-y-6">
               <div className="inline-block">
-                <span className="text-blue-600 dark:text-blue-800 text-sm tracking-wider uppercase font-semibold">
+                <span className="text-destructive text-sm tracking-wider uppercase font-semibold">
                   Studio Venturiero
                 </span>
               </div>
@@ -115,32 +122,21 @@ export function Home() {
                 lo protegge.
               </h1>
 
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
+              {/* <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
                 HSE Manager • Sicurezza Cantieri • Sicurezza sul
                 Lavoro • Coordinamento
-              </p>
+              </p> */}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
+                className="bg-primary text-white px-8 py-3"
               >
                 Contattaci
               </Button>
             </div>
 
-            {/* Services Dropdown Preview */}
-            {/* <div className="bg-white rounded-lg shadow-lg p-6 max-w-md">
-              <h3 className="text-sm text-gray-500 mb-4">I NOSTRI SERVIZI</h3>
-              <div className="space-y-3">
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sistemi di Gestione</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza sui cantieri</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza Alimentare</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza sul Lavoro</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza sui cantieri</div>
-              </div>
-            </div> */}
           </div>
 
           {/* Right Content - Hero Image */}
@@ -148,8 +144,11 @@ export function Home() {
             {/* Logo */}
             <div className="relative z-10 flex items-center justify-center">
               <img 
-                src={Logo}
-                alt="Studio Venturiero Logo"
+                src={logo.src}
+                width={logo.width}
+                height={logo.height}
+                decoding="async"
+                alt="Studio Latina Consulenza iso lavoro diritti sicurezza formazione consulente Logo"
                 className=" rounded object-cover"
               />
             </div>

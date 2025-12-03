@@ -117,13 +117,13 @@ export function ArticleList() {
         <div className="container mx-auto px-4 py-12">
           <a
             href={mkLink("#article")}
-            className="mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center"
+            className="mb-6 text-primary hover:bg-transparent flex items-center"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Torna alla pagina principale
           </a>
           <div className="max-w-4xl">
-            <h1 className="text-4xl lg:text-5xl mb-4 text-blue-600 dark:text-blue-400">
+            <h1 className="text-4xl lg:text-5xl mb-4 text-primary">
               Tutti gli Articoli
             </h1>
             <p className="text-xl text-foreground/70">
@@ -163,7 +163,7 @@ export function ArticleList() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm transition-all ${
                   selectedCategory === category
-                    ? "bg-blue-600 text-white"
+                    ? "bg-primary text-white"
                     : "bg-gray-100 dark:bg-gray-800 text-foreground/70 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
@@ -185,7 +185,7 @@ export function ArticleList() {
             {filteredArticles.map((article) => (
               <a
                 key={article.id}
-                className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer group"
+                className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] hover:border-blue-800 dark:hover:border-blue-800 transition-all duration-300 cursor-pointer group"
                 href={mkLink(`news/${article.id}`)}
               >
                 {/* Image */}
@@ -196,7 +196,7 @@ export function ArticleList() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-blue-600 text-white rounded-full text-xs">
+                    <span className="px-3 py-1 bg-primary text-white rounded-full text-xs">
                       {article.category}
                     </span>
                   </div>
@@ -204,7 +204,7 @@ export function ArticleList() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl mb-3 text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-xl mb-3 text-foreground group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
                     {article.title}
                   </h3>
                   <p className="text-foreground/70 mb-4 line-clamp-2">

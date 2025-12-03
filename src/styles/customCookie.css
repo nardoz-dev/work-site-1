@@ -1,0 +1,72 @@
+/* Applica queste variabili quando il nostro tema è attivo */
+.cc--elegant-black {
+  /* Colori di base del banner */
+  --cc-bg: #364153; /* Sfondo scuro, come il footer del sito */
+  --cc-primary-color: #f5f5f7; /* Colore del testo principale (titolo) */
+  --cc-secondary-color: #a1a1a6; /* Colore del testo secondario (descrizione) */
+
+  /* Stile del bottone primario (Accetta Tutti) */
+  --cc-btn-primary-bg: #ffffff;
+  --cc-btn-primary-color: #000000;
+  --cc-btn-primary-hover-bg: #e5e5e5;
+
+  /* Stile del bottone secondario (Rifiuta, Personalizza) */
+  --cc-btn-secondary-bg: #3a3a3c;
+  --cc-btn-secondary-color: #ffffff;
+  --cc-btn-secondary-hover-bg: #4a4a4c;
+  --cc-btn-secondary-border-color: #3a3a3c;
+}
+
+/* Stile specifico per il layout a BARRA */
+.cc--elegant-black .cm--bar {
+  /* Rendi la barra a tutta larghezza e rimuovi bordi/ombre */
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Leggera ombra superiore */
+}
+
+/* Contenitore interno dei contenuti */
+.cc--elegant-black .cm--bar .cm__in {
+  display: flex;
+  flex-direction: column; /* Su mobile, metti testo e bottoni in colonna */
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 1rem; /* Padding per mobile */
+}
+
+/* Contenitore dei bottoni */
+.cc--elegant-black .cm--bar .cm__btns {
+  width: 100%; /* Bottoni a tutta larghezza su mobile */
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Stile generale dei bottoni */
+.cc--elegant-black .cc-btn {
+  border-radius: 6px;
+  font-weight: 600;
+  flex-grow: 1; /* Fa sì che i bottoni occupino lo spazio disponibile */
+}
+
+/* Media query per schermi più grandi (desktop) */
+@media (min-width: 768px) {
+  .cc--elegant-black .cm--bar .cm__in {
+    /* Su desktop, metti testo e bottoni sulla stessa riga */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px; /* Limita la larghezza del contenuto come nel resto del sito */
+    margin: 0 auto;
+    padding: 1rem 2rem;
+  }
+
+  .cc--elegant-black .cm--bar .cm__btns {
+    width: auto; /* Ritorna alla larghezza automatica per i bottoni */
+    flex-shrink: 0; /* Evita che i bottoni si restringano */
+  }
+
+  .cc--elegant-black .cc-btn {
+    flex-grow: 0; /* Disattiva la crescita automatica */
+  }
+}
