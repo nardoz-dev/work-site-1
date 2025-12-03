@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Calendar, ChevronRight, Eye, Clock } from "lucide-react";
 import { ImageWithFallback } from "../utils/fallback";
 
-// Calculate path based on deployment base URL
+// ... (newsArticles data and mkLink function remain the same)
 const base = import.meta.env.BASE_URL;
 const mkLink = (path: string) => `${base}${path}`;
 
@@ -58,13 +58,15 @@ export function NewsSection() {
   }
 
   return (
-    <section id="article" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
+    // 1. Sfondo della sezione unificato con il tema
+    <section id="article" className="py-20 bg-muted text-foreground transition-colors duration-500">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl text-gray-900 dark:text-white mb-4">
+          {/* 2. Testi unificati con il tema */}
+          <h2 className="text-3xl lg:text-4xl text-foreground mb-4">
             NEWS - EVENTI
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Rimani aggiornato sulle ultime novità in materia di sicurezza, 
             formazione e certificazioni con i nostri articoli e eventi.
           </p>
@@ -79,7 +81,8 @@ export function NewsSection() {
             >
               <Card 
                 key={article.id} 
-                className="group relative bg-white dark:bg-[#2d2d2f] border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.02] transition-all duration-500 overflow-hidden rounded-2xl flex flex-col h-full"
+                // 3. Stile della card unificato
+                className="group relative bg-card border border-border hover:scale-[1.02] transition-all duration-500 overflow-hidden rounded-2xl flex flex-col h-full"
               >
                 <div className="relative">
                   <div className="relative h-56 overflow-hidden">
@@ -90,23 +93,23 @@ export function NewsSection() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                     
-                    {/* Category Badge - Bottom Left */}
+                    {/* 4. Badge della categoria unificato */}
                     <div className="absolute bottom-4 left-4">
-                      <Badge className="bg-white/95 dark:bg-gray-800/95 text-gray-800 dark:text-white backdrop-blur-sm">
+                      <Badge className="bg-card/95 text-card-foreground backdrop-blur-sm">
                         {article.category}
                       </Badge>
                     </div>
                     
-                    {/* New Badge - Top Right */}
+                    {/* 5. Badge "NUOVO" unificato */}
                     {article.isNew && (
                       <div className="absolute top-4 right-4">
-                        <Badge className="bg-blue-600 text-white shadow-lg">
+                        <Badge className="bg-primary text-primary-foreground shadow-lg">
                           NUOVO
                         </Badge>
                       </div>
                     )}
                     
-                    {/* Stats overlay */}
+                    {/* Stats overlay - i colori qui sono stilistici e possono rimanere */}
                     <div className="absolute bottom-4 right-4 flex items-center gap-3 text-white text-xs">
                       <div className="flex items-center gap-1 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
                         <Clock className="w-3 h-3" />
@@ -121,23 +124,27 @@ export function NewsSection() {
                 </div>
                 
                 <CardHeader className="pb-3">
-                  <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-2">
+                  {/* 6. Testo della data unificato */}
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                     <Calendar className="w-4 h-4" />
                     <span>{article.date}</span>
                   </div>
                   
-                  <CardTitle className="text-lg leading-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500 transition-colors cursor-pointer">
+                  {/* 7. Titolo della card unificato */}
+                  <CardTitle className="text-lg leading-tight text-foreground group-hover:text-primary transition-colors cursor-pointer">
                     {article.title}
                   </CardTitle>
                 </CardHeader>
                 
                 <CardContent className="pt-0 flex-grow flex flex-col">
-                  <CardDescription className="mb-6 line-clamp-3 text-gray-600 dark:text-gray-400 flex-grow">
+                  {/* 8. Descrizione della card unificata */}
+                  <CardDescription className="mb-6 line-clamp-3 text-muted-foreground flex-grow">
                     {article.excerpt}
                   </CardDescription>
                   
+                  {/* 9. Link "Leggi tutto" unificato */}
                   <div
-                    className="group/btn p-0 text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 self-start mt-auto"
+                    className="p-0 text-primary group-hover:text-primary/90 self-start mt-auto font-medium"
                   >
                     Leggi tutto 
                   </div>
@@ -148,9 +155,10 @@ export function NewsSection() {
         </div>
 
         <div className="text-center mt-12">
+          {/* 10. Bottone "Vedi tutti" unificato (stile outline) */}
           <a
             href={mkLink("/news")}
-            className="inline-block px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-600 dark:hover:text-white rounded-lg transition-colors"
+            className="inline-block px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-lg transition-colors"
           >
             Vedi tutti gli articoli
           </a>

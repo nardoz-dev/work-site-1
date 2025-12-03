@@ -29,16 +29,21 @@ export function Security() {
   }, [featureToOpen]);
 
   return (
-    <section id="security" className="py-20 bg-[#f5f5f7] dark:bg-[#1d1d1f] transition-colors duration-500">
+    // PRIMA: bg-[#f5f5f7] dark:bg-[#1d1d1f]
+    // DOPO: Usiamo le variabili di background del tema. 'muted' per il grigio chiaro.
+    <section id="security" className="py-20 bg-muted text-foreground transition-colors duration-500">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <p className="text-blue-600 dark:text-blue-400 tracking-wide mb-4">SICUREZZA SUL LAVORO</p>
+          {/* Manteniamo un blu specifico come accento, ma potremmo usare text-primary */}
+          <p className="text-destructive tracking-wide mb-4">SICUREZZA SUL LAVORO</p>
           <h2 className="text-3xl lg:text-4xl text-foreground mb-4">
-            Affidati a chi fa della sicurezza un valore, <span className="text-blue-600 dark:text-blue-400">non un obbligo.</span>
+            Affidati a chi fa della sicurezza un valore, <span className="text-destructive">non un obbligo.</span>
             <br />
             Sicurezza sul lavoro: la nostra esperienza al servizio della tua azienda.
           </h2>
-          <p className="text-foreground/70 text-lg leading-relaxed max-w-3xl mx-auto">
+          {/* PRIMA: text-foreground/70 */}
+          {/* DOPO: Usiamo il colore "muted" per il testo secondario */}
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
             La consulenza per la sicurezza sul lavoro è un servizio fondamentale per garantire la tutela dei lavoratori, 
             la conformità alle normative vigenti e la prevenzione degli infortuni e delle malattie professionali.
             Attraverso un approccio tecnico e personalizzato, STUDIO VENTURIERO supporta le aziende nell’applicazione del D.Lgs.
@@ -51,7 +56,9 @@ export function Security() {
         <div className="text-center mb-8">
           <Button 
             size="lg" 
-            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+            // PRIMA: bg-blue-600 hover:bg-blue-700 text-white
+            // DOPO: Usiamo le classi semantiche per il bottone primario
+            className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
             onClick={() => window.location.href = "/#contact"}
           >
             Contattami per una consulenza gratuita

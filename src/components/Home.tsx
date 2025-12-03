@@ -110,7 +110,7 @@ export function Home( {logo, sliderImages}: HomeProps) {
           <div className="space-y-8">
             <div className="space-y-6">
               <div className="inline-block">
-                <span className="text-blue-600 dark:text-blue-800 text-sm tracking-wider uppercase font-semibold">
+                <span className="text-destructive text-sm tracking-wider uppercase font-semibold">
                   Studio Venturiero
                 </span>
               </div>
@@ -131,7 +131,7 @@ export function Home( {logo, sliderImages}: HomeProps) {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
+                className="bg-primary text-white px-8 py-3"
               >
                 Contattaci
               </Button>
