@@ -2,7 +2,7 @@ export const navItems = [
     { id: "home", label: "Home", href: "#home", dropdown: false },
     {
       id: "iso",
-      label: "Cons. ISO",
+      label: "ISO",
       href: ("#iso"),
       dropdown: true,
       dropdownLinks: [
@@ -17,9 +17,9 @@ export const navItems = [
         {
           title: "",
           items: [
-            { label: "ISO 27001", id: "iso-27001", href: "iso?open=27001" },
-            { label: "ISO 45001", id: "iso-45001", href: "iso?open=45001" },
+            { label: "ISO 37001", id: "iso-37001", href: "iso?open=37001" },
             { label: "PDR 125", id: "pdr-125", href: "iso?open=PDR125" },
+            { label: "ISO 27001", id: "iso-27001", href: "iso?open=27001" },
           ]
         },
         {

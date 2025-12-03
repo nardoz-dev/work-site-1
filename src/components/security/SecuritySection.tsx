@@ -1,5 +1,13 @@
 import { Button } from "../ui/button";
-
+import { 
+  Shield, 
+  FileText, 
+  HardHat, 
+  FileCheck, 
+  Stethoscope, 
+  Settings,
+  X,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { securityFeatures } from "../../data/securityData";
@@ -8,21 +16,14 @@ import { useStore } from "@nanostores/react";
 
 export function Security() {
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
-
-  // 2. Ascolta lo store 'activeFeature'
   const featureToOpen = useStore(activeFeature);
-
-  // 3. Sostituisci il tuo vecchio 'useEffect' con questo
-  // Questo si attiva ogni volta che 'featureToOpen' (dallo store) cambia
   useEffect(() => {
     if (featureToOpen) {
-      // Trova il 'label' corrispondente all' 'id'
       const feature = securityFeatures.find(f => f.id === featureToOpen);
       if (feature) {
         setSelectedFeature(feature.label);
       }
     } else {
-      // Se lo store è nullo (es. si chiude il menu), chiudi la card
       setSelectedFeature(null);
     }
   }, [featureToOpen]);
@@ -45,6 +46,7 @@ export function Security() {
              documentata e conforme del sistema sicurezza.
           </p>
         </div>
+
         {/* CTA Button */}
         <div className="text-center mb-8">
           <Button 
@@ -57,76 +59,68 @@ export function Security() {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-          {securityFeatures.map((feature, index) => {
-            const IconComponent = feature.icon;
-            const isSelected = selectedFeature === feature.label;
-            return (
-              <button
-                key={index}
-                onClick={() => setSelectedFeature(isSelected ? null : feature.label)}
-                className={`group flex flex-col items-center text-center p-6 rounded-2xl transition-all duration-300 border-2 ${
-                  isSelected
-                    ? "bg-blue-50 dark:bg-blue-950/20 border-blue-600 dark:border-blue-500 shadow-lg"
-                    : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md"
-                }`}
-              >
-                <div className={`w-16 h-16 mb-4 flex items-center justify-center rounded-xl transition-colors ${
-                  isSelected
-                    ? "bg-blue-600 dark:bg-blue-600"
-                    : "bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30"
-                }`}>
-                  <IconComponent 
-                    className={`w-8 h-8 transition-colors ${
-                      isSelected
-                        ? "text-white"
-                        : "text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    }`} 
-                    strokeWidth={1.5} 
-                  />
-                </div>
-                <p className={`text-sm transition-colors ${
-                  isSelected
-                    ? "text-blue-600 dark:text-blue-500"
-                    : "text-foreground/80 group-hover:text-foreground"
-                }`}>
-                  {feature.label}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Selected Feature Description - Fixed Height Container */}
-        <div className="min-h-[120px]">
-          <AnimatePresence mode="wait">
-            {selectedFeature && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-[#1d1d1f] rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-800"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    {(() => {
-                      const feature = securityFeatures.find(f => f.label === selectedFeature);
-                      if (!feature) return null;
-                      const IconComponent = feature.icon;
-                      return <IconComponent className="w-5 h-5 text-white" />;
-                    })()}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg text-foreground mb-1">{selectedFeature}</h3>
-                    <p className="text-foreground/70 text-sm leading-relaxed">
-                      {securityFeatures.find(f => f.label === selectedFeature)?.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        <div className="h-[650px] bg-white/50 dark:bg-[#1d1d1f]/50 rounded-3xl p-6 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50">
+          <div className="h-full grid grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-4" style={{ gridAutoFlow: 'dense' }}>
+            {securityFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              const isSelected = selectedFeature === feature.label;
+              const isLastElement = index === securityFeatures.length - 1; //To handle last case
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => setSelectedFeature(isSelected ? null : feature.label)}
+                  className={`group flex rounded-2xl transition-all duration-300 border-2 relative overflow-hidden ${
+                    isSelected
+                      ? "col-span-3 row-span-3 bg-blue-50 dark:bg-blue-950/20 border-blue-600 dark:border-blue-500 shadow-lg p-6 items-start"
+                      : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md p-6 flex-col items-center text-center justify-center"
+                  }`}
+                  style={isSelected && isLastElement ? { gridRow: '1 / 3', gridColumn: '3 / 5' } : undefined}
+                >
+                  {isSelected ? (
+                    // Expanded Layout
+                    <div className="flex items-start h-full w-full">
+                      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-blue-600">
+                        <IconComponent className="w-6 h-6 text-white" strokeWidth={1.5} />
+                      </div>
+                      
+                      <div className="flex-1 text-left ml-4 pr-12 h-full flex flex-col">
+                        <p className="text-blue-600 dark:text-blue-500 text-lg mb-3">
+                          {feature.label}
+                        </p>
+                        <p className="text-foreground/70 text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                      
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedFeature(null);
+                        }}
+                        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    // Collapsed Layout
+                    <>
+                      <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30 transition-colors">
+                        <IconComponent 
+                          className="w-8 h-8 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" 
+                          strokeWidth={1.5} 
+                        />
+                      </div>
+                      <p className="text-sm text-foreground/80 group-hover:text-foreground transition-colors">
+                        {feature.label}
+                      </p>
+                    </>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

@@ -26,11 +26,11 @@ const mkLink = (path: string) => {
 
 // NOTE: Questo è il modo con il quale posso rendere globale il mkLink nel momento in cui si fà un deploy ( almeno per github pages )
 const mainAssignment = Object.keys(assData).map((assCode) => {
-  const { icon: IconComponent, title, description, features, badge } = assData[assCode];
+  const { icon: IconComponent, title, subdescription, features, badge } = assData[assCode];
   return {
     icon: IconComponent, // Passa il componente React valido
     title,
-    description,
+    subdescription,
     features,
     badge,
     badgeColor: "text-blue-600 border-blue-600",
@@ -83,7 +83,7 @@ export function Assignments() {
                 </CardHeader>
                 <CardContent className="space-y-4 flex flex-col flex-grow">
                   <CardDescription className="text-foreground/70 leading-relaxed">
-                    {assignment.description}
+                    {assignment.subdescription}
                   </CardDescription>
 
                   <div className="space-y-2 flex-grow">

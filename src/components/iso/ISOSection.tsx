@@ -9,7 +9,7 @@ import { ISOModal } from "./ISOModal";
 const mainServices = Object.keys(isoData).map((isoCode) => ({
   icon: Award,
   title: isoData[isoCode].title,
-  description: isoData[isoCode].description,
+  description: isoData[isoCode].subtitle,
   bgColor: "bg-white dark:bg-gray-800",
   textColor: "text-gray-800 dark:text-white",
   iconBg: "bg-blue-600 dark:bg-blue-700",
