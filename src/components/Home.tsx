@@ -122,10 +122,10 @@ export function Home( {logo, sliderImages}: HomeProps) {
                 lo protegge.
               </h1>
 
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
+              {/* <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
                 HSE Manager • Sicurezza Cantieri • Sicurezza sul
                 Lavoro • Coordinamento
-              </p>
+              </p> */}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -137,17 +137,6 @@ export function Home( {logo, sliderImages}: HomeProps) {
               </Button>
             </div>
 
-            {/* Services Dropdown Preview */}
-            {/* <div className="bg-white rounded-lg shadow-lg p-6 max-w-md">
-              <h3 className="text-sm text-gray-500 mb-4">I NOSTRI SERVIZI</h3>
-              <div className="space-y-3">
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sistemi di Gestione</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza sui cantieri</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza Alimentare</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza sul Lavoro</div>
-                <div className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors">Sicurezza sui cantieri</div>
-              </div>
-            </div> */}
           </div>
 
           {/* Right Content - Hero Image */}

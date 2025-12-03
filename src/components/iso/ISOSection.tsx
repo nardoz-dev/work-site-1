@@ -8,7 +8,7 @@ import { ISOModal } from "./ISOModal";
 const mainServices = Object.keys(isoData).map((isoCode) => ({
   icon: Award,
   title: isoData[isoCode].title,
-  description: isoData[isoCode].details,
+  description: isoData[isoCode].subtitle,
   link: `/iso/${isoCode}`,
   code: isoCode,
   modal: true,

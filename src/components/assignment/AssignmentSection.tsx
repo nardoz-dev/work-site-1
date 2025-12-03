@@ -22,11 +22,11 @@ const mkLink = (path: string) => {
 
 // 1. RIMOSSA la proprietà 'badgeColor' dall'oggetto. Lo stile ora è nel JSX.
 const mainAssignment = Object.keys(assData).map((assCode) => {
-  const { icon: IconComponent, title, description, features, badge } = assData[assCode];
+  const { icon: IconComponent, title, subdescription, features, badge } = assData[assCode];
   return {
     icon: IconComponent,
     title,
-    description,
+    subdescription,
     features,
     badge,
     link: mkLink(`/assignment/${assCode}`),
@@ -81,9 +81,8 @@ export function Assignments() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 flex flex-col flex-grow">
-                  {/* 7. Descrizione con colore 'muted' */}
-                  <CardDescription className="text-muted-foreground leading-relaxed">
-                    {assignment.description}
+                  <CardDescription className="text-foreground/70 leading-relaxed">
+                    {assignment.subdescription}
                   </CardDescription>
 
                   <div className="space-y-2 flex-grow">
