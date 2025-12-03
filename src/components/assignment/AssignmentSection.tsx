@@ -57,10 +57,16 @@ export function Assignments() {
           {mainAssignment.map((assignment, index) => {
             const IconComponent = assignment.icon;
             return (
+              <a
+                key={index}
+                href={assignment.link}
+                className="block rounded-2xl transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] group"
+              
+              >
               <Card
                 key={index}
                 // 4. Stile della card unificato con le classi del tema
-                className="bg-card text-card-foreground flex flex-col rounded-2xl border border-border hover:shadow-2xl hover:scale-[1.02] transition-all duration-500"
+                className="bg-card text-card-foreground h-full flex flex-col rounded-2xl border border-border hover:shadow-2xl hover:scale-[1.02] transition-all duration-500"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
@@ -88,22 +94,21 @@ export function Assignments() {
                   <div className="space-y-2 flex-grow">
                     {assignment.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-2">
-                        {/* Manteniamo il verde per le spunte, è un colore di stato universale */}
                         <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-500 flex-shrink-0 mt-0.5" />
                         <span className="text-sm text-muted-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* 8. Link stilizzato come un bottone primario */}
-                  <a
-                    href={assignment.link}
+                  {/* 8. Since the Card now is linkable it is used just for UI*/}
+                  <div
                     className="mt-auto inline-block text-center bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
                   >
                     Cerca Informazioni
-                  </a>
+                  </div>
                 </CardContent>
               </Card>
+              </a>
             );
           })}
         </div>

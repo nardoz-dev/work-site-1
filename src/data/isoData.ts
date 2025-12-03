@@ -9,7 +9,6 @@ export const isoData = {
     home: true,
     imageUrl: "https://images.unsplash.com/photo-1754039985008-a15410211b67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxxdWFsaXR5JTIwbWFuYWdlbWVudCUyMGJ1c2luZXNzfGVufDF8fHx8MTc2MzEyMTI1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Qualita",
-    badgeColor: "from-blue-500 to-blue-600",
     textPosition: "left", 
     benefits: [
      "Accesso prioritario a bandi di gara pubblici e Albi Fornitori qualificati",
@@ -30,7 +29,6 @@ export const isoData = {
     home: true,
     imageUrl: "https://images.unsplash.com/photo-1659431245880-4e9ad1225f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGZvcmVzdCUyMGVudmlyb25tZW50fGVufDF8fHx8MTc2MzEyMTI1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Qualita",
-    badgeColor: "from-blue-500 to-blue-600",
     textPosition: "right", 
     benefits: [
      "Protezione legale: riduce il rischio di reati ambientali (D.Lgs 231/01)",
@@ -51,7 +49,6 @@ export const isoData = {
     home: true,
     imageUrl: "https://images.unsplash.com/photo-1680699232561-de5452f56f8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYWZldHklMjB3b3JrJTIwcHJvdGVjdGlvbnxlbnwxfHx8fDE3NjMxMjEyNTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Qualita",
-    badgeColor: "from-blue-500 to-blue-600",
     textPosition: "left", 
     benefits: [
       "Sconto significativo sul premio assicurativo INAIL fino al 28% (tramite Modello OT23)",
@@ -70,7 +67,6 @@ export const isoData = {
     home: false,
     imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kc2hha2UlMjBidXNpbmVzc3xlbnwxfHx8fDE3NjMxMjEyNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Legalità",
-    badgeColor: "from-blue-500 to-blue-600",
     textPosition: "right",
     benefits: [
      "Miglioramento della reputazione aziendale",
@@ -89,7 +85,6 @@ export const isoData = {
     home: false,
     imageUrl: "https://images.unsplash.com/photo-1683322499436-f4383dd59f5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxJVCUyMHNlcnZlciUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzYyOTk4NTIwfDA&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Qualita",
-    badgeColor: "from-blue-500 to-blue-600",
     textPosition: "left", 
     benefits: [
       "Sgravio contributivo INPS dell'1% (fino a 50.000€/anno per azienda)",
@@ -108,7 +103,6 @@ export const isoData = {
     home: false,
     imageUrl: "https://images.unsplash.com/photo-1624895608078-e9f564cbe3fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMGRhdGElMjB0ZWNobm9sb2d5fGVufDF8fHx8MTc2MzEyMTI1OHww&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Qualita",
-    badgeColor: "from-blue-500 to-blue-600",
     textPosition: "right", 
     benefits: [
       "Massima garanzia di conformità al GDPR evitando sanzioni privacy",

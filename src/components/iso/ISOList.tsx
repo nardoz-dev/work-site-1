@@ -88,7 +88,7 @@ export function ISOList() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
               <a
               href={`${mkLink("#iso")}`}
-              className={`mb-6 text-blue-600 dark:text-blue-400 hover:bg-transparent flex items-center`}
+              className={`mb-6 text-primary hover:bg-transparent flex items-center`}
               >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Torna alla pagina principale
@@ -99,7 +99,9 @@ export function ISOList() {
                 transition={{ duration: 0.8 }}
                 className="max-w-4xl"
               >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 dark:from-blue-400 dark:via-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
+                {/* Qui di sotto abbiamo salvato una cosa veramente carina decommenta per vedere! */}
+                {/* <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 bg-gradient-to-r from-red-600 via-blue-500 to-blue-600 dark:from-blue-400 dark:via-blue-300 dark:to-blue-400 bg-clip-text text-transparent"> */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 bg-primary bg-clip-text text-transparent">
                   Tutte le Certificazioni ISO
                 </h1>
                 <p className="text-lg md:text-xl text-foreground/70">
@@ -154,7 +156,7 @@ export function ISOList() {
                   {/* Overlay Gradients */}
                   <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/80" />
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-r ${iso.badgeColor} opacity-20`}
+                    className={`absolute inset-0 bg-gradient-to-r from-blue-200 to-blue-300, opacity-20`}
                     animate={{
                       opacity:
                         hoveredISO === iso.code ? 0.3 : 0.2,
@@ -217,7 +219,7 @@ export function ISOList() {
                               ISO {iso.code}
                             </Badge>
                             <Badge
-                              className={`bg-gradient-to-r ${iso.badgeColor} text-white border-0 shadow-lg`}
+                              className={`bg-gradient-to-r bg-primary text-white border-0 shadow-lg`}
                             >
                               {iso.category}
                             </Badge>
@@ -250,7 +252,7 @@ export function ISOList() {
                             >
                               <Button
                                 size="lg"
-                                className={`bg-gradient-to-r ${iso.badgeColor} hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 border-0 text-white px-8 py-3`}
+                                className={`bg-gradient-to-r bg-primary hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 border-0 text-white px-8 py-3`}
                               >
                                 <FileCheck className="w-5 h-5 mr-2" />
                                 Scopri di più

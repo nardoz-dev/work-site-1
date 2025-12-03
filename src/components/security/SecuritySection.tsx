@@ -56,8 +56,6 @@ export function Security() {
         <div className="text-center mb-8">
           <Button 
             size="lg" 
-            // PRIMA: bg-blue-600 hover:bg-blue-700 text-white
-            // DOPO: Usiamo le classi semantiche per il bottone primario
             className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
             onClick={() => window.location.href = "/#contact"}
           >
@@ -66,7 +64,7 @@ export function Security() {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="h-[650px] bg-white/50 dark:bg-[#1d1d1f]/50 rounded-3xl p-6 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50">
+        <div className="h-[650px] bg-card/50 rounded-3xl p-6 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50">
           <div className="h-full grid grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-4" style={{ gridAutoFlow: 'dense' }}>
             {securityFeatures.map((feature, index) => {
               const IconComponent = feature.icon;
@@ -79,7 +77,7 @@ export function Security() {
                   onClick={() => setSelectedFeature(isSelected ? null : feature.label)}
                   className={`group flex rounded-2xl transition-all duration-300 border-2 relative overflow-hidden ${
                     isSelected
-                      ? "col-span-3 row-span-3 bg-blue-50 dark:bg-blue-950/20 border-blue-600 dark:border-blue-500 shadow-lg p-6 items-start"
+                      ? "col-span-3 row-span-3 bg-blue-50 dark:bg-blue-950/20 border-primary shadow-lg p-6 items-start"
                       : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md p-6 flex-col items-center text-center justify-center"
                   }`}
                   style={isSelected && isLastElement ? { gridRow: '1 / 3', gridColumn: '3 / 5' } : undefined}
@@ -87,12 +85,12 @@ export function Security() {
                   {isSelected ? (
                     // Expanded Layout
                     <div className="flex items-start h-full w-full">
-                      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-blue-600">
+                      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-primary">
                         <IconComponent className="w-6 h-6 text-white" strokeWidth={1.5} />
                       </div>
                       
                       <div className="flex-1 text-left ml-4 pr-12 h-full flex flex-col">
-                        <p className="text-blue-600 dark:text-blue-500 text-lg mb-3">
+                        <p className="text-destructive text-lg mb-3">
                           {feature.label}
                         </p>
                         <p className="text-foreground/70 text-sm leading-relaxed">
@@ -105,7 +103,7 @@ export function Security() {
                           e.stopPropagation();
                           setSelectedFeature(null);
                         }}
-                        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 text-white transition-colors"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -115,7 +113,7 @@ export function Security() {
                     <>
                       <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30 transition-colors">
                         <IconComponent 
-                          className="w-8 h-8 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors" 
+                          className="w-8 h-8 text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-primary transition-colors" 
                           strokeWidth={1.5} 
                         />
                       </div>

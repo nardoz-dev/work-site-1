@@ -13,10 +13,10 @@ export function AssignmentDetail({ assignmentType }: AssignmentDetailProps) {
   // Usa sempre il colore blu per tutti gli incarichi
   const colorClasses = {
     bg: "bg-blue-50 dark:bg-blue-950/20",
-    text: "text-blue-600 dark:text-blue-400",
+    text: "text-primary",
     border: "border-blue-200 dark:border-blue-900",
     hover: "hover:bg-blue-100 dark:hover:bg-blue-900/30",
-    icon: "bg-blue-600 dark:bg-blue-700"
+    icon: "bg-primary"
   };
 
   const base = import.meta.env.BASE_URL;
