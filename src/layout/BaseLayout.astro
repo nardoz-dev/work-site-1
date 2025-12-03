@@ -2,7 +2,7 @@
 import { NavBar } from '../components/NavBar.tsx';
 import { FooterMinimal } from '../components/FooterMinimal.tsx';
 import { ScrollSpy } from '../components/utils/ScrollSpy.tsx'; 
-import { activeSection } from '../stores/navigationStore';
+import CookieConsent from '../components/cookie/CookieConsent.astro';
 
 interface Props {
   activeSectionID?: string;
@@ -39,6 +39,7 @@ console.log('NavBar activeSectionID:', activeSectionID);
       gtag('config', 'G-XXXXXXXXXX');
     </script>
      -->
+
   </head>
   <body>
     <div class="bg-background text-foreground">
@@ -49,12 +50,17 @@ console.log('NavBar activeSectionID:', activeSectionID);
         <slot />
       </main>
       
-      <FooterMinimal client:load />
+      
     </div>
 
     {/* Carica ScrollSpy solo sulla homepage */}
     {Astro.url.pathname === import.meta.env.BASE_URL && <ScrollSpy client:load />}
 
 
+    <CookieConsent />
+
+    <FooterMinimal client:load />
+    
   </body>
+  
 </html>

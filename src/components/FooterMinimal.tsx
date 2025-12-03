@@ -13,7 +13,7 @@ export function FooterMinimal() {
     <footer className="bg-gray-700 dark:bg-[#1d1d1f] border-t border-border/50 transition-colors duration-500">
 
         {/* Back to Top Button */}
-        <div className="border-b border-border/50">
+        <div className="border-b border-border/50 hover:bg-gray-600 dark:hover:bg-gray-800 transition-colors">
         <div className="container mx-auto px-4">
             <button
             onClick={() => {

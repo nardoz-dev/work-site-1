@@ -1,0 +1,7 @@
+# filepath: /home/ubuntu/work-site-1/public/robots.txt
+# Consenti a tutti i crawler (come Googlebot) di scansionare il sito
+User-agent: *
+Allow: /
+
+# Indica ai crawler dove trovare la mappa del sito (Sitemap)
+Sitemap: https://nardoz-dev.github.io/sitemap-index.xml

@@ -9,6 +9,33 @@ import { NewsSection } from '../components/news/ArticleSection.tsx';
 import { Contact } from '../components/contact/ContactSection.tsx';
 // import { Stats } from '../components/FooterStat.tsx';
 import BaseLayout from '../layout/BaseLayout.astro';
+import Logo from "../assets/LogoNew.png?url";
+import photo1 from "../../src/assets/Photo_1.png";
+import photo2 from "../../src/assets/Photo_2.png";
+import photo3 from "../../src/assets/Photo_3.png";
+import photo4 from "../../src/assets/Photo_4.png";
+import photo5 from "../../src/assets/Photo_Logo.png";
+
+const optimizedLogo = await getImage({
+  src: Logo,
+  width: 500,
+  height: 500,
+  format: 'webp',
+});
+
+const optimizedSliderImages = await Promise.all(
+  [photo1, photo2, photo3, photo4].map(async (img) => {
+    const optimizedImage = await getImage({
+      src: img,
+      width: 1920,
+      height: 1080,
+      format: 'webp',
+      quality: 80,
+    });
+    return { src: optimizedImage.src, width: 1920, height: 1080 }
+  })
+)
+
 ---
 
 <html lang="it">
@@ -22,7 +49,10 @@ import BaseLayout from '../layout/BaseLayout.astro';
   <body>
 
   <BaseLayout>
-    <Home client:load />
+    <Home client:load
+      logo={optimizedLogo} 
+      sliderImages={optimizedSliderImages} 
+    />
     <ConsISO client:load />
     <Security client:load />
     <Assignments client:load />
