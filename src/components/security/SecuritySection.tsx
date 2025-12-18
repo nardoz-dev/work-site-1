@@ -70,6 +70,7 @@ export function Security() {
               const IconComponent = feature.icon;
               const isSelected = selectedFeature === feature.label;
               const isLastElement = index === securityFeatures.length - 1; //To handle last case
+              const isLastElement_v2 = index == securityFeatures.length -2; //To handle last case even if the last is selected
               
               return (
                 <button
@@ -81,7 +82,7 @@ export function Security() {
                       : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md p-6 flex-col items-center text-center justify-center"
                   }`}
                   style={isSelected && isLastElement ? { gridRow: '1 / 3', gridColumn: '3 / 5' } : undefined}
-                >
+              >
                   {isSelected ? (
                     // Expanded Layout
                     <div className="flex items-start h-full w-full">
@@ -96,6 +97,17 @@ export function Security() {
                         <p className="text-foreground/70 text-sm leading-relaxed">
                           {feature.description}
                         </p>
+
+                        <Button 
+                          size="lg" 
+                          className="mt-auto text-white hover:text-white/90 px-0"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.location.href = "/#contact";
+                          }}
+                        >
+                          Contattaci
+                        </Button>
                       </div>
                       
                       <button

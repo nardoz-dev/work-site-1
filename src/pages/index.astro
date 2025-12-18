@@ -7,7 +7,7 @@ import { Security } from '../components/security/SecuritySection.tsx';
 import { Assignments } from '../components/assignment/AssignmentSection.tsx';
 import { NewsSection } from '../components/news/ArticleSection.tsx';
 import { Contact } from '../components/contact/ContactSection.tsx';
-// import { Stats } from '../components/FooterStat.tsx';
+import { About } from '../components/About.tsx';
 import { getImage } from "astro:assets"
 import BaseLayout from '../layout/BaseLayout.astro';
 import Logo from "../assets/LogoNew.png?url";
@@ -54,6 +54,7 @@ const optimizedSliderImages = await Promise.all(
       logo={optimizedLogo} 
       sliderImages={optimizedSliderImages} 
     />
+    <About client:load />
     <ConsISO client:load />
     <Security client:load />
     <Assignments client:load />

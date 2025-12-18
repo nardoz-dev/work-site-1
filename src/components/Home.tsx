@@ -129,12 +129,12 @@ export function Home( {logo, sliderImages}: HomeProps) {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-primary text-white px-8 py-3"
+              <a
+                href="#about"
+                className="bg-primary text-white px-8 py-3 rounded-lg"
               >
-                Contattaci
-              </Button>
+                Chi Siamo
+              </a>
             </div>
 
           </div>
