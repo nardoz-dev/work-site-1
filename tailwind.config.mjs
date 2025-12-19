@@ -38,6 +38,9 @@ export default {
           DEFAULT: 'var(--color-card)',
           foreground: 'var(--color-card-foreground)',
         },
+        logonew: {
+          DEFAULT: 'var(--logonew)',
+        },
       },
       borderRadius: {
         lg: 'var(--radius-lg)',

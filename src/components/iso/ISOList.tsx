@@ -114,8 +114,8 @@ export function ISOList() {
           </div>
 
         {/* Content */}
-        <div className="py-16">
-          <div className="space-y-0">
+        <div className="py-8">
+          <div className="space-y-5">
             {Object.values(isoData).map((iso,index) => (
               <motion.div
                 key={iso.code}

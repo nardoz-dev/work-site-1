@@ -45,6 +45,19 @@ export const securityFeatures = [
     description: "Le verifiche e gli audit interni sulla sicurezza sono processi periodici e sistematici che un'azienda esegue su se stessa per valutare la conformità, l'efficacia e le prestazioni del proprio sistema di gestione della sicurezza. Questi controlli servono a individuare preventivamente potenziali rischi e punti deboli, a garantire la conformità alle normative e agli standard (come la ISO 45001) ed a promuovere il miglioramento continuo.\
     Le verifiche e gli audit interni su una norma ISO (come la ISO 9001) sono valutazioni sistematiche condotte dall'organizzazione stessa per verificare la conformità ai requisiti della norma e per identificare aree di miglioramento. Questi audit sono un requisito fondamentale della norma stessa e servono a controllare l'efficacia del sistema di gestione, identificando non conformità prima che vengano rilevate in audit esterni e fornendo un feedback alla direzione per il miglioramento continuo."
   },
+    {
+    id: "haccp",
+    icon: FileText,
+    label: "HACCP",
+    description: "HACCP è l'acronimo di Hazard Analysis and Critical Control Points, che in italiano significa 'Analisi dei rischi e punti critici di controllo' ed è un sistema di autocontrollo igienico per garantire la sicurezza alimentare. Si tratta di una metodologia obbligatoria per le aziende del settore alimentare che identifica i pericoli e stabilisce i punti critici di controllo per prevenirli. Il sistema include la redazione di un manuale HACCP, la formazione del personale e l'ottenimento di un attestato di formazione.\
+      Cosa implica per gli addetti\
+      Formazione: È obbligatoria la partecipazione a corsi di formazione HACCP specifici, la cui durata e modalità variano in base alla regione e al ruolo svolto.\
+      Attestato: L'attestato di formazione certifica la competenza del lavoratore in materia di igiene e sicurezza alimentare e ha una validità limitata che richiede un rinnovo periodico.\
+      Cosa implica per le aziende\
+      Manuale HACCP: L'azienda deve redigere e tenere disponibile in sede un Manuale HACCP che descrive i rischi e le procedure di controllo.\
+      Adempimenti: Il manuale deve essere disponibile prima dell'inizio dell'attività e deve essere aggiornato in caso di cambiamenti nei processi produttivi o nelle normative.\
+      Sanzioni: L'assenza del manuale o la sua non conformità può comportare sanzioni pecuniarie significative."
+  },
   {
     id: "haccp",
     icon: Stethoscope,
@@ -63,19 +76,6 @@ export const securityFeatures = [
     label: "Sorveglianza sanitaria e visite mediche",
     description: "La sorveglianza sanitaria è un insieme di visite mediche, esami e accertamenti, effettuati dal medico competente, per monitorare la salute dei lavoratori in relazione ai rischi professionali. Le visite mediche sono obbligatorie in presenza di specifici rischi lavorativi, sono a carico del datore di lavoro e non devono comportare oneri per il lavoratore. Le visite includono accertamenti preventivi, periodici, su richiesta del lavoratore, in caso di cambio mansione, o dopo assenze prolungate."
   },
-  {
-    id: "haccp",
-    icon: FileText,
-    label: "HACCP",
-    description: "HACCP è l'acronimo di Hazard Analysis and Critical Control Points, che in italiano significa 'Analisi dei rischi e punti critici di controllo' ed è un sistema di autocontrollo igienico per garantire la sicurezza alimentare. Si tratta di una metodologia obbligatoria per le aziende del settore alimentare che identifica i pericoli e stabilisce i punti critici di controllo per prevenirli. Il sistema include la redazione di un manuale HACCP, la formazione del personale e l'ottenimento di un attestato di formazione.\
-      Cosa implica per gli addetti\
-      Formazione: È obbligatoria la partecipazione a corsi di formazione HACCP specifici, la cui durata e modalità variano in base alla regione e al ruolo svolto.\
-      Attestato: L'attestato di formazione certifica la competenza del lavoratore in materia di igiene e sicurezza alimentare e ha una validità limitata che richiede un rinnovo periodico.\
-      Cosa implica per le aziende\
-      Manuale HACCP: L'azienda deve redigere e tenere disponibile in sede un Manuale HACCP che descrive i rischi e le procedure di controllo.\
-      Adempimenti: Il manuale deve essere disponibile prima dell'inizio dell'attività e deve essere aggiornato in caso di cambiamenti nei processi produttivi o nelle normative.\
-      Sanzioni: L'assenza del manuale o la sua non conformità può comportare sanzioni pecuniarie significative."
-    },
   {
     id: "inspections-2",
     icon: HardHat,
