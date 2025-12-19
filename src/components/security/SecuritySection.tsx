@@ -9,7 +9,6 @@ import {
   X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { securityFeatures } from "../../data/securityData";
 import { activeFeature } from "../../stores/navigationStore";
 import { useStore } from "@nanostores/react";
@@ -72,16 +71,24 @@ export function Security() {
               const isLastElement = index === securityFeatures.length - 1; //To handle last case
               const isLastElement_v2 = index == securityFeatures.length -2; //To handle last case even if the last is selected
               
+              const selectedSpanClass = isSelected 
+              ? "col-span-3 row-span-3"
+              : "col-span-3 row-span-3";
+
               return (
                 <button
                   key={index}
                   onClick={() => setSelectedFeature(isSelected ? null : feature.label)}
                   className={`group flex rounded-2xl transition-all duration-300 border-2 relative overflow-hidden ${
                     isSelected
-                      ? "col-span-3 row-span-3 bg-blue-50 dark:bg-blue-950/20 border-primary shadow-lg p-6 items-start"
+                      ? `${selectedSpanClass} bg-blue-50 dark:bg-blue-950/20 border-primary shadow-lg p-6 items-start`
                       : "bg-white dark:bg-[#1d1d1f] border-transparent hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md p-6 flex-col items-center text-center justify-center"
                   }`}
-                  style={isSelected && isLastElement ? { gridRow: '1 / 3', gridColumn: '3 / 5' } : undefined}
+                  style={
+                    isSelected && (isLastElement || isLastElement_v2)
+                      ? { gridRow: '1 / 3', gridColumn: '3 / 5' }
+                      : undefined
+                  }
               >
                   {isSelected ? (
                     // Expanded Layout
